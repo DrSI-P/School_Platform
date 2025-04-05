@@ -1,0 +1,383 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          UserRole  @default(STUDENT)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts           Account[]
+  sessions           Session[]
+  profile            Profile?
+  resources          Resource[]
+  assessmentResults  AssessmentResult[]
+  assessments        Assessment[]
+  resourceInteractions ResourceInteraction[]
+  aiUsageLogs        AiUsageLog[]
+  moderationLogs     ModerationLog[]
+
+  @@map("users")
+}
+
+// User roles
+enum UserRole {
+  STUDENT
+  EDUCATOR
+  SPECIALIST
+  PARENT
+  ADMINISTRATOR
+}
+
+// Profile model
+model Profile {
+  id                 String    @id @default(cuid())
+  bio                String?
+  avatar             String?
+  preferences        Json?
+  accessibilityNeeds Json?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  // Relations
+  userId             String    @unique
+  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  learningProfile    LearningProfile?
+  studentProfile     StudentProfile?
+  educatorProfile    EducatorProfile?
+  specialistProfile  SpecialistProfile?
+  parentProfile      ParentProfile?
+
+  @@map("profiles")
+}
+
+// Learning profile for students
+model LearningProfile {
+  id                String   @id @default(cuid())
+  learningStyle     Json?
+  strengths         String[]
+  challenges        String[]
+  interests         String[]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  profileId         String   @unique
+  profile           Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@map("learning_profiles")
+}
+
+// Student profile
+model StudentProfile {
+  id                String   @id @default(cuid())
+  gradeLevel        String?
+  school            String?
+  accommodations    String[]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  profileId         String   @unique
+  profile           Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@map("student_profiles")
+}
+
+// Educator profile
+model EducatorProfile {
+  id                String   @id @default(cuid())
+  subjects          String[]
+  gradeLevels       String[]
+  school            String?
+  credentials       String[]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  profileId         String   @unique
+  profile           Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@map("educator_profiles")
+}
+
+// Specialist profile
+model SpecialistProfile {
+  id                String   @id @default(cuid())
+  specialties       String[]
+  credentials       String[]
+  organization      String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  profileId         String   @unique
+  profile           Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@map("specialist_profiles")
+}
+
+// Parent profile
+model ParentProfile {
+  id                String   @id @default(cuid())
+  childrenIds       String[]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  profileId         String   @unique
+  profile           Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@map("parent_profiles")
+}
+
+// Resource model
+model Resource {
+  id                String       @id @default(cuid())
+  title             String
+  description       String?
+  type              ResourceType
+  subjects          String[]
+  gradeLevel        String[]
+  isPublic          Boolean      @default(false)
+  content           Json
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  creatorId         String
+  creator           User         @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  interactions      ResourceInteraction[]
+
+  @@map("resources")
+}
+
+// Resource types
+enum ResourceType {
+  LESSON_PLAN
+  WORKSHEET
+  ASSESSMENT
+  INTERVENTION
+  REPORT
+  DOCUMENT
+  OTHER
+}
+
+// Assessment model
+model Assessment {
+  id                String       @id @default(cuid())
+  title             String
+  description       String?
+  instructions      String?
+  subjects          String[]
+  gradeLevel        String[]
+  isPublic          Boolean      @default(false)
+  questions         Json
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  creatorId         String
+  creator           User         @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  results           AssessmentResult[]
+
+  @@map("assessments")
+}
+
+// Assessment result model
+model AssessmentResult {
+  id                String       @id @default(cuid())
+  score             Float?
+  answers           Json
+  feedback          Json?
+  completedAt       DateTime     @default(now())
+  
+  // Relations
+  userId            String
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assessmentId      String
+  assessment        Assessment   @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+
+  @@map("assessment_results")
+}
+
+// Resource interaction model
+model ResourceInteraction {
+  id                String       @id @default(cuid())
+  type              String       // VIEW, DOWNLOAD, SHARE, etc.
+  timestamp         DateTime     @default(now())
+  metadata          Json?
+
+  // Relations
+  userId            String
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resourceId        String
+  resource          Resource     @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+
+  @@map("resource_interactions")
+}
+
+// Educational relationship model
+model EducationalRelationship {
+  id                String       @id @default(cuid())
+  type              String       // TEACHER_STUDENT, SPECIALIST_STUDENT, etc.
+  isActive          Boolean      @default(true)
+  startDate         DateTime     @default(now())
+  endDate           DateTime?
+  
+  // Relations
+  educatorId        String
+  studentId         String
+
+  @@map("educational_relationships")
+}
+
+// Session model for NextAuth
+model Session {
+  id                String       @id @default(cuid())
+  sessionToken      String       @unique
+  userId            String
+  expires           DateTime
+  startTime         DateTime     @default(now())
+  endTime           DateTime?
+  
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+// Account model for NextAuth
+model Account {
+  id                String       @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?      @db.Text
+  access_token      String?      @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?      @db.Text
+  session_state     String?
+
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+// Subscription model
+model Subscription {
+  id                   String             @id @default(cuid())
+  plan                 SubscriptionPlan
+  status               SubscriptionStatus
+  features             Json
+  startDate            DateTime
+  endDate              DateTime?
+  trialEnd             DateTime?
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  // Relations - either user or organization
+  userId               String?            @unique
+  organizationId       String?            @unique
+
+  @@map("subscriptions")
+}
+
+// Subscription plans
+enum SubscriptionPlan {
+  FREE
+  BASIC
+  PROFESSIONAL
+  EDUCATIONAL_INSTITUTION
+  ENTERPRISE
+}
+
+// Subscription status
+enum SubscriptionStatus {
+  ACTIVE
+  TRIALING
+  PAST_DUE
+  CANCELED
+  EXPIRED
+}
+
+// AI usage log
+model AiUsageLog {
+  id                String       @id @default(cuid())
+  type              String       // GENERATION, ANALYSIS, PERSONALIZATION, etc.
+  prompt            String       @db.Text
+  tokensUsed        Int
+  timestamp         DateTime     @default(now())
+
+  // Relations
+  userId            String
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("ai_usage_logs")
+}
+
+// Moderation log
+model ModerationLog {
+  id                String       @id @default(cuid())
+  originalContent   String       @db.Text
+  flagged           Boolean
+  categories        String       @db.Text
+  scores            String       @db.Text
+  timestamp         DateTime     @default(now())
+
+  // Relations
+  userId            String
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("moderation_logs")
+}
+
+// Parental consent
+model ParentalConsent {
+  id                String       @id @default(cuid())
+  consentType       String       // DATA_COLLECTION, CONTENT_CREATION, AI_INTERACTION, etc.
+  isActive          Boolean      @default(true)
+  grantedAt         DateTime     @default(now())
+  expiresAt         DateTime?
+  
+  // Relations
+  studentId         String
+  parentId          String
+
+  @@map("parental_consents")
+}
+
+// Educational record access log
+model EducationalRecordAccess {
+  id                String       @id @default(cuid())
+  recordId          String
+  recordType        String
+  reason            String
+  timestamp         DateTime     @default(now())
+  
+  // Relations
+  accessorId        String
+
+  @@map("educational_record_accesses")
+}
