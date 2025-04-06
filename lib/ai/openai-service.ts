@@ -1,9 +1,95 @@
 import OpenAI from 'openai';
 
+// Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// Define message type to match OpenAI API
+type ChatMessage = {
+  role: 'system' | 'user' | 'assistant' | 'function' | 'tool';
+  content: string;
+  name?: string;
+};
+
+// OpenAI Service class for more structured usage
+export class OpenAIService {
+  private client: OpenAI;
+
+  constructor(apiKey?: string) {
+    this.client = new OpenAI({
+      apiKey: apiKey || process.env.OPENAI_API_KEY,
+    });
+  }
+
+  async getChatCompletion(
+    messages: ChatMessage[],
+    options: {
+      model?: string;
+      temperature?: number;
+      max_tokens?: number;
+      top_p?: number;
+      frequency_penalty?: number;
+      presence_penalty?: number;
+    } = {}
+  ) {
+    try {
+      const response = await this.client.chat.completions.create({
+        model: options.model || process.env.OPENAI_API_MODEL || 'gpt-4o',
+        messages: messages as any, // Type assertion to bypass strict typing
+        temperature: options.temperature || 0.7,
+        max_tokens: options.max_tokens || 1500,
+        top_p: options.top_p || 1,
+        frequency_penalty: options.frequency_penalty || 0,
+        presence_penalty: options.presence_penalty || 0,
+      });
+
+      return {
+        content: response.choices[0].message.content,
+        usage: response.usage,
+      };
+    } catch (error) {
+      console.error('OpenAI API error:', error);
+      throw new Error('Failed to get chat completion');
+    }
+  }
+
+  async generateEmbedding(text: string) {
+    try {
+      const response = await this.client.embeddings.create({
+        model: 'text-embedding-3-small',
+        input: text,
+      });
+
+      return {
+        embedding: response.data[0].embedding,
+        usage: response.usage,
+      };
+    } catch (error) {
+      console.error('OpenAI API error:', error);
+      throw new Error('Failed to generate embedding');
+    }
+  }
+
+  async moderateContent(text: string) {
+    try {
+      const response = await this.client.moderations.create({
+        input: text,
+      });
+
+      return {
+        flagged: response.results[0].flagged,
+        categories: response.results[0].categories,
+        scores: response.results[0].category_scores,
+      };
+    } catch (error) {
+      console.error('OpenAI API error:', error);
+      throw new Error('Failed to moderate content');
+    }
+  }
+}
+
+// Standalone functions for simpler usage
 export async function generateContent(prompt: string, options: any = {}) {
   try {
     const response = await openai.chat.completions.create({

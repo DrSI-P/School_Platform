@@ -32,6 +32,15 @@ model User {
   resourceInteractions ResourceInteraction[]
   aiUsageLogs        AiUsageLog[]
   moderationLogs     ModerationLog[]
+  
+  // New relations for enhanced features
+  projects           Project[]            // Projects created by the user
+  projectCollaborations ProjectCollaborator[] // Projects user collaborates on
+  showcaseProjects   ProjectShowcase[]    // Projects showcased by the user
+  realWorldProblems  RealWorldProblem[]   // Problems created by the user
+  studentSolutions   StudentSolution[]    // Solutions created by the user
+  aiLabSessions      AILabSession[]       // AI Lab sessions
+  learningPathProgress LearningPathProgress[] // Learning path progress
 
   @@map("users")
 }
@@ -380,4 +389,396 @@ model EducationalRecordAccess {
   accessorId        String
 
   @@map("educational_record_accesses")
+}
+
+// NEW MODELS FOR ENHANCED FEATURES
+
+// Project model for collaborative AI projects
+model Project {
+  id                String       @id @default(cuid())
+  title             String
+  description       String
+  repositoryUrl     String?
+  demoUrl           String?
+  aiComponents      String[]     // AI technologies used
+  learningObjectives String[]    // Educational objectives
+  status            ProjectStatus @default(IN_PROGRESS)
+  visibility        Visibility   @default(PRIVATE)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  creatorId         String
+  creator           User         @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  collaborators     ProjectCollaborator[]
+  showcase          ProjectShowcase?
+  codeSnippets      CodeSnippet[]
+  aiModels          AIModel[]
+
+  @@map("projects")
+}
+
+enum ProjectStatus {
+  PLANNING
+  IN_PROGRESS
+  TESTING
+  COMPLETED
+  ARCHIVED
+}
+
+enum Visibility {
+  PRIVATE
+  TEAM
+  PUBLIC
+}
+
+// Project collaborator model
+model ProjectCollaborator {
+  id                String       @id @default(cuid())
+  role              String       // DEVELOPER, DESIGNER, TESTER, etc.
+  permissions       String[]     // READ, WRITE, ADMIN, etc.
+  joinedAt          DateTime     @default(now())
+
+  // Relations
+  userId            String
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projectId         String
+  project           Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, projectId])
+  @@map("project_collaborators")
+}
+
+// Project showcase model
+model ProjectShowcase {
+  id                String       @id @default(cuid())
+  title             String
+  description       String
+  demoUrl           String?
+  thumbnailUrl      String?
+  tags              String[]
+  aiTechnologies    String[]
+  isPublic          Boolean      @default(false)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  projectId         String       @unique
+  project           Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  creatorId         String
+  creator           User         @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@map("project_showcases")
+}
+
+// Code snippet model for AI Lab
+model CodeSnippet {
+  id                String       @id @default(cuid())
+  title             String
+  description       String?
+  language          String
+  code              String       @db.Text
+  isPublic          Boolean      @default(false)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  projectId         String?
+  project           Project?     @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  labSessionId      String?
+  labSession        AILabSession? @relation(fields: [labSessionId], references: [id], onDelete: SetNull)
+
+  @@map("code_snippets")
+}
+
+// AI Lab session model
+model AILabSession {
+  id                String       @id @default(cuid())
+  title             String
+  description       String?
+  duration          Int          // Duration in seconds
+  createdAt         DateTime     @default(now())
+  endedAt           DateTime?
+
+  // Relations
+  userId            String
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  codeSnippets      CodeSnippet[]
+  aiModels          AIModelUsage[]
+
+  @@map("ai_lab_sessions")
+}
+
+// AI Model model
+model AIModel {
+  id                String       @id @default(cuid())
+  name              String
+  provider          String       // OPENAI, HUGGINGFACE, ANTHROPIC, etc.
+  type              String       // TEXT, CODE, IMAGE, SPEECH, etc.
+  description       String?
+  apiEndpoint       String?
+  isActive          Boolean      @default(true)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  projects          Project[]
+  usages            AIModelUsage[]
+
+  @@map("ai_models")
+}
+
+// AI Model usage model
+model AIModelUsage {
+  id                String       @id @default(cuid())
+  prompt            String       @db.Text
+  response          String       @db.Text
+  parameters        Json?
+  tokensUsed        Int?
+  createdAt         DateTime     @default(now())
+
+  // Relations
+  modelId           String
+  model             AIModel      @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  labSessionId      String?
+  labSession        AILabSession? @relation(fields: [labSessionId], references: [id], onDelete: SetNull)
+
+  @@map("ai_model_usages")
+}
+
+// Real-world problem model
+model RealWorldProblem {
+  id                String       @id @default(cuid())
+  title             String
+  description       String       @db.Text
+  domain            String[]     // e.g., "healthcare", "education", "environment"
+  difficulty        String       // "beginner", "intermediate", "advanced"
+  stakeholders      String[]
+  constraints       String?      @db.Text
+  successCriteria   String?      @db.Text
+  aiApproaches      String[]
+  resources         Json?
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  creatorId         String
+  creator           User         @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  studentSolutions  StudentSolution[]
+
+  @@map("real_world_problems")
+}
+
+// Student solution model
+model StudentSolution {
+  id                String       @id @default(cuid())
+  title             String
+  description       String       @db.Text
+  approach          String       @db.Text
+  implementation    String?      @db.Text // Could be code, pseudocode, or description
+  results           String?      @db.Text
+  feedback          String?      @db.Text
+  status            String       // "draft", "submitted", "reviewed", "approved"
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  problemId         String
+  problem           RealWorldProblem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  studentId         String
+  student           User         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@map("student_solutions")
+}
+
+// Learning path model
+model LearningPath {
+  id                String       @id @default(cuid())
+  title             String
+  description       String
+  difficulty        String       // "beginner", "intermediate", "advanced"
+  estimatedHours    Int
+  tags              String[]
+  isPublic          Boolean      @default(false)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  modules           LearningModule[]
+  progress          LearningPathProgress[]
+
+  @@map("learning_paths")
+}
+
+// Learning module model
+model LearningModule {
+  id                String       @id @default(cuid())
+  title             String
+  description       String
+  content           String       @db.Text
+  type              String       // "lesson", "exercise", "quiz", "project"
+  order             Int
+  estimatedMinutes  Int
+  isRequired        Boolean      @default(true)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  pathId            String
+  path              LearningPath @relation(fields: [pathId], references: [id], onDelete: Cascade)
+  nextModules       LearningModule[] @relation("ModulePrerequisites")
+  prerequisites     LearningModule[] @relation("ModulePrerequisites")
+  progress          ModuleProgress[]
+
+  @@map("learning_modules")
+}
+
+// Learning path progress model
+model LearningPathProgress {
+  id                String       @id @default(cuid())
+  startedAt         DateTime     @default(now())
+  completedAt       DateTime?
+  percentComplete   Float        @default(0)
+  
+  // Relations
+  userId            String
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pathId            String
+  path              LearningPath @relation(fields: [pathId], references: [id], onDelete: Cascade)
+  moduleProgress    ModuleProgress[]
+
+  @@unique([userId, pathId])
+  @@map("learning_path_progress")
+}
+
+// Module progress model
+model ModuleProgress {
+  id                String       @id @default(cuid())
+  status            String       // "not_started", "in_progress", "completed"
+  startedAt         DateTime?
+  completedAt       DateTime?
+  score             Float?
+  
+  // Relations
+  pathProgressId    String
+  pathProgress      LearningPathProgress @relation(fields: [pathProgressId], references: [id], onDelete: Cascade)
+  moduleId          String
+  module            LearningModule @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  @@unique([pathProgressId, moduleId])
+  @@map("module_progress")
+}
+
+// AI Ethics module model
+model AIEthicsModule {
+  id                String       @id @default(cuid())
+  title             String
+  description       String
+  content           String       @db.Text
+  level             String       // "beginner", "intermediate", "advanced"
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  scenarios         EthicsScenario[]
+  discussions       EthicsDiscussion[]
+
+  @@map("ai_ethics_modules")
+}
+
+// Ethics scenario model
+model EthicsScenario {
+  id                String       @id @default(cuid())
+  title             String
+  scenario          String       @db.Text
+  questions         Json
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  moduleId          String
+  module            AIEthicsModule @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  @@map("ethics_scenarios")
+}
+
+// Ethics discussion model
+model EthicsDiscussion {
+  id                String       @id @default(cuid())
+  title             String
+  content           String       @db.Text
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  moduleId          String
+  module            AIEthicsModule @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  comments          EthicsComment[]
+
+  @@map("ethics_discussions")
+}
+
+// Ethics comment model
+model EthicsComment {
+  id                String       @id @default(cuid())
+  content           String       @db.Text
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  discussionId      String
+  discussion        EthicsDiscussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
+  authorId          String
+  parentId          String?
+  parent            EthicsComment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: SetNull)
+  replies           EthicsComment[] @relation("CommentReplies")
+
+  @@map("ethics_comments")
+}
+
+// Communication model
+model Conversation {
+  id                String       @id @default(cuid())
+  title             String
+  type              String       // "direct", "group", "class"
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  messages          Message[]
+  participants      ConversationParticipant[]
+
+  @@map("conversations")
+}
+
+// Conversation participant model
+model ConversationParticipant {
+  id                String       @id @default(cuid())
+  role              String       // "owner", "member", "observer"
+  joinedAt          DateTime     @default(now())
+  leftAt            DateTime?
+
+  // Relations
+  conversationId    String
+  conversation      Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  userId            String
+
+  @@unique([conversationId, userId])
+  @@map("conversation_participants")
+}
+
+// Message model
+model Message {
+  id                String       @id @default(cuid())
+  content           String       @db.Text
+  isAI              Boolean      @default(false)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  // Relations
+  conversationId    String
+  conversation      Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId          String
+
+  @@map("messages")
 }

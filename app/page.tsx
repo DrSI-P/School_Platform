@@ -3,43 +3,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
+import { BrainCircuit, Code, Rocket, Users, BarChart2, Shield, Database, Sparkles } from 'lucide-react'
 
 export default function Home() {
   const [showMore, setShowMore] = useState(false)
   
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-primary-600">EdPsychConnect</h1>
-          </div>
-          <nav className="hidden md:flex space-x-8">
-            <Link href="/about" className="text-gray-700 hover:text-primary-600 transition-colors">
-              About
-            </Link>
-            <Link href="/features" className="text-gray-700 hover:text-primary-600 transition-colors">
-              Features
-            </Link>
-            <Link href="/pricing" className="text-gray-700 hover:text-primary-600 transition-colors">
-              Pricing
-            </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-primary-600 transition-colors">
-              Contact
-            </Link>
-          </nav>
-          <div className="flex items-center space-x-4">
-            <Link href="/auth/signin" className="btn-outline">
-              Sign In
-            </Link>
-            <Link href="/auth/signup" className="btn-primary">
-              Sign Up
-            </Link>
-          </div>
-        </div>
-      </header>
-
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,85 +49,109 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Feature 1 */}
-            <div className="card hover:shadow-lg transition-shadow">
+            {/* Feature 1 - AI Lab */}
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100">
               <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                <BrainCircuit className="h-6 w-6 text-primary-600" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">AI Lab</h3>
+              <p className="text-gray-600 mb-4">
+                Build and experiment with AI tools for education in our interactive coding environment.
+              </p>
+              <Link href="/ai-lab" className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
+                Explore AI Lab
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
+              </Link>
+            </div>
+            
+            {/* Feature 2 - Collaborative Projects */}
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+              <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
+                <Rocket className="h-6 w-6 text-primary-600" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Collaborative Projects</h3>
+              <p className="text-gray-600 mb-4">
+                Work together on AI-powered educational tools and resources with team members.
+              </p>
+              <Link href="/projects" className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
+                View Projects
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+            
+            {/* Feature 3 - AI-Powered Resources */}
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+              <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
+                <Sparkles className="h-6 w-6 text-primary-600" />
               </div>
               <h3 className="text-xl font-semibold mb-2">AI-Powered Resources</h3>
               <p className="text-gray-600 mb-4">
                 Generate personalized educational materials tailored to individual learning profiles and needs.
               </p>
-            </div>
-            
-            {/* Feature 2 */}
-            <div className="card hover:shadow-lg transition-shadow">
-              <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              <Link href="/resources" className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
+                Browse Resources
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Comprehensive Assessment Tools</h3>
-              <p className="text-gray-600 mb-4">
-                Create, administer, and analyze assessments with detailed insights into student understanding.
-              </p>
-            </div>
-            
-            {/* Feature 3 */}
-            <div className="card hover:shadow-lg transition-shadow">
-              <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Collaborative Platform</h3>
-              <p className="text-gray-600 mb-4">
-                Connect specialists, educators, parents, and students in a secure, integrated environment.
-              </p>
+              </Link>
             </div>
           </div>
           
           {showMore && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-              {/* Feature 4 */}
-              <div className="card hover:shadow-lg transition-shadow">
+              {/* Feature 4 - Advanced Analytics */}
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100">
                 <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
+                  <BarChart2 className="h-6 w-6 text-primary-600" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Advanced Analytics</h3>
+                <h3 className="text-xl font-semibold mb-2">Learning Analytics</h3>
                 <p className="text-gray-600 mb-4">
                   Track progress and identify patterns with detailed learning analytics and visualizations.
                 </p>
+                <Link href="/analytics" className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
+                  View Analytics
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
               </div>
               
-              {/* Feature 5 */}
-              <div className="card hover:shadow-lg transition-shadow">
+              {/* Feature 5 - FERPA & COPPA Compliant */}
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100">
                 <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                  </svg>
+                  <Shield className="h-6 w-6 text-primary-600" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">FERPA & COPPA Compliant</h3>
                 <p className="text-gray-600 mb-4">
                   Built with privacy and security at its core, ensuring all educational data is protected.
                 </p>
+                <Link href="/compliance" className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
+                  Learn More
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
               </div>
               
-              {/* Feature 6 */}
-              <div className="card hover:shadow-lg transition-shadow">
+              {/* Feature 6 - Community */}
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100">
                 <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-                  </svg>
+                  <Users className="h-6 w-6 text-primary-600" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Comprehensive Resource Library</h3>
+                <h3 className="text-xl font-semibold mb-2">Educational Community</h3>
                 <p className="text-gray-600 mb-4">
-                  Access thousands of evidence-based resources, interventions, and assessment tools.
+                  Connect with other educators, specialists, and students to share ideas and collaborate.
                 </p>
+                <Link href="/community" className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
+                  Join Community
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
               </div>
             </div>
           )}
@@ -165,10 +159,90 @@ export default function Home() {
           <div className="text-center mt-12">
             <button 
               onClick={() => setShowMore(!showMore)} 
-              className="btn-outline"
+              className="bg-white text-primary-600 hover:bg-gray-50 border border-primary-600 font-medium py-2 px-6 rounded-md transition-colors"
             >
               {showMore ? 'Show Less' : 'Show More Features'}
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* AI Lab Showcase Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">AI Lab: Build Your Own Educational Tools</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our AI Lab provides a safe environment for students to experiment with AI and build tools that enhance their learning experience.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+              <div className="bg-gray-800 rounded-t-md p-3 text-white text-sm font-mono">
+                AI Lab - Code Editor
+              </div>
+              <div className="bg-gray-900 p-4 font-mono text-green-400 text-sm whitespace-pre overflow-x-auto">
+{`// Example AI-powered learning tool
+function analyzeText(text) {
+  // Use AI to analyze sentiment and key concepts
+  return {
+    sentiment: "positive",
+    keywords: ["learning", "AI", "education"],
+    readabilityScore: 85,
+    suggestions: [
+      "Consider adding more examples",
+      "Explain the concept in simpler terms"
+    ]
+  };
+}
+
+// Example usage
+const feedback = analyzeText(studentEssay);
+console.log(feedback);`}
+              </div>
+            </div>
+            
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold text-gray-900">What You Can Build</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center">
+                    <svg className="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="ml-3 text-lg text-gray-700">
+                    <span className="font-medium text-gray-900">Personalized Learning Tools</span> - Create AI assistants that adapt to individual learning styles
+                  </p>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center">
+                    <svg className="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="ml-3 text-lg text-gray-700">
+                    <span className="font-medium text-gray-900">Automated Feedback Systems</span> - Develop tools that provide instant, constructive feedback on assignments
+                  </p>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center">
+                    <svg className="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="ml-3 text-lg text-gray-700">
+                    <span className="font-medium text-gray-900">Content Generators</span> - Build tools that create customized learning materials based on curriculum needs
+                  </p>
+                </li>
+              </ul>
+              <div className="pt-4">
+                <Link href="/ai-lab" className="bg-primary-600 text-white hover:bg-primary-700 font-medium py-3 px-6 rounded-md transition-colors inline-block">
+                  Try AI Lab Now
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -181,7 +255,7 @@ export default function Home() {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
               Join thousands of educational professionals already using EdPsychConnect to enhance learning experiences.
             </p>
-            <Link href="/auth/signup" className="btn-primary text-lg py-3 px-8">
+            <Link href="/auth/signup" className="bg-primary-600 text-white hover:bg-primary-700 font-medium py-3 px-8 rounded-md transition-colors inline-block text-lg">
               Get Started Today
             </Link>
           </div>
