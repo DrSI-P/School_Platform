@@ -4,508 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DALA Learning Adventure! - TTS Prototype</title>
-    <style>
-        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fredoka+One&display=swap");
-
-        body {
-            font-family: "Poppins", sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #4A4A4A;
-            line-height: 1.7;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding-top: 30px;
-            padding-bottom: 30px;
-        }
-        .container {
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 30px 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            max-width: 850px;
-            width: 90%;
-            margin: 20px auto;
-        }
-        h1 {
-            font-family: "Fredoka One", cursive;
-            color: #5e35b1;
-            text-align: center;
-            font-size: 2.8em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-        h2 {
-            font-family: "Fredoka One", cursive;
-            color: #00796b;
-            border-bottom: 3px dashed #764ba2;
-            padding-bottom: 10px;
-            margin-top: 35px;
-            font-size: 1.8em;
-            display: flex;
-            align-items: center;
-        }
-        h3 {
-            font-family: "Poppins", sans-serif;
-            font-weight: 600;
-            color: #1e88e5;
-            margin-top: 25px;
-            font-size: 1.3em;
-        }
-        h4 {
-            font-family: "Poppins", sans-serif;
-            font-weight: 600;
-            color: #3949ab;
-            margin-top: 20px;
-            font-size: 1.1em;
-        }
-        .section {
-            margin-bottom: 35px;
-            padding: 25px;
-            background-color: #f7f9fc;
-            border: 1px solid #e0e0e0;
-            border-radius: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        .button {
-            background-image: linear-gradient(to right, #ff7e5f, #feb47b);
-            color: white;
-            padding: 14px 25px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin-right: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .button:hover {
-            background-image: linear-gradient(to right, #feb47b, #ff7e5f);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-            transform: translateY(-2px);
-        }
-        .button[disabled] {
-            background-image: none;
-            background-color: #cccccc;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
-        }
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        li {
-            background-color: #ffffff;
-            margin-bottom: 12px;
-            padding: 18px;
-            border-radius: 10px;
-            border-left: 6px solid #66bb6a;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.07);
-            transition: transform 0.2s ease;
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-        }
-        li:hover {
-            transform: translateX(5px);
-        }
-        .lo-title-container {
-            flex-grow: 1; /* Allow title container to take available space */
-            margin-right: 10px; /* Space between title and speaker icon */
-        }
-        .lo-title {
-            font-weight: 700;
-            color: #3949ab;
-            font-size: 1.15em;
-            margin-bottom: 5px;
-        }
-        .content-title-container {
-            flex-grow: 1;
-            margin-left: 15px;
-            margin-right: 10px;
-        }
-        .content-title {
-            color: #546e7a;
-            font-size: 1em;
-        }
-        .content-title em {
-            color: #78909c;
-            font-size: 0.9em;
-        }
-        .tts-button {
-            background-color: #42a5f5; /* Light blue, distinct */
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-            padding: 0;
-            flex-shrink: 0; /* Prevent shrinking if text is long */
-        }
-        .tts-button:hover {
-            background-color: #1e88e5; /* Darker blue on hover */
-            transform: scale(1.1);
-        }
-        .tts-button[disabled] {
-            background-color: #cccccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-        pre {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            background-color: #f5f5f5;
-            padding: 18px;
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
-            font-size: 0.95em;
-            color: #37474f;
-            max-height: 250px;
-            overflow-y: auto;
-        }
-        strong { color: #ef5350; }
-        em { color: #26a69a; }
-        .section-icon {
-            margin-right: 12px;
-            font-size: 1.5em;
-            color: #7e57c2;
-        }
-        .section-icon img {
-            width: 1.5em; /* Match font size */
-            height: 1.5em;
-            vertical-align: middle;
-        }
-        .diagnostic-task-result {
-            background-color: #e8f5e9;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            border-left: 5px solid #4caf50;
-        }
-        .diagnostic-task-result p { margin: 5px 0; }
-
-        .interactive-selection-area label {
-            display: block;
-            margin-bottom: 8px;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
-        }
-        .interactive-selection-area label:hover {
-            background-color: #f0f4f8;
-            border-color: #00796b;
-        }
-        .interactive-selection-area input[type="checkbox"] {
-            margin-right: 10px;
-            transform: scale(1.2);
-        }
-        .interactive-selection-area input[type="text"],
-        .goal-input-area textarea {
-            width: calc(100% - 22px); /* Default width */
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-family: "Poppins", sans-serif;
-            font-size: 1em;
-            margin-top: 5px;
-        }
-        .input-with-mic {
-            display: flex;
-            align-items: center;
-        }
-        .input-with-mic input[type="text"],
-        .input-with-mic textarea {
-            flex-grow: 1;
-            margin-right: 10px; /* Space between input and mic button */
-        }
-        .mic-button {
-            background-color: #1e88e5;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.5em;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background-color 0.2s ease;
-        }
-        .mic-button:hover {
-            background-color: #1565c0;
-        }
-        .mic-button.listening {
-            background-color: #d32f2f; /* Red when listening */
-        }
-        .mic-button[disabled] {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        #voiceStatus {
-            font-size: 0.9em;
-            color: #546e7a;
-            margin-top: 5px;
-            min-height: 1.2em; /* Reserve space for messages */
-        }
-
-        .selected-items-display {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #e3f2fd;
-            border-radius: 8px;
-            border: 1px dashed #90caf9;
-        }
-        .selected-items-display p em {
-            color: #546e7a;
-        }
-        .selected-item-tag {
-            display: inline-block;
-            background-color: #66bb6a;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            margin-right: 8px;
-            margin-bottom: 8px;
-            font-size: 0.9em;
-        }
-        .goal-input-area textarea {
-            resize: vertical;
-            min-height: 60px;
-        }
-
-        #gameCanvas {
-            border: 3px dashed #764ba2;
-            background-color: #fafafa;
-            border-radius: 12px;
-            cursor: crosshair;
-            margin-top: 15px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .game-info {
-            font-size: 1.2em;
-            color: #004d40;
-            margin-bottom: 10px;
-            text-align: center;
-            font-weight: 600;
-        }
-        #gameMessage {
-            text-align: center;
-            font-weight: 600;
-            color: #d32f2f;
-            min-height: 20px;
-            margin-top: 10px;
-        }
-        .game-section .button {
-             display: block;
-             margin: 20px auto 0 auto;
-        }
-        .accessibility-controls h3 .section-icon { color: #42a5f5; }
-
-        /* Adventure Quest Saga Styles */
-        .adventure-quest-section {
-            background-color: #e0f2f1; /* Light teal background */
-            border: 2px dashed #00796b;
-        }
-        .adventure-map {
-            width: 100%;
-            height: 350px; 
-            background-image: url("./assets/adventure_quest_saga/world_map_background.png");
-            background-size: cover; 
-            background-position: center;
-            background-repeat: no-repeat;
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden; 
-            margin-bottom: 20px;
-            border: 3px solid #004d40;
-        }
-        .map-path {
-            position: absolute;
-            height: 8px; 
-            background-color: rgba(255, 220, 100, 0.8); 
-            top: 50%;
-            left: 5%; 
-            right: 5%; 
-            transform: translateY(-50%);
-            z-index: 1;
-            border-radius: 4px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.3);
-        }
-        .map-node {
-            width: 40px; 
-            height: 40px;
-            background-color: #ff8f00; 
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1em;
-            border: 3px solid #e65100; 
-            position: absolute; 
-            z-index: 2;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.25);
-            cursor: pointer; 
-            transition: transform 0.2s ease;
-        }
-        .map-node:hover {
-            transform: scale(1.1);
-        }
-        .map-node.completed {
-            background-color: #4caf50; 
-            border-color: #2e7d32;
-        }
-        .map-node.current {
-            background-color: #1e88e5; 
-            border-color: #0d47a1;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-        .map-node-tooltip {
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.9em;
-            bottom: 120%;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            z-index: 3;
-        }
-        .map-node:hover .map-node-tooltip {
-            opacity: 1;
-        }
-
-        /* Badge System Styles */
-        .badges-section {
-            background-color: #fff8e1; /* Light amber background */
-            border: 2px dashed #ff8f00;
-        }
-        .badges-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .badge-item {
-            width: 120px;
-            text-align: center;
-            background-color: white;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-        .badge-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-        }
-        .badge-item.earned {
-            border: 2px solid #4caf50;
-        }
-        .badge-item.locked {
-            filter: grayscale(1);
-            opacity: 0.7;
-        }
-        .badge-image {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 10px auto;
-            object-fit: contain;
-        }
-        .badge-name {
-            font-weight: 600;
-            color: #3949ab;
-            font-size: 0.95em;
-            margin-bottom: 5px;
-        }
-        .badge-description {
-            font-size: 0.8em;
-            color: #546e7a;
-            line-height: 1.4;
-        }
-        .badge-earned-date {
-            font-size: 0.75em;
-            color: #4caf50;
-            margin-top: 8px;
-            font-style: italic;
-        }
-        .badge-locked-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0,0,0,0.1);
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .badge-locked-icon {
-            font-size: 2em;
-            color: rgba(0,0,0,0.5);
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-                width: 95%;
-            }
-            h1 { font-size: 2.2em; }
-            h2 { font-size: 1.5em; }
-            .section { padding: 15px; }
-            .badges-container { gap: 10px; }
-            .badge-item { width: 100px; padding: 10px; }
-            .badge-image { width: 60px; height: 60px; }
-            .adventure-map { height: 250px; }
-        }
-        @media (max-width: 480px) {
-            .container { padding: 15px; }
-            h1 { font-size: 1.8em; }
-            .button { padding: 10px 18px; font-size: 0.9em; }
-            .badges-container { gap: 8px; }
-            .badge-item { width: 85px; padding: 8px; }
-            .badge-image { width: 50px; height: 50px; }
-            .adventure-map { height: 200px; }
-        }
-    </style>
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
     <div class="container">
@@ -515,484 +14,136 @@
         <div class="section">
             <h2><span class="section-icon">👋</span> Welcome, {student_id}!</h2>
             <p>Welcome to your personalized learning adventure! I'm DALA, your <strong>Dynamic AI Learning Architect</strong>. I'll help you explore new knowledge and skills in a way that's tailored just for you.</p>
-            <p>Let's start by getting to know you better so I can create the perfect learning pathway!</p>
         </div>
-
-        <!-- HLP Section -->
+        
+        <!-- Learning Profile Section -->
         <div class="section">
             <h2><span class="section-icon">🧠</span> Your Learning Profile</h2>
-            <p>I've analyzed your learning preferences and created a profile to help personalize your learning experience.</p>
+            <p>Based on our diagnostic activities, I've created a personalized learning profile for you. This helps me understand how you learn best!</p>
             
-            <h3>Learning Preferences</h3>
+            <h3>Visual Learning Preference</h3>
             <div class="diagnostic-task-result">
-                <p><strong>Visual Learning:</strong> {visual_preference_result}</p>
-                <p><strong>Text Format:</strong> {textual_preference_result}</p>
+                <p>Your result: <strong>{visual_preference_result}</strong></p>
             </div>
             
-            <h3>Your Interests</h3>
-            <div class="selected-items-display">
-                <p><em>These topics will make your learning more engaging:</em></p>
-                <div id="interestsDisplay">
-                    {interests_html}
-                </div>
-            </div>
-            
-            <h3>Areas to Focus On</h3>
-            <div class="selected-items-display">
-                <p><em>We'll give extra attention to these areas:</em></p>
-                <div id="strugglesDisplay">
-                    {struggles_html}
-                </div>
-            </div>
-            
-            <h3>Advanced Learning Insights</h3>
+            <h3>Textual Learning Preference</h3>
             <div class="diagnostic-task-result">
-                <p><strong>Story Weaving:</strong> {story_weaver_result}</p>
-                <p><strong>Mind Mapping:</strong> {mind_mapper_result}</p>
+                <p>Your result: <strong>{textual_preference_result}</strong></p>
+            </div>
+            
+            <h3>Story Weaver Task</h3>
+            <div class="diagnostic-task-result">
+                <p>Your result: <strong>{story_weaver_result}</strong></p>
+            </div>
+            
+            <h3>Mind Mapper Task</h3>
+            <div class="diagnostic-task-result">
+                <p>Your result: <strong>{mind_mapper_result}</strong></p>
             </div>
         </div>
         
-        <!-- Learning Pathway Section -->
+        <!-- Interests Section -->
         <div class="section">
-            <h2><span class="section-icon">🗺️</span> Your Learning Pathway</h2>
-            <p>Based on your profile, I've created a personalized learning pathway for you. Each step builds on what you already know and helps you progress at your own pace.</p>
-            
-            <h3>Current Learning Objectives</h3>
-            <ul id="learningObjectivesList">
-                {learning_objectives_html}
-            </ul>
+            <h2><span class="section-icon">⭐</span> Your Interests</h2>
+            <p>These are the topics you've told me you're interested in:</p>
+            <div class="selected-items-display">
+                {interests_html}
+                <p><em>Your interests help me make learning more engaging for you!</em></p>
+            </div>
         </div>
         
-        <!-- Adventure Quest Saga Section -->
+        <!-- Struggle Areas Section -->
+        <div class="section">
+            <h2><span class="section-icon">🤔</span> Areas You Want Help With</h2>
+            <p>You've identified these areas where you'd like some extra support:</p>
+            <div class="selected-items-display">
+                {struggles_html}
+                <p><em>I'll provide extra guidance in these areas.</em></p>
+            </div>
+        </div>
+        
+        <!-- Learning Goals Section -->
+        <div class="section">
+            <h2><span class="section-icon">🎯</span> Your Learning Goals</h2>
+            <p>What would you like to achieve in your learning journey? You can type your goals or use voice input!</p>
+            
+            <div class="goal-input-area">
+                <div class="input-with-mic">
+                    <textarea id="learningGoalsInput" placeholder="Enter your learning goals here..."></textarea>
+                    <button id="micButtonGoals" class="mic-button" title="Voice input">🎤</button>
+                </div>
+                <div id="voiceStatus"></div>
+            </div>
+        </div>
+        
+        <!-- Adventure Quest Map Section -->
         <div class="section adventure-quest-section">
-            <h2><span class="section-icon"><img src="./assets/adventure_quest_saga/map_icon.png" alt="Map Icon"></span> Adventure Quest Saga</h2>
-            <p>Track your learning journey on this adventure map! Each node represents a learning objective. Complete them to progress through your quest!</p>
+            <h2><span class="section-icon">🗺️</span> Your Learning Adventure Map</h2>
+            <p>Follow your personalized learning pathway on this adventure map! Each node represents a learning objective.</p>
+            
+            <h3>Current Quest: <strong>{current_quest_name}</strong></h3>
+            <p>Progress: {quest_progress}</p>
             
             <div class="adventure-map">
                 <div class="map-path"></div>
                 {adventure_map_nodes_html}
             </div>
+        </div>
+        
+        <!-- Learning Pathway Section -->
+        <div class="section">
+            <h2><span class="section-icon">📚</span> Your Learning Pathway</h2>
+            <p>Here's your personalized learning pathway. Click the speaker icon to hear the text read aloud!</p>
             
-            <p><strong>Current Quest:</strong> {current_quest_name}</p>
-            <p><strong>Progress:</strong> {quest_progress}</p>
+            <ul>
+                {learning_objectives_html}
+            </ul>
         </div>
         
         <!-- Badges Section -->
         <div class="section badges-section">
             <h2><span class="section-icon">🏆</span> Your Achievements</h2>
-            <p>Collect badges as you progress through your learning journey. Each badge represents a milestone in your adventure!</p>
+            <p>Collect badges as you progress through your learning journey!</p>
             
             <div class="badges-container">
                 {badges_html}
             </div>
         </div>
         
-        <!-- Star Collector Game Section -->
+        <!-- Mini-Game Section -->
         <div class="section game-section">
-            <h2><span class="section-icon">⭐</span> Star Collector</h2>
-            <p>Take a quick break and play this mini-game! Collect as many stars as you can in 30 seconds.</p>
+            <h2><span class="section-icon">🎮</span> Star Collector Mini-Game</h2>
+            <p>Take a quick break and have some fun! Click on the stars as they appear to collect them.</p>
             
-            <div class="game-info">Score: <span id="gameScore">0</span> | Time: <span id="gameTimer">30</span>s</div>
-            <canvas id="gameCanvas" width="600" height="300"></canvas>
-            <div id="gameMessage"></div>
-            <button id="startGameBtn" class="button">Start Game</button>
+            <div class="game-info">Score: <span id="score">0</span></div>
+            <canvas id="gameCanvas" width="500" height="300"></canvas>
+            <div id="gameMessage">Click Start to play!</div>
+            <button id="startGameButton" class="button">Start Game</button>
         </div>
         
         <!-- Accessibility Controls Section -->
         <div class="section accessibility-controls">
-            <h2><span class="section-icon">🔊</span> Accessibility Controls</h2>
+            <h2><span class="section-icon">🔊</span> Accessibility Features</h2>
+            <h3><span class="section-icon">🗣️</span> Text-to-Speech</h3>
+            <p>Click on the speaker buttons next to content to have it read aloud.</p>
+            
             <h3><span class="section-icon">🎤</span> Voice Input</h3>
-            <p>You can use your voice to input text in the fields below. Click the microphone button and start speaking.</p>
-            
-            <div class="goal-input-area">
-                <label for="voiceInputDemo">Try voice input here:</label>
-                <div class="input-with-mic">
-                    <input type="text" id="voiceInputDemo" placeholder="Click the mic button and speak...">
-                    <button id="micButton" class="mic-button" title="Click to start voice input">🎤</button>
-                </div>
-                <div id="voiceStatus"></div>
-            </div>
-            
-            <h3><span class="section-icon">🔈</span> Text-to-Speech</h3>
-            <p>Click the speaker buttons next to text to have it read aloud. You can adjust the settings below.</p>
-            
-            <div>
-                <label for="ttsVoiceSelect">Voice:</label>
-                <select id="ttsVoiceSelect" class="tts-voice-select"></select>
-            </div>
-            <div>
-                <label for="ttsRateRange">Speed:</label>
-                <input type="range" id="ttsRateRange" min="0.5" max="2" step="0.1" value="1">
-                <span id="ttsRateValue">1.0</span>
-            </div>
-            <div>
-                <label for="ttsPitchRange">Pitch:</label>
-                <input type="range" id="ttsPitchRange" min="0.5" max="2" step="0.1" value="1">
-                <span id="ttsPitchValue">1.0</span>
-            </div>
-            <button id="testTtsButton" class="button">Test Speech</button>
+            <p>Use the microphone buttons to speak instead of type.</p>
         </div>
     </div>
-
-    <script>
-        // Learner Profile Data (from Python)
-        const learnerProfile = {learner_profile_json};
-        
-        // Badge Definitions (from Python)
-        const badgeDefinitions = {all_badge_definitions_json};
-        
-        // Map Nodes Data (from Python)
-        const mapNodesData = {map_nodes_json_for_js};
-        
-        // Initialize Text-to-Speech
-        let speechSynthesis = window.speechSynthesis;
-        let voices = [];
-        let currentUtterance = null;
-        
-        // Initialize TTS when voices are loaded
-        function initTTS() {
-            voices = speechSynthesis.getVoices();
-            const voiceSelect = document.getElementById('ttsVoiceSelect');
-            voiceSelect.innerHTML = '';
-            
-            voices.forEach((voice, i) => {
-                const option = document.createElement('option');
-                option.textContent = `${voice.name} (${voice.lang})`;
-                option.setAttribute('data-lang', voice.lang);
-                option.setAttribute('data-voice-index', i);
-                voiceSelect.appendChild(option);
-            });
-            
-            // Try to select an English voice by default
-            const englishVoices = Array.from(voiceSelect.options).filter(option => 
-                option.getAttribute('data-lang').includes('en-')
-            );
-            if (englishVoices.length > 0) {
-                voiceSelect.value = englishVoices[0].value;
-            }
-        }
-        
-        if (speechSynthesis.onvoiceschanged !== undefined) {
-            speechSynthesis.onvoiceschanged = initTTS;
-        }
-        
-        // TTS function
-        function speak(text, rate = 1, pitch = 1) {
-            // Cancel any ongoing speech
-            if (speechSynthesis.speaking) {
-                speechSynthesis.cancel();
-            }
-            
-            if (text) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                const voiceSelect = document.getElementById('ttsVoiceSelect');
-                const selectedOption = voiceSelect.selectedOptions[0];
-                
-                if (selectedOption) {
-                    const voiceIndex = selectedOption.getAttribute('data-voice-index');
-                    utterance.voice = voices[voiceIndex];
-                }
-                
-                utterance.rate = rate;
-                utterance.pitch = pitch;
-                currentUtterance = utterance;
-                
-                speechSynthesis.speak(utterance);
-                return true;
-            }
-            return false;
-        }
-        
-        // Setup TTS buttons
-        function setupTTSButtons() {
-            const ttsButtons = document.querySelectorAll('.tts-button');
-            const rateRange = document.getElementById('ttsRateRange');
-            const pitchRange = document.getElementById('ttsPitchRange');
-            
-            ttsButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const textElement = this.closest('li').querySelector('.lo-title, .content-title');
-                    if (textElement) {
-                        const text = textElement.textContent.trim();
-                        speak(text, parseFloat(rateRange.value), parseFloat(pitchRange.value));
-                    }
-                });
-            });
-            
-            // Test TTS button
-            document.getElementById('testTtsButton').addEventListener('click', function() {
-                speak("This is a test of the text-to-speech feature. You can adjust the voice, speed, and pitch using the controls.", 
-                      parseFloat(rateRange.value), 
-                      parseFloat(pitchRange.value));
-            });
-            
-            // Update displayed values for sliders
-            rateRange.addEventListener('input', function() {
-                document.getElementById('ttsRateValue').textContent = this.value;
-            });
-            
-            pitchRange.addEventListener('input', function() {
-                document.getElementById('ttsPitchValue').textContent = this.value;
-            });
-        }
-        
-        // Initialize Web Speech API for voice input
-        function initVoiceInput() {
-            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                document.getElementById('voiceStatus').textContent = "Voice input not supported in this browser.";
-                document.getElementById('micButton').disabled = true;
-                return;
-            }
-            
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            const recognition = new SpeechRecognition();
-            
-            recognition.continuous = false;
-            recognition.interimResults = true;
-            recognition.lang = 'en-US'; // Default to English
-            
-            const micButton = document.getElementById('micButton');
-            const voiceStatus = document.getElementById('voiceStatus');
-            const voiceInputDemo = document.getElementById('voiceInputDemo');
-            
-            let isListening = false;
-            
-            micButton.addEventListener('click', function() {
-                if (!isListening) {
-                    // Start listening
-                    recognition.start();
-                    micButton.classList.add('listening');
-                    voiceStatus.textContent = "Listening...";
-                    isListening = true;
-                } else {
-                    // Stop listening
-                    recognition.stop();
-                    micButton.classList.remove('listening');
-                    voiceStatus.textContent = "";
-                    isListening = false;
-                }
-            });
-            
-            recognition.onresult = function(event) {
-                const transcript = Array.from(event.results)
-                    .map(result => result[0])
-                    .map(result => result.transcript)
-                    .join('');
-                
-                voiceInputDemo.value = transcript;
-                
-                if (event.results[0].isFinal) {
-                    voiceStatus.textContent = "Voice input captured!";
-                    setTimeout(() => {
-                        voiceStatus.textContent = "";
-                    }, 2000);
-                }
-            };
-            
-            recognition.onend = function() {
-                micButton.classList.remove('listening');
-                isListening = false;
-            };
-            
-            recognition.onerror = function(event) {
-                voiceStatus.textContent = "Error: " + event.error;
-                micButton.classList.remove('listening');
-                isListening = false;
-            };
-        }
-        
-        // Star Collector Game
-        function initGame() {
-            const canvas = document.getElementById('gameCanvas');
-            const ctx = canvas.getContext('2d');
-            const startBtn = document.getElementById('startGameBtn');
-            const scoreDisplay = document.getElementById('gameScore');
-            const timerDisplay = document.getElementById('gameTimer');
-            const messageDisplay = document.getElementById('gameMessage');
-            
-            let gameRunning = false;
-            let score = 0;
-            let timeLeft = 30;
-            let stars = [];
-            let gameTimer;
-            
-            // Star object
-            class Star {
-                constructor() {
-                    this.reset();
-                }
-                
-                reset() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.size = 20 + Math.random() * 20;
-                    this.points = 5 + Math.floor(Math.random() * 3); // 5-7 points
-                    this.rotation = Math.random() * Math.PI * 2;
-                    this.color = `hsl(${Math.random() * 60 + 40}, 100%, 50%)`; // Gold-yellow variations
-                    this.collected = false;
-                    this.value = Math.ceil(this.size / 10); // Bigger stars worth more points
-                }
-                
-                draw() {
-                    if (this.collected) return;
-                    
-                    ctx.save();
-                    ctx.translate(this.x, this.y);
-                    ctx.rotate(this.rotation);
-                    ctx.beginPath();
-                    
-                    // Draw star shape
-                    for (let i = 0; i < this.points * 2; i++) {
-                        const radius = i % 2 === 0 ? this.size / 2 : this.size / 4;
-                        const angle = (i * Math.PI) / this.points;
-                        ctx.lineTo(radius * Math.cos(angle), radius * Math.sin(angle));
-                    }
-                    
-                    ctx.closePath();
-                    ctx.fillStyle = this.color;
-                    ctx.fill();
-                    ctx.strokeStyle = 'rgba(0,0,0,0.3)';
-                    ctx.lineWidth = 2;
-                    ctx.stroke();
-                    ctx.restore();
-                }
-                
-                isClicked(x, y) {
-                    if (this.collected) return false;
-                    
-                    // Simple distance check for click detection
-                    const distance = Math.sqrt(Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2));
-                    return distance < this.size / 2;
-                }
-            }
-            
-            // Initialize stars
-            function createStars(count) {
-                stars = [];
-                for (let i = 0; i < count; i++) {
-                    stars.push(new Star());
-                }
-            }
-            
-            // Draw game
-            function drawGame() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                // Draw stars
-                stars.forEach(star => star.draw());
-                
-                // Request next frame if game is running
-                if (gameRunning) {
-                    requestAnimationFrame(drawGame);
-                }
-            }
-            
-            // Start game
-            function startGame() {
-                if (gameRunning) return;
-                
-                score = 0;
-                timeLeft = 30;
-                scoreDisplay.textContent = score;
-                timerDisplay.textContent = timeLeft;
-                messageDisplay.textContent = "";
-                
-                createStars(10); // Create 10 stars
-                gameRunning = true;
-                
-                // Start timer
-                gameTimer = setInterval(() => {
-                    timeLeft--;
-                    timerDisplay.textContent = timeLeft;
-                    
-                    if (timeLeft <= 0) {
-                        endGame();
-                    }
-                }, 1000);
-                
-                // Start drawing
-                drawGame();
-                
-                // Update button
-                startBtn.textContent = "Game Running...";
-                startBtn.disabled = true;
-            }
-            
-            // End game
-            function endGame() {
-                gameRunning = false;
-                clearInterval(gameTimer);
-                
-                messageDisplay.textContent = `Game Over! You collected ${score} points!`;
-                startBtn.textContent = "Play Again";
-                startBtn.disabled = false;
-            }
-            
-            // Handle canvas clicks
-            canvas.addEventListener('click', (e) => {
-                if (!gameRunning) return;
-                
-                const rect = canvas.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                // Check if any star was clicked
-                stars.forEach(star => {
-                    if (star.isClicked(x, y)) {
-                        star.collected = true;
-                        score += star.value;
-                        scoreDisplay.textContent = score;
-                        
-                        // Replace with a new star
-                        setTimeout(() => {
-                            star.reset();
-                        }, 200);
-                    }
-                });
-            });
-            
-            // Start button
-            startBtn.addEventListener('click', startGame);
-            
-            // Initial draw to show empty canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.font = '20px Poppins';
-            ctx.fillStyle = '#546e7a';
-            ctx.textAlign = 'center';
-            ctx.fillText('Click "Start Game" to begin!', canvas.width / 2, canvas.height / 2);
-        }
-        
-        // Initialize everything when page loads
-        window.addEventListener('DOMContentLoaded', () => {
-            // Initialize TTS (will be called again when voices are loaded)
-            initTTS();
-            
-            // Setup TTS buttons
-            setupTTSButtons();
-            
-            // Initialize voice input
-            initVoiceInput();
-            
-            // Initialize game
-            initGame();
-            
-            // Set up adventure map node tooltips
-            document.querySelectorAll('.map-node').forEach(node => {
-                node.addEventListener('mouseenter', function() {
-                    const tooltip = this.querySelector('.map-node-tooltip');
-                    if (tooltip) {
-                        tooltip.style.opacity = '1';
-                    }
-                });
-                
-                node.addEventListener('mouseleave', function() {
-                    const tooltip = this.querySelector('.map-node-tooltip');
-                    if (tooltip) {
-                        tooltip.style.opacity = '0';
-                    }
-                });
-            });
-        });
+    
+    <!-- Hidden data for JavaScript -->
+    <script id="learnerProfileJson" type="application/json">
+        {learner_profile_json}
     </script>
+    <script id="allBadgeDefinitionsJson" type="application/json">
+        {all_badge_definitions_json}
+    </script>
+    <script id="mapNodesJson" type="application/json">
+        {map_nodes_json_for_js}
+    </script>
+    
+    <!-- External JavaScript -->
+    <script src="./assets/script.js"></script>
 </body>
 </html>

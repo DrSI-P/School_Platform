@@ -135,51 +135,62 @@ def generate_html_interface(student_id: str = DEFAULT_STUDENT_ID, output_filenam
     adventure_quest_assets_dir = os.path.join(assets_dir, ADVENTURE_QUEST_ASSETS_SUBDIR)
     os.makedirs(adventure_quest_assets_dir, exist_ok=True)
     
-    # Copy sample adventure quest assets (placeholder for actual implementation)
-    # In a real implementation, you would copy actual asset files here
-    
     # Initialize the learner profile
     learner_profile = LearnerProfile(student_id=student_id)
     
     # Run the HLP assessment to populate the learner profile
     run_full_hlp_assessment(learner_profile)
-    
-    # Initialize the curriculum content store with the initial curriculum data
+
+    # --- Combine curriculum and content data --- 
+    merged_los = []
+    seen_lo_ids = set()
+    for lo_list_source in [initial_curriculum_data.get('learning_objectives', []), new_curriculum_data.get('learning_objectives', [])]:
+        for lo in lo_list_source:
+            if lo.get('id') not in seen_lo_ids:
+                merged_los.append(lo)
+                seen_lo_ids.add(lo['id'])
+
+    final_curriculum_data = {
+        "curriculum_id": "combined_math_english_ks2_y3_y4", 
+        "subject": "Mathematics & English", 
+        "year_group": "Year 3/4", 
+        "description": "Combined learning objectives for KS2 Mathematics and English.",
+        "learning_objectives": merged_los
+    }
+
+    merged_content = []
+    seen_content_ids = set()
+    for content_list_source in [initial_content_data, new_content_data]:
+        for item in content_list_source:
+            if item.get('id') not in seen_content_ids:
+                merged_content.append(item)
+                seen_content_ids.add(item['id'])
+    final_content_data = merged_content
+    logger.info(f"Combined curriculum: {len(final_curriculum_data['learning_objectives'])} LOs. Combined content: {len(final_content_data)} items.")
+
+    # Initialize the curriculum content store with the COMBINED curriculum data
     content_store = CurriculumContentStore(
-        learning_objectives_data=initial_curriculum_data,
-        learning_content_data=initial_content_data
+        curriculum_data=final_curriculum_data,
+        content_data=final_content_data
     )
     
-    # Generate an initial learning pathway
+    # Generate a learning pathway using the combined store
     pathway_generator = PathwayGenerator(learner_profile, content_store)
-    initial_pathway = pathway_generator.generate_initial_pathway(
+    current_pathway = pathway_generator.generate_initial_pathway(
         target_lo_count=DEFAULT_TARGET_LO_COUNT,
         max_activities_per_lo=DEFAULT_MAX_ACTIVITIES_PER_LO
     )
     
     # Simulate completing some LOs to demonstrate progress
-    if initial_pathway and len(initial_pathway) > 0:
-        # Mark the first LO as completed
-        first_lo_id = initial_pathway[0]['id']
+    if current_pathway and len(current_pathway) > 0:
+        first_lo_id = current_pathway[0]['id']
         learner_profile.mark_lo_completed(first_lo_id)
         logger.info(f"Marked LO {first_lo_id} as completed for demonstration")
         
-        # If there's a second LO, mark it as in progress
-        if len(initial_pathway) > 1:
-            second_lo_id = initial_pathway[1]['id']
+        if len(current_pathway) > 1:
+            second_lo_id = current_pathway[1]['id']
             learner_profile.current_learning_objective_id = second_lo_id
             logger.info(f"Set LO {second_lo_id} as current for demonstration")
-    
-    # Add the new curriculum content to demonstrate switching subjects
-    content_store.add_learning_objectives(new_curriculum_data)
-    content_store.add_learning_content(new_content_data)
-    logger.info("Added new curriculum content (KS2 English)")
-    
-    # Generate a new pathway with the combined curriculum
-    combined_pathway = pathway_generator.generate_initial_pathway(
-        target_lo_count=DEFAULT_TARGET_LO_COUNT,
-        max_activities_per_lo=DEFAULT_MAX_ACTIVITIES_PER_LO
-    )
     
     # Award some badges for demonstration
     learner_profile.earned_badges_data["first_step"] = {
@@ -196,7 +207,7 @@ def generate_html_interface(student_id: str = DEFAULT_STUDENT_ID, output_filenam
     
     # Generate HTML for the learning objectives and content items
     learning_objectives_html = ""
-    for lo in combined_pathway:
+    for lo in current_pathway: # Use current_pathway which has all content
         lo_html = f"""
         <li>
             <div class="lo-title-container">
@@ -207,7 +218,6 @@ def generate_html_interface(student_id: str = DEFAULT_STUDENT_ID, output_filenam
         </li>
         """
         
-        # Add content items if available
         content_items = lo.get('content_items', [])
         if content_items:
             for item in content_items:
@@ -238,36 +248,32 @@ def generate_html_interface(student_id: str = DEFAULT_STUDENT_ID, output_filenam
     adventure_map_nodes_html = ""
     map_nodes_for_js = []
     
-    # Create nodes for each LO in the pathway
-    for i, lo in enumerate(combined_pathway):
-        # Calculate position (simplified for demonstration)
-        pos_x = 5 + (90 * i / len(combined_pathway))  # Spread across 5% to 95% of width
-        pos_y = 50 + (random.randint(-15, 15))  # Center line with some variation
-        
-        # Determine node status
-        status = "normal"
-        if learner_profile.has_completed_lo(lo['id']):
-            status = "completed"
-        elif learner_profile.current_learning_objective_id == lo['id']:
-            status = "current"
-        
-        # Create node HTML
-        node_html = f"""
-        <div class="map-node {status}" style="left: {pos_x}%; top: {pos_y}%;">
-            {i+1}
-            <div class="map-node-tooltip">{html.escape(lo.get('description', 'Learning Objective'))}</div>
-        </div>
-        """
-        adventure_map_nodes_html += node_html
-        
-        # Add to JS data
-        map_nodes_for_js.append({
-            "id": lo['id'],
-            "position": {"x": pos_x, "y": pos_y},
-            "number": i+1,
-            "status": status,
-            "description": lo.get('description', 'Learning Objective')
-        })
+    if current_pathway: # Check if current_pathway is not empty
+        for i, lo in enumerate(current_pathway):
+            pos_x = 5 + (90 * i / len(current_pathway)) if len(current_pathway) > 0 else 50
+            pos_y = 50 + (random.randint(-15, 15))
+            
+            status = "normal"
+            if learner_profile.has_completed_lo(lo['id']):
+                status = "completed"
+            elif learner_profile.current_learning_objective_id == lo['id']:
+                status = "current"
+            
+            node_html = f"""
+            <div class="map-node {status}" style="left: {pos_x}%; top: {pos_y}%;">
+                {i+1}
+                <div class="map-node-tooltip">{html.escape(lo.get('description', 'Learning Objective'))}</div>
+            </div>
+            """
+            adventure_map_nodes_html += node_html
+            
+            map_nodes_for_js.append({
+                "id": lo['id'],
+                "position": {"x": pos_x, "y": pos_y},
+                "number": i+1,
+                "status": status,
+                "description": lo.get('description', 'Learning Objective')
+            })
     
     # Generate HTML for badges
     badges_html = ""
@@ -276,17 +282,14 @@ def generate_html_interface(student_id: str = DEFAULT_STUDENT_ID, output_filenam
         badge_description = badge_info.get('description', 'No description available')
         badge_image = badge_info.get('image', 'default_badge.png')
         
-        # Check if the badge is earned
         is_earned = badge_id in learner_profile.earned_badges_data
         badge_class = "earned" if is_earned else "locked"
         
-        # Get earned date if available
         earned_date_html = ""
         if is_earned:
             earned_date = learner_profile.earned_badges_data[badge_id].get('earned_date', 'Unknown date')
             earned_date_html = f'<div class="badge-earned-date">Earned: {earned_date}</div>'
         
-        # Create badge HTML
         badge_html = f"""
         <div class="badge-item {badge_class}">
             <img src="./assets/{badge_image}" alt="{badge_name}" class="badge-image">
@@ -306,14 +309,14 @@ def generate_html_interface(student_id: str = DEFAULT_STUDENT_ID, output_filenam
         student_id=html.escape(student_id),
         visual_preference_result=html.escape(learner_profile.learning_preferences.get('visual_task_1', 'Not assessed')),
         textual_preference_result=html.escape(learner_profile.learning_preferences.get('textual_task_1', 'Not assessed')),
-        story_weaver_result=html.escape(learner_profile.learning_preferences.get('story_weaver', 'Not assessed')),
-        mind_mapper_result=html.escape(learner_profile.learning_preferences.get('mind_mapper', 'Not assessed')),
+        story_weaver_result=html.escape(str(learner_profile.cognitive_metrics.get('story_weaver', 'Not assessed'))),
+        mind_mapper_result=html.escape(str(learner_profile.cognitive_metrics.get('mind_mapper', 'Not assessed'))),
         interests_html=interests_html,
         struggles_html=struggles_html,
         learning_objectives_html=learning_objectives_html,
         adventure_map_nodes_html=adventure_map_nodes_html,
-        current_quest_name="Math and English Fundamentals",
-        quest_progress=f"{len(learner_profile.completed_los)} / {len(combined_pathway)} objectives completed",
+        current_quest_name="Math and English Fundamentals", # Updated quest name
+        quest_progress=f"{len(learner_profile.completed_los)} / {len(current_pathway) if current_pathway else 0} objectives completed", # Use current_pathway
         badges_html=badges_html,
         learner_profile_json=json.dumps(learner_profile.to_dict()),
         all_badge_definitions_json=json.dumps(BADGE_DEFINITIONS),
@@ -335,17 +338,12 @@ def generate_logged_interface() -> str:
     Returns:
         str: The path to the generated HTML file.
     """
-    # Generate with default student ID but a modified filename to indicate logging
     return generate_html_interface(
         student_id=DEFAULT_STUDENT_ID,
         output_filename="dala_student_interface_v15_tts_logged.html"
     )
 
 if __name__ == "__main__":
-    # When run directly, generate the interface with logging
     output_path = generate_logged_interface()
     print(f"Interface generated at: {output_path}")
-    
-    # You could open the file in a browser automatically here if desired
-    # import webbrowser
-    # webbrowser.open('file://' + os.path.abspath(output_path))
+

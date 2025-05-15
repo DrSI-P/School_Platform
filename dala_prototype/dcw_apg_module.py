@@ -1,4 +1,4 @@
-"""#!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -312,120 +312,37 @@ class PathwayGenerator:
         """
         Generates an initial learning pathway, typically for when a student starts or needs a new set of LOs.
         
-        This is essentially a wrapper for generate_pathway_with_prerequisites with specific defaults,
-        but returns the data in a format suitable for the interface.
+        This method:
+        1. Selects a set of learning objectives based on prerequisites and student progress
+        2. For each LO, selects appropriate content items based on preferences and variety
+        3. Returns a list of LOs with their content items attached
         
         Args:
-            target_lo_count (int, optional): Target number of learning objectives. Defaults to DEFAULT_TARGET_LO_COUNT.
-            max_activities_per_lo (int, optional): Maximum activities per learning objective. Defaults to DEFAULT_MAX_ACTIVITIES_PER_LO.
+            target_lo_count (int, optional): Target number of learning objectives to include.
+                                           Defaults to DEFAULT_TARGET_LO_COUNT.
+            max_activities_per_lo (int, optional): Maximum activities per learning objective.
+                                                 Defaults to DEFAULT_MAX_ACTIVITIES_PER_LO.
             
         Returns:
             List[Dict[str, Any]]: A list of learning objective dictionaries, each with a 'content_items' key
-                                 containing a list of content item dictionaries.
+                                containing a list of selected content items.
         """
-        logger.info(f"--- Generating Initial Pathway (target_lo_count={target_lo_count}) for {self.learner_profile.learner_id} ---")
-        pathway_tuples = self.generate_pathway_with_prerequisites(max_los=target_lo_count, max_activities_per_lo=max_activities_per_lo)
+        logger.info(f"Generating initial pathway for student: {self.learner_profile.learner_id}")
         
-        interface_pathway: List[Dict[str, Any]] = []
-        for lo_data, content_list in pathway_tuples:
-            lo_for_interface = lo_data.copy()
-            lo_for_interface['content_items'] = content_list
-            interface_pathway.append(lo_for_interface)
-            
-        return interface_pathway
-
-    def display_pathway(self, pathway_to_display: Any, student_id: str) -> None:
-        """
-        Displays a learning pathway in a human-readable format.
+        # Use the prerequisite-aware pathway generation
+        pathway_tuples = self.generate_pathway_with_prerequisites(
+            max_los=target_lo_count,
+            max_activities_per_lo=max_activities_per_lo
+        )
         
-        Args:
-            pathway_to_display (Any): The pathway to display, either as tuples or interface format.
-            student_id (str): The ID of the student for whom the pathway was generated.
-        """
-        logger.info(f"--- Learning Pathway for {student_id} ---")
-        if not pathway_to_display:
-            logger.info("No pathway generated or pathway is empty.")
-            return
+        # Convert the tuples to the expected format (LOs with content_items)
+        pathway_los = []
+        for lo_data, content_items in pathway_tuples:
+            # Create a copy of the LO data to avoid modifying the original
+            lo_with_content = lo_data.copy()
+            # Add the content items to the LO
+            lo_with_content['content_items'] = content_items
+            pathway_los.append(lo_with_content)
         
-        # Determine format (tuple based or interface list of dicts)
-        is_tuple_format = False
-        if pathway_to_display and isinstance(pathway_to_display[0], tuple) and len(pathway_to_display[0]) == 2:
-            first_element, second_element = pathway_to_display[0]
-            if isinstance(first_element, dict) and isinstance(second_element, list):
-                is_tuple_format = True
-
-        if is_tuple_format:
-            # Assumes pathway_to_display is List[Tuple[Dict[str, Any], List[Dict[str, Any]]]]
-            for i, (lo, content_items_list) in enumerate(pathway_to_display):
-                logger.info(f"Step {i+1}: Learning Objective: {lo.get('description', 'N/A')} (ID: {lo.get('id', 'N/A')})")
-                if content_items_list:
-                    for idx, content_item in enumerate(content_items_list):
-                        logger.info(f"  Activity {idx+1}: {content_item.get('title', 'N/A')} (Type: {content_item.get('type', 'N/A')}, Difficulty: {content_item.get('difficulty', 'N/A')})")
-                else:
-                    logger.info("  No activities selected for this LO.")
-        else:
-            # Assumes pathway_to_display is List[Dict[str, Any]] (interface format)
-            for i, lo_with_content in enumerate(pathway_to_display):
-                logger.info(f"Step {i+1}: Learning Objective: {lo_with_content.get('description', 'N/A')} (ID: {lo_with_content.get('id', 'N/A')})")
-                content_items_list = lo_with_content.get('content_items', [])
-                if content_items_list:
-                    for idx, content_item in enumerate(content_items_list):
-                        logger.info(f"  Activity {idx+1}: {content_item.get('title', 'N/A')} (Type: {content_item.get('type', 'N/A')}, Difficulty: {content_item.get('difficulty', 'N/A')})")
-                else:
-                    logger.info("  No activities selected for this LO.")
-        logger.info("--- End of Pathway Display ---")
-
-# Example Usage (for testing or demonstration)
-if __name__ == "__main__":
-    # This block is for testing the module directly.
-    # It requires dummy LearnerProfile and CurriculumContentStore setup.
-    
-    # Setup basic LearnerProfile
-    test_student_id = "dcw_apg_test_student"
-    lp = LearnerProfile(student_id=test_student_id)
-    lp.learning_preferences = {"visual_task_1": "visual", "textual_task_1": "detailed_text"} # Example preferences
-    lp.mark_lo_completed("MA3_N1a") # Example completed LO for prerequisite testing
-
-    # Setup basic CurriculumContentStore with some sample data
-    sample_los = [
-        {"id": "MA3_N1a", "description": "Math Year 3 - Prereq LO", "subject": "Math", "year_group": "Year 3", "prerequisites": []},
-        {"id": "MA4_N1a", "description": "Math Year 4 - Counting", "subject": "Math", "year_group": "Year 4", "prerequisites": ["MA3_N1a"]},
-        {"id": "MA4_N1b", "description": "Math Year 4 - Place Value", "subject": "Math", "year_group": "Year 4", "prerequisites": ["MA3_N1a"]},
-        {"id": "EN4_R1a", "description": "English Year 4 - Reading Comprehension", "subject": "English", "year_group": "Year 4", "prerequisites": []}
-    ]
-    sample_content = [
-        {"id": "content_m4_n1a_vid", "lo_id": "MA4_N1a", "title": "Counting Fun Video", "type": "video", "difficulty": "easy"},
-        {"id": "content_m4_n1a_quiz", "lo_id": "MA4_N1a", "title": "Counting Quiz", "type": "interactive_quiz", "difficulty": "medium"},
-        {"id": "content_m4_n1b_game", "lo_id": "MA4_N1b", "title": "Place Value Game", "type": "game", "difficulty": "medium"},
-        {"id": "content_m4_n1b_text", "lo_id": "MA4_N1b", "title": "Place Value Explained", "type": "text_explanation", "difficulty": "easy"},
-        {"id": "content_e4_r1a_pdf", "lo_id": "EN4_R1a", "title": "Reading Practice PDF", "type": "worksheet_pdf", "difficulty": "medium"}
-    ]
-    ccs = CurriculumContentStore(learning_objectives_data=sample_los, learning_content_data=sample_content)
-
-    # Initialize PathwayGenerator
-    pathway_gen = PathwayGenerator(learner_profile=lp, content_store=ccs)
-
-    # Generate a pathway using the refactored method
-    logger.info("\n--- Testing generate_pathway_with_prerequisites ---")
-    generated_pathway = pathway_gen.generate_pathway_with_prerequisites(max_los=2, max_activities_per_lo=1)
-    pathway_gen.display_pathway(generated_pathway, test_student_id)
-
-    # Test generate_initial_pathway (which uses the refactored method)
-    logger.info("\n--- Testing generate_initial_pathway ---")
-    initial_pathway_interface_format = pathway_gen.generate_initial_pathway(target_lo_count=3, max_activities_per_lo=2)
-    pathway_gen.display_pathway(initial_pathway_interface_format, test_student_id)
-
-    # Simulate completing an LO and regenerating
-    if generated_pathway and generated_pathway[0][0]:
-        first_lo_id_in_pathway = generated_pathway[0][0]['id']
-        logger.info(f"\n--- Simulating completion of LO: {first_lo_id_in_pathway} ---")
-        lp.mark_lo_completed(first_lo_id_in_pathway)
-        logger.info(f"Completed LOs for {test_student_id}: {lp.completed_los}")
-        
-        logger.info("\n--- Regenerating pathway after LO completion ---")
-        regenerated_pathway = pathway_gen.generate_pathway_with_prerequisites(max_los=2, max_activities_per_lo=1)
-        pathway_gen.display_pathway(regenerated_pathway, test_student_id)
-    
-    logger.info("\n--- DCW-APG Module Test Run Complete ---")
-
-"""
+        logger.info(f"Initial pathway generation complete. Generated {len(pathway_los)} LOs with content.")
+        return pathway_los
