@@ -1,0 +1,113 @@
+# KS2 English (Years 3-4) - Digitized Learning Activities (Set 2)
+
+# This file contains the structured data for the second set of new learning activities
+# for the Key Stage 2 English (Years 3 and 4) curriculum slice.
+
+# Learning Objective IDs (derived from ks2_english_curriculum_expansion_plan.md and ks2_english_new_activities_set2.md)
+# These should ideally be centralized in the curriculum_content_module later, but defined here for clarity of this data set.
+LO_IDS = {
+    "READ_MAINIDEAS_SUMMARISE": "KS2_ENG_Y34_READ_MAINIDEAS_SUMMARISE",
+    "READ_NONFIC_RETRIEVE_RECORD": "KS2_ENG_Y34_READ_NONFIC_RETRIEVE_RECORD",
+    "READ_NONFIC_LANG_STRUCT_PRES": "KS2_ENG_Y34_READ_NONFIC_LANG_STRUCT_PRES",
+    "WRITE_NONNARR_ORGDEVICES": "KS2_ENG_Y34_WRITE_NONNARR_ORGDEVICES",
+    "WRITE_PURPOSES": "KS2_ENG_Y34_WRITE_PURPOSES",
+    "WRITE_EVAL_EDIT_IMPROVE": "KS2_ENG_Y34_WRITE_EVAL_EDIT_IMPROVE",
+    "WRITE_PROOFREAD": "KS2_ENG_Y34_WRITE_PROOFREAD",
+    "VOCAB_DICT_CHECK_SPELL": "KS2_ENG_Y34_VOCAB_DICT_CHECK_SPELL",
+    "GRAM_PRONOUNS_COHESION": "KS2_ENG_Y34_GRAM_PRONOUNS_COHESION",
+    "GRAM_CONJ_ADV_PREP_VARIETY": "KS2_ENG_Y34_GRAM_CONJ_ADV_PREP_VARIETY"
+}
+
+NEW_KS2_ENGLISH_ACTIVITIES_SET2 = [
+    {
+        "id": "KS2_ENG_Y34_ACT_009",
+        "title": "Non-Fiction Navigator",
+        "description": "Students read a non-fiction text, identify main ideas, summarise, retrieve information, and analyze text features like headings and bold text.",
+        "learning_objectives_covered": [
+            LO_IDS["READ_MAINIDEAS_SUMMARISE"],
+            LO_IDS["READ_NONFIC_RETRIEVE_RECORD"],
+            LO_IDS["READ_NONFIC_LANG_STRUCT_PRES"]
+        ],
+        "activity_type": "interactive_module",
+        "content_format": "text_based_interactive",
+        "estimated_duration_minutes": 20,
+        "difficulty_level": "intermediate",
+        "tags": ["non-fiction", "reading_comprehension", "summarising", "information_retrieval", "text_features"],
+        "prerequisites": [],
+        "success_criteria": "Correctly identifies main ideas for 2/3 sections, writes a coherent summary, answers 3/4 retrieval questions accurately, identifies 2/3 text features.",
+        "engagement_notes": "Theming around exploration or research (e.g., \"Become a Fact Finder!\"). Points awarded. Visuals related to the non-fiction topic."
+    },
+    {
+        "id": "KS2_ENG_Y34_ACT_010",
+        "title": "How-To Guide Creator",
+        "description": "Students write a set of instructions for a simple activity, focusing on clear steps, imperative verbs, and organisational devices like titles and headings.",
+        "learning_objectives_covered": [
+            LO_IDS["WRITE_NONNARR_ORGDEVICES"],
+            LO_IDS["WRITE_PURPOSES"]
+        ],
+        "activity_type": "interactive_writing_tool",
+        "content_format": "structured_template_text_input",
+        "estimated_duration_minutes": 25,
+        "difficulty_level": "intermediate",
+        "tags": ["writing", "instructions", "non-narrative", "procedural_text", "organisational_devices"],
+        "prerequisites": [],
+        "success_criteria": "Creates a guide with a clear title, lists materials, provides at least 3 sequential steps using imperative verbs, and uses headings appropriately.",
+        "engagement_notes": "Students could choose from a few topics or suggest their own. Idea of creating something useful for others. Vocabulary banks for imperative verbs and time connectives."
+    },
+    {
+        "id": "KS2_ENG_Y34_ACT_011",
+        "title": "Editor\'s Desk",
+        "description": "Students identify and correct spelling, punctuation, and grammatical errors in short texts, and suggest improvements for clarity.",
+        "learning_objectives_covered": [
+            LO_IDS["WRITE_EVAL_EDIT_IMPROVE"],
+            LO_IDS["WRITE_PROOFREAD"]
+        ],
+        "activity_type": "interactive_editing_tool",
+        "content_format": "text_based_interactive_correction",
+        "estimated_duration_minutes": 20,
+        "difficulty_level": "intermediate",
+        "tags": ["editing", "proofreading", "grammar", "punctuation", "spelling", "writing_improvement"],
+        "prerequisites": [],
+        "success_criteria": "Correctly identifies and corrects 75% of errors in spelling and punctuation. Suggests at least one valid improvement for clarity or grammar.",
+        "engagement_notes": "Theming as an \"Editor\" or \"Proofreading Pro.\" Points for each correctly identified and corrected error. Different levels of difficulty."
+    },
+    {
+        "id": "KS2_ENG_Y34_ACT_012",
+        "title": "Dictionary Detective Dash",
+        "description": "Students practice using a dictionary to find words based on guide words and check spellings. Optional extension for finding definitions.",
+        "learning_objectives_covered": [
+            LO_IDS["VOCAB_DICT_CHECK_SPELL"]
+        ],
+        "activity_type": "interactive_module",
+        "content_format": "simulated_dictionary_interface_interactive",
+        "estimated_duration_minutes": 15,
+        "difficulty_level": "beginner_intermediate",
+        "tags": ["dictionary_skills", "vocabulary", "spelling", "reference_skills"],
+        "prerequisites": [],
+        "success_criteria": "Correctly identifies guide word placement for 4/5 words. Correctly verifies spelling for 4/5 words.",
+        "engagement_notes": "Timed challenge or race against a DALA character. Points for speed and accuracy."
+    },
+    {
+        "id": "KS2_ENG_Y34_ACT_013",
+        "title": "Pronoun Power & Adverbial Adventures",
+        "description": "Students rewrite sentences to use pronouns effectively, avoiding noun repetition, and enhance sentences by choosing varied adverbs and prepositions.",
+        "learning_objectives_covered": [
+            LO_IDS["GRAM_PRONOUNS_COHESION"],
+            LO_IDS["GRAM_CONJ_ADV_PREP_VARIETY"]
+        ],
+        "activity_type": "interactive_exercise",
+        "content_format": "sentence_rewriting_fill_in_blanks",
+        "estimated_duration_minutes": 15,
+        "difficulty_level": "intermediate",
+        "tags": ["grammar", "pronouns", "adverbs", "prepositions", "sentence_structure", "cohesion"],
+        "prerequisites": [],
+        "success_criteria": "Correctly rewrites 2/3 sentences using pronouns. Chooses appropriate adverbs/prepositions for 3/4 sentences.",
+        "engagement_notes": "Theming around making writing more interesting. \"Super Writer Sentences!\" Points for correct usage."
+    }
+]
+
+# Example of how to access this data (for later use in curriculum_content_module.py):
+# from ks2_english_digitized_activities_set2 import NEW_KS2_ENGLISH_ACTIVITIES_SET2, LO_IDS
+# for activity in NEW_KS2_ENGLISH_ACTIVITIES_SET2:
+# print(activity["title"])
+

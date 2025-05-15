@@ -1,0 +1,56 @@
+{
+    "subject": "Mathematics",
+    "year_group": "Year 4",
+    "topic": "Number - Multiplication and Division",
+    "learning_objectives": [
+        {
+            "id": "Y4MD_LO1",
+            "description": "Recall multiplication and division facts for multiplication tables up to 12 \u00d7 12.",
+            "keywords": [
+                "multiplication facts",
+                "division facts",
+                "times tables"
+            ],
+            "prerequisites": []
+        },
+        {
+            "id": "Y4MD_LO2",
+            "description": "Use place value, known and derived facts to multiply and divide mentally, including: multiplying by 0 and 1; dividing by 1; multiplying together three numbers.",
+            "keywords": [
+                "mental multiplication",
+                "mental division",
+                "place value",
+                "derived facts"
+            ],
+            "prerequisites": [
+                "Y4MD_LO1"
+            ]
+        },
+        {
+            "id": "Y4MD_LO3",
+            "description": "Recognise and use factor pairs and commutativity in mental calculations.",
+            "keywords": [
+                "factor pairs",
+                "commutativity",
+                "mental calculation"
+            ],
+            "prerequisites": [
+                "Y4MD_LO1"
+            ]
+        },
+        {
+            "id": "Y4MD_LO4",
+            "description": "Solve problems involving multiplying and adding, including using the distributive law to multiply two digit numbers by one digit, integer scaling problems and harder correspondence problems such as n objects are connected to m objects.",
+            "keywords": [
+                "problem solving",
+                "distributive law",
+                "integer scaling",
+                "correspondence problems"
+            ],
+            "prerequisites": [
+                "Y4MD_LO2",
+                "Y4MD_LO3"
+            ]
+        }
+    ]
+}

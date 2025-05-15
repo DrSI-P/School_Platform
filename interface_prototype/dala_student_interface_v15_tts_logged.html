@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DALA Learning Adventure! - TTS Prototype</title>
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>DALA Learning Adventure!</h1>
+        
+        <!-- Welcome Section -->
+        <div class="section">
+            <h2><span class="section-icon">👋</span> Welcome, test_student_001!</h2>
+            <p>Welcome to your personalized learning adventure! I'm DALA, your <strong>Dynamic AI Learning Architect</strong>. I'll help you explore new knowledge and skills in a way that's tailored just for you.</p>
+        </div>
+        
+        <!-- Learning Profile Section -->
+        <div class="section">
+            <h2><span class="section-icon">🧠</span> Your Learning Profile</h2>
+            <p>Based on our diagnostic activities, I've created a personalized learning profile for you. This helps me understand how you learn best!</p>
+            
+            <h3>Visual Learning Preference</h3>
+            <div class="diagnostic-task-result">
+                <p>Your result: <strong>Not assessed</strong></p>
+            </div>
+            
+            <h3>Textual Learning Preference</h3>
+            <div class="diagnostic-task-result">
+                <p>Your result: <strong>Not assessed</strong></p>
+            </div>
+            
+            <h3>Story Weaver Task</h3>
+            <div class="diagnostic-task-result">
+                <p>Your result: <strong>{&#x27;accuracy&#x27;: 0.82, &#x27;completion_time&#x27;: 179, &#x27;panels_created&#x27;: 6, &#x27;attempts&#x27;: 1}</strong></p>
+            </div>
+            
+            <h3>Mind Mapper Task</h3>
+            <div class="diagnostic-task-result">
+                <p>Your result: <strong>{&#x27;nodes_created&#x27;: 7, &#x27;connections_made&#x27;: 5, &#x27;complexity_score&#x27;: 0.45, &#x27;attempts&#x27;: 1}</strong></p>
+            </div>
+        </div>
+        
+        <!-- Interests Section -->
+        <div class="section">
+            <h2><span class="section-icon">⭐</span> Your Interests</h2>
+            <p>These are the topics you've told me you're interested in:</p>
+            <div class="selected-items-display">
+                <span class="selected-item-tag">Sports &amp; Athletics</span><span class="selected-item-tag">Visual Arts &amp; Drawing</span>
+                <p><em>Your interests help me make learning more engaging for you!</em></p>
+            </div>
+        </div>
+        
+        <!-- Struggle Areas Section -->
+        <div class="section">
+            <h2><span class="section-icon">🤔</span> Areas You Want Help With</h2>
+            <p>You've identified these areas where you'd like some extra support:</p>
+            <div class="selected-items-display">
+                
+                <p><em>I'll provide extra guidance in these areas.</em></p>
+            </div>
+        </div>
+        
+        <!-- Learning Goals Section -->
+        <div class="section">
+            <h2><span class="section-icon">🎯</span> Your Learning Goals</h2>
+            <p>What would you like to achieve in your learning journey? You can type your goals or use voice input!</p>
+            
+            <div class="goal-input-area">
+                <div class="input-with-mic">
+                    <textarea id="learningGoalsInput" placeholder="Enter your learning goals here..."></textarea>
+                    <button id="micButtonGoals" class="mic-button" title="Voice input">🎤</button>
+                </div>
+                <div id="voiceStatus"></div>
+            </div>
+        </div>
+        
+        <!-- Adventure Quest Map Section -->
+        <div class="section adventure-quest-section">
+            <h2><span class="section-icon">🗺️</span> Your Learning Adventure Map</h2>
+            <p>Follow your personalized learning pathway on this adventure map! Each node represents a learning objective.</p>
+            
+            <h3>Current Quest: <strong>Math and English Fundamentals</strong></h3>
+            <p>Progress: 1 / 3 objectives completed</p>
+            
+            <div class="adventure-map">
+                <div class="map-path"></div>
+                
+            <div class="map-node completed" style="left: 5.0%; top: 64%;">
+                1
+                <div class="map-node-tooltip">Apply their growing knowledge of root words, prefixes and suffixes (etymology and morphology) as listed in English Appendix 1, both to read aloud and to understand the meaning of new words they meet.</div>
+            </div>
+            
+            <div class="map-node current" style="left: 35.0%; top: 59%;">
+                2
+                <div class="map-node-tooltip">Plan their writing by: discussing writing similar to that which they are planning to write in order to understand and learn from its structure, vocabulary and grammar; discussing and recording ideas.</div>
+            </div>
+            
+            <div class="map-node normal" style="left: 65.0%; top: 45%;">
+                3
+                <div class="map-node-tooltip">Use further prefixes and suffixes and understand how to add them. Spell further homophones. Spell words that are often misspelt.</div>
+            </div>
+            
+            </div>
+        </div>
+        
+        <!-- Learning Pathway Section -->
+        <div class="section">
+            <h2><span class="section-icon">📚</span> Your Learning Pathway</h2>
+            <p>Here's your personalized learning pathway. Click the speaker icon to hear the text read aloud!</p>
+            
+            <ul>
+                
+        <li>
+            <div class="lo-title-container">
+                <div class="lo-title">Apply their growing knowledge of root words, prefixes and suffixes (etymology and morphology) as listed in English Appendix 1, both to read aloud and to understand the meaning of new words they meet.</div>
+                <div>Subject: N/A | Year: N/A</div>
+            </div>
+            <button class="tts-button" title="Read aloud">🔊</button>
+        </li>
+        
+        <li>
+            <div class="lo-title-container">
+                <div class="lo-title">Plan their writing by: discussing writing similar to that which they are planning to write in order to understand and learn from its structure, vocabulary and grammar; discussing and recording ideas.</div>
+                <div>Subject: N/A | Year: N/A</div>
+            </div>
+            <button class="tts-button" title="Read aloud">🔊</button>
+        </li>
+        
+        <li>
+            <div class="lo-title-container">
+                <div class="lo-title">Use further prefixes and suffixes and understand how to add them. Spell further homophones. Spell words that are often misspelt.</div>
+                <div>Subject: N/A | Year: N/A</div>
+            </div>
+            <button class="tts-button" title="Read aloud">🔊</button>
+        </li>
+        
+            </ul>
+        </div>
+        
+        <!-- Badges Section -->
+        <div class="section badges-section">
+            <h2><span class="section-icon">🏆</span> Your Achievements</h2>
+            <p>Collect badges as you progress through your learning journey!</p>
+            
+            <div class="badges-container">
+                
+        <div class="badge-item earned">
+            <img src="./assets/default_badge.png" alt="Trailblazer" class="badge-image">
+            <div class="badge-name">Trailblazer</div>
+            <div class="badge-description">You&#x27;ve taken the first step on your learning adventure! (Completed HLP Introduction)</div>
+            <div class="badge-earned-date">Earned: Unknown date</div>
+            
+        </div>
+        
+        <div class="badge-item locked">
+            <img src="./assets/default_badge.png" alt="Numeria Novice Tackler" class="badge-image">
+            <div class="badge-name">Numeria Novice Tackler</div>
+            <div class="badge-description">Well done! You&#x27;ve successfully navigated the initial challenges of Numeria!</div>
+            
+            <div class="badge-locked-overlay"><span class="badge-locked-icon">🔒</span></div>
+        </div>
+        
+        <div class="badge-item locked">
+            <img src="./assets/default_badge.png" alt="Introductory Quest Completer" class="badge-image">
+            <div class="badge-name">Introductory Quest Completer</div>
+            <div class="badge-description">You&#x27;ve completed your first full quest! Adventure awaits!</div>
+            
+            <div class="badge-locked-overlay"><span class="badge-locked-icon">🔒</span></div>
+        </div>
+        
+        <div class="badge-item locked">
+            <img src="./assets/default_badge.png" alt="Curiosity Spark" class="badge-image">
+            <div class="badge-name">Curiosity Spark</div>
+            <div class="badge-description">Your curiosity is shining bright! You&#x27;ve explored beyond the beaten path!</div>
+            
+            <div class="badge-locked-overlay"><span class="badge-locked-icon">🔒</span></div>
+        </div>
+        
+        <div class="badge-item locked">
+            <img src="./assets/default_badge.png" alt="Helping Hand" class="badge-image">
+            <div class="badge-name">Helping Hand</div>
+            <div class="badge-description">Well done for identifying areas to grow! Understanding your learning is a superpower!</div>
+            
+            <div class="badge-locked-overlay"><span class="badge-locked-icon">🔒</span></div>
+        </div>
+        
+            </div>
+        </div>
+        
+        <!-- Mini-Game Section -->
+        <div class="section game-section">
+            <h2><span class="section-icon">🎮</span> Star Collector Mini-Game</h2>
+            <p>Take a quick break and have some fun! Click on the stars as they appear to collect them.</p>
+            
+            <div class="game-info">Score: <span id="score">0</span></div>
+            <canvas id="gameCanvas" width="500" height="300"></canvas>
+            <div id="gameMessage">Click Start to play!</div>
+            <button id="startGameButton" class="button">Start Game</button>
+        </div>
+        
+        <!-- Accessibility Controls Section -->
+        <div class="section accessibility-controls">
+            <h2><span class="section-icon">🔊</span> Accessibility Features</h2>
+            <h3><span class="section-icon">🗣️</span> Text-to-Speech</h3>
+            <p>Click on the speaker buttons next to content to have it read aloud.</p>
+            
+            <h3><span class="section-icon">🎤</span> Voice Input</h3>
+            <p>Use the microphone buttons to speak instead of type.</p>
+        </div>
+    </div>
+    
+    <!-- Hidden data for JavaScript -->
+    <script id="learnerProfileJson" type="application/json">
+        {"student_id": "test_student_001", "learning_preferences": {"visual_preference_task_1": "non-visual", "textual_preference_task_1": "non-textual"}, "interests": ["Sports & Athletics", "Visual Arts & Drawing"], "struggle_areas": [], "cognitive_metrics": {"story_weaver": {"accuracy": 0.82, "completion_time": 179, "panels_created": 6, "attempts": 1}, "mind_mapper": {"nodes_created": 7, "connections_made": 5, "complexity_score": 0.45, "attempts": 1}}, "completed_los": ["KS2_ENG_Y34_READ_ROOTS_PREFIXES_SUFFIXES"], "current_learning_objective_id": "KS2_ENG_Y34_WRITE_PLAN_DISCUSS_RECORD", "earned_badges_data": {"trailblazer": {"id": "trailblazer", "name": "Trailblazer", "description": "You've taken the first step on your learning adventure! (Completed HLP Introduction)", "image_url": "assets/badges/trailblazer_badge.png", "criteria_check_function": "check_trailblazer_badge", "date_earned": "2025-05-15T15:31:28.497175Z"}, "first_step": {"earned_date": "2025-05-15", "details": "Awarded for starting your learning journey!"}, "hlp_explorer": {"earned_date": "2025-05-15", "details": "Awarded for completing the learning profile assessment!"}}, "game_scores": {}}
+    </script>
+    <script id="allBadgeDefinitionsJson" type="application/json">
+        {"trailblazer": {"id": "trailblazer", "name": "Trailblazer", "description": "You've taken the first step on your learning adventure! (Completed HLP Introduction)", "image_url": "assets/badges/trailblazer_badge.png", "criteria_check_function": "check_trailblazer_badge"}, "topic_tackler_numeria_novice": {"id": "topic_tackler_numeria_novice", "name": "Numeria Novice Tackler", "description": "Well done! You've successfully navigated the initial challenges of Numeria!", "image_url": "assets/badges/topic_tackler_badge.png", "criteria_check_function": "check_topic_tackler_numeria_novice_badge"}, "quest_completer_intro": {"id": "quest_completer_intro", "name": "Introductory Quest Completer", "description": "You've completed your first full quest! Adventure awaits!", "image_url": "assets/badges/quest_completer_badge.png", "criteria_check_function": "check_quest_completer_intro_badge"}, "curiosity_spark": {"id": "curiosity_spark", "name": "Curiosity Spark", "description": "Your curiosity is shining bright! You've explored beyond the beaten path!", "image_url": "assets/badges/curiosity_spark_badge.png", "criteria_check_function": "check_curiosity_spark_badge"}, "helping_hand": {"id": "helping_hand", "name": "Helping Hand", "description": "Well done for identifying areas to grow! Understanding your learning is a superpower!", "image_url": "assets/badges/helping_hand_badge.png", "criteria_check_function": "check_helping_hand_badge"}}
+    </script>
+    <script id="mapNodesJson" type="application/json">
+        [{"id": "KS2_ENG_Y34_READ_ROOTS_PREFIXES_SUFFIXES", "position": {"x": 5.0, "y": 64}, "number": 1, "status": "completed", "description": "Apply their growing knowledge of root words, prefixes and suffixes (etymology and morphology) as listed in English Appendix 1, both to read aloud and to understand the meaning of new words they meet."}, {"id": "KS2_ENG_Y34_WRITE_PLAN_DISCUSS_RECORD", "position": {"x": 35.0, "y": 59}, "number": 2, "status": "current", "description": "Plan their writing by: discussing writing similar to that which they are planning to write in order to understand and learn from its structure, vocabulary and grammar; discussing and recording ideas."}, {"id": "KS2_ENG_Y34_SPELL_PREFIXES_SUFFIXES_HOMOPHONES_MISSPELLT", "position": {"x": 65.0, "y": 45}, "number": 3, "status": "normal", "description": "Use further prefixes and suffixes and understand how to add them. Spell further homophones. Spell words that are often misspelt."}]
+    </script>
+    
+    <!-- External JavaScript -->
+    <script src="./assets/script.js"></script>
+</body>
+</html>

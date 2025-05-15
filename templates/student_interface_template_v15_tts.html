@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DALA Learning Adventure! - TTS Prototype</title>
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>DALA Learning Adventure!</h1>
+        
+        <!-- Welcome Section -->
+        <div class="section">
+            <h2><span class="section-icon">👋</span> Welcome, {student_id}!</h2>
+            <p>Welcome to your personalized learning adventure! I'm DALA, your <strong>Dynamic AI Learning Architect</strong>. I'll help you explore new knowledge and skills in a way that's tailored just for you.</p>
+        </div>
+        
+        <!-- Learning Profile Section -->
+        <div class="section">
+            <h2><span class="section-icon">🧠</span> Your Learning Profile</h2>
+            <p>Based on our diagnostic activities, I've created a personalized learning profile for you. This helps me understand how you learn best!</p>
+            
+            <h3>Visual Learning Preference</h3>
+            <div class="diagnostic-task-result">
+                <p>Your result: <strong>{visual_preference_result}</strong></p>
+            </div>
+            
+            <h3>Textual Learning Preference</h3>
+            <div class="diagnostic-task-result">
+                <p>Your result: <strong>{textual_preference_result}</strong></p>
+            </div>
+            
+            <h3>Story Weaver Task</h3>
+            <div class="diagnostic-task-result">
+                <p>Your result: <strong>{story_weaver_result}</strong></p>
+            </div>
+            
+            <h3>Mind Mapper Task</h3>
+            <div class="diagnostic-task-result">
+                <p>Your result: <strong>{mind_mapper_result}</strong></p>
+            </div>
+        </div>
+        
+        <!-- Interests Section -->
+        <div class="section">
+            <h2><span class="section-icon">⭐</span> Your Interests</h2>
+            <p>These are the topics you've told me you're interested in:</p>
+            <div class="selected-items-display">
+                {interests_html}
+                <p><em>Your interests help me make learning more engaging for you!</em></p>
+            </div>
+        </div>
+        
+        <!-- Struggle Areas Section -->
+        <div class="section">
+            <h2><span class="section-icon">🤔</span> Areas You Want Help With</h2>
+            <p>You've identified these areas where you'd like some extra support:</p>
+            <div class="selected-items-display">
+                {struggles_html}
+                <p><em>I'll provide extra guidance in these areas.</em></p>
+            </div>
+        </div>
+        
+        <!-- Learning Goals Section -->
+        <div class="section">
+            <h2><span class="section-icon">🎯</span> Your Learning Goals</h2>
+            <p>What would you like to achieve in your learning journey? You can type your goals or use voice input!</p>
+            
+            <div class="goal-input-area">
+                <div class="input-with-mic">
+                    <textarea id="learningGoalsInput" placeholder="Enter your learning goals here..."></textarea>
+                    <button id="micButtonGoals" class="mic-button" title="Voice input">🎤</button>
+                </div>
+                <div id="voiceStatus"></div>
+            </div>
+        </div>
+        
+        <!-- Adventure Quest Map Section -->
+        <div class="section adventure-quest-section">
+            <h2><span class="section-icon">🗺️</span> Your Learning Adventure Map</h2>
+            <p>Follow your personalized learning pathway on this adventure map! Each node represents a learning objective.</p>
+            
+            <h3>Current Quest: <strong>{current_quest_name}</strong></h3>
+            <p>Progress: {quest_progress}</p>
+            
+            <div class="adventure-map">
+                <div class="map-path"></div>
+                {adventure_map_nodes_html}
+            </div>
+        </div>
+        
+        <!-- Learning Pathway Section -->
+        <div class="section">
+            <h2><span class="section-icon">📚</span> Your Learning Pathway</h2>
+            <p>Here's your personalized learning pathway. Click the speaker icon to hear the text read aloud!</p>
+            
+            <ul>
+                {learning_objectives_html}
+            </ul>
+        </div>
+        
+        <!-- Badges Section -->
+        <div class="section badges-section">
+            <h2><span class="section-icon">🏆</span> Your Achievements</h2>
+            <p>Collect badges as you progress through your learning journey!</p>
+            
+            <div class="badges-container">
+                {badges_html}
+            </div>
+        </div>
+        
+        <!-- Mini-Game Section -->
+        <div class="section game-section">
+            <h2><span class="section-icon">🎮</span> Star Collector Mini-Game</h2>
+            <p>Take a quick break and have some fun! Click on the stars as they appear to collect them.</p>
+            
+            <div class="game-info">Score: <span id="score">0</span></div>
+            <canvas id="gameCanvas" width="500" height="300"></canvas>
+            <div id="gameMessage">Click Start to play!</div>
+            <button id="startGameButton" class="button">Start Game</button>
+        </div>
+        
+        <!-- Accessibility Controls Section -->
+        <div class="section accessibility-controls">
+            <h2><span class="section-icon">🔊</span> Accessibility Features</h2>
+            <h3><span class="section-icon">🗣️</span> Text-to-Speech</h3>
+            <p>Click on the speaker buttons next to content to have it read aloud.</p>
+            
+            <h3><span class="section-icon">🎤</span> Voice Input</h3>
+            <p>Use the microphone buttons to speak instead of type.</p>
+        </div>
+    </div>
+    
+    <!-- Hidden data for JavaScript -->
+    <script id="learnerProfileJson" type="application/json">
+        {learner_profile_json}
+    </script>
+    <script id="allBadgeDefinitionsJson" type="application/json">
+        {all_badge_definitions_json}
+    </script>
+    <script id="mapNodesJson" type="application/json">
+        {map_nodes_json_for_js}
+    </script>
+    
+    <!-- External JavaScript -->
+    <script src="./assets/script.js"></script>
+</body>
+</html>

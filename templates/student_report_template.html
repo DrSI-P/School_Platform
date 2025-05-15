@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Student Report - {{ student.name }}</title>
+</head>
+<body>
+    <div class="header">
+        <h1>EdPsych Connect - Student Report</h1>
+        <p>Student: {{ student.name }} | Year Group: {{ student.year_group }} | School Year: {{ school_year }}</p>
+        <p>Report Generated: {{ generated_date }}</p>
+    </div>
+    
+    <div class="section">
+        <h2>Overview</h2>
+        <p>Student ID: {{ student.student_id }}</p>
+        <p>Last Active: {{ student.last_active.strftime('%Y-%m-%d %H:%M') if student.last_active else 'N/A' }}</p>
+        <p>Overall Progress: {{ student.overall_progress }}%</p>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: {{ student.overall_progress }}%">
+                {{ student.overall_progress }}%
+            </div>
+        </div>
+        
+        {% if student.requires_attention %}
+        <div class="alert">
+            <strong>Attention Required:</strong> {{ student.attention_reason }}
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="section">
+        <h2>Learning Progress</h2>
+        
+        {% if 'progress' in charts %}
+        <div class="chart-container">
+            <img src="{{ charts['progress'] }}" alt="Progress Chart">
+        </div>
+        {% endif %}
+        
+        <h3>Completed Learning Objectives ({{ student.completed_los|length }})</h3>
+        {% if student.completed_los %}
+        <ul>
+            {% for lo in student.completed_los %}
+            <li>{{ lo }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No learning objectives completed yet.</p>
+        {% endif %}
+        
+        {% if student.current_lo_id %}
+        <h3>Current Learning Objective</h3>
+        <p>{{ student.current_lo_id }}</p>
+        {% endif %}
+    </div>
+    
+    <div class="section">
+        <h2>Learning Profile</h2>
+        
+        <h3>Learning Preferences</h3>
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Value</th>
+            </tr>
+            {% for pref in student.learning_preferences %}
+            <tr>
+                <td>{{ pref.category }}</td>
+                <td>{{ pref.value }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        <h3>Interests</h3>
+        <p>
+            {% for interest in student.interests %}
+            <span class="badge">{{ interest }}</span>
+            {% endfor %}
+        </p>
+        
+        {% if student.struggle_areas %}
+        <h3>Areas Requiring Support</h3>
+        <ul>
+            {% for struggle in student.struggle_areas %}
+            <li>{{ struggle }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    
+    {% if student.cognitive_metrics %}
+    <div class="section">
+        <h2>Cognitive Metrics</h2>
+        
+        {% if 'metrics' in charts %}
+        <div class="chart-container">
+            <img src="{{ charts['metrics'] }}" alt="Cognitive Metrics Chart">
+        </div>
+        {% endif %}
+        
+        <table>
+            <tr>
+                <th>Task</th>
+                <th>Metrics</th>
+            </tr>
+            {% for metric in student.cognitive_metrics %}
+            <tr>
+                <td>{{ metric.task_name }}</td>
+                <td>
+                    <ul>
+                    {% for key, value in metric.metrics.items() %}
+                        <li>{{ key }}: {{ value }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+    
+    {% if student.activity_history %}
+    <div class="section">
+        <h2>Recent Activity</h2>
+        
+        {% if 'activity' in charts %}
+        <div class="chart-container">
+            <img src="{{ charts['activity'] }}" alt="Activity Performance Chart">
+        </div>
+        {% endif %}
+        
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Activity</th>
+                <th>Type</th>
+                <th>Score</th>
+                <th>Status</th>
+            </tr>
+            {% for activity in student.activity_history|sort(attribute='timestamp', reverse=True) %}
+            <tr>
+                <td>{{ activity.timestamp.strftime('%Y-%m-%d') if activity.timestamp else 'N/A' }}</td>
+                <td>{{ activity.activity_id }}</td>
+                <td>{{ activity.activity_type }}</td>
+                <td>{{ activity.score if activity.score is not none else 'N/A' }}</td>
+                <td>{{ 'Completed' if activity.completed else 'In Progress' }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+    
+    {% if student.badges_earned %}
+    <div class="section">
+        <h2>Badges Earned</h2>
+        <table>
+            <tr>
+                <th>Badge</th>
+                <th>Description</th>
+                <th>Date Earned</th>
+            </tr>
+            {% for badge in student.badges_earned|sort(attribute='date_earned', reverse=True) %}
+            <tr>
+                <td>{{ badge.badge_name }}</td>
+                <td>{{ badge.description }}</td>
+                <td>{{ badge.date_earned.strftime('%Y-%m-%d') if badge.date_earned else 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+    
+    <div class="footer">
+        <p>EdPsych Connect - Empowering learners through tailored, evidence-based support</p>
+        <p>This report is confidential and intended for educational purposes only.</p>
+    </div>
+</body>
+</html>

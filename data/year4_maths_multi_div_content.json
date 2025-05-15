@@ -1,0 +1,100 @@
+[
+    {
+        "id": "CONT_MD_001",
+        "title": "Times Tables Practice Game (Up to 12x12)",
+        "type": "game",
+        "learning_objectives_covered": [
+            "Y4MD_LO1"
+        ],
+        "target_preferences": [
+            "kinesthetic",
+            "visual"
+        ],
+        "difficulty": "medium",
+        "url_path": "/content/games/timestables_y4.html"
+    },
+    {
+        "id": "CONT_MD_002",
+        "title": "Video: Understanding Multiplication by 0 and 1",
+        "type": "video",
+        "learning_objectives_covered": [
+            "Y4MD_LO2"
+        ],
+        "target_preferences": [
+            "visual",
+            "auditory"
+        ],
+        "difficulty": "easy",
+        "url_path": "/content/videos/multiply_zero_one_y4.mp4"
+    },
+    {
+        "id": "CONT_MD_003",
+        "title": "Worksheet: Factor Pairs Fun",
+        "type": "worksheet_pdf",
+        "learning_objectives_covered": [
+            "Y4MD_LO3"
+        ],
+        "target_preferences": [
+            "textual",
+            "logical"
+        ],
+        "difficulty": "medium",
+        "url_path": "/content/worksheets/factor_pairs_y4.pdf"
+    },
+    {
+        "id": "CONT_MD_004",
+        "title": "Interactive: Mental Multiplication Challenge",
+        "type": "interactive_quiz",
+        "learning_objectives_covered": [
+            "Y4MD_LO2"
+        ],
+        "target_preferences": [
+            "kinesthetic",
+            "logical"
+        ],
+        "difficulty": "medium",
+        "url_path": "/content/interactive/mental_math_multiply_y4.html"
+    },
+    {
+        "id": "CONT_MD_005",
+        "title": "Explanation: The Distributive Law in Multiplication",
+        "type": "text_explanation",
+        "learning_objectives_covered": [
+            "Y4MD_LO4"
+        ],
+        "target_preferences": [
+            "textual",
+            "logical"
+        ],
+        "difficulty": "hard",
+        "url_path": "/content/text/distributive_law_y4.md"
+    },
+    {
+        "id": "CONT_MD_006",
+        "title": "Animated Story: Solving Scaling Problems",
+        "type": "video",
+        "learning_objectives_covered": [
+            "Y4MD_LO4"
+        ],
+        "target_preferences": [
+            "visual",
+            "auditory",
+            "narrative"
+        ],
+        "difficulty": "hard",
+        "url_path": "/content/videos/scaling_problems_story_y4.mp4"
+    },
+    {
+        "id": "CONT_MD_007",
+        "title": "Quick Quiz: Commutativity in Calculations",
+        "type": "interactive_quiz",
+        "learning_objectives_covered": [
+            "Y4MD_LO3"
+        ],
+        "target_preferences": [
+            "logical"
+        ],
+        "difficulty": "easy",
+        "url_path": "/content/interactive/commutativity_quiz_y4.html"
+    }
+]

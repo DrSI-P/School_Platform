@@ -1,0 +1,501 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fredoka+One&display=swap");
+
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #4A4A4A;
+    line-height: 1.7;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    max-width: 850px;
+    width: 90%;
+    margin: 20px auto;
+}
+h1 {
+    font-family: "Fredoka One", cursive;
+    color: #5e35b1;
+    text-align: center;
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+h2 {
+    font-family: "Fredoka One", cursive;
+    color: #00796b;
+    border-bottom: 3px dashed #764ba2;
+    padding-bottom: 10px;
+    margin-top: 35px;
+    font-size: 1.8em;
+    display: flex;
+    align-items: center;
+}
+h3 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: #1e88e5;
+    margin-top: 25px;
+    font-size: 1.3em;
+}
+h4 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: #3949ab;
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+.section {
+    margin-bottom: 35px;
+    padding: 25px;
+    background-color: #f7f9fc;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.button {
+    background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: white;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-right: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.button:hover {
+    background-image: linear-gradient(to right, #feb47b, #ff7e5f);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+}
+.button[disabled] {
+    background-image: none;
+    background-color: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+li {
+    background-color: #ffffff;
+    margin-bottom: 12px;
+    padding: 18px;
+    border-radius: 10px;
+    border-left: 6px solid #66bb6a;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.07);
+    transition: transform 0.2s ease;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+}
+li:hover {
+    transform: translateX(5px);
+}
+.lo-title-container {
+    flex-grow: 1; /* Allow title container to take available space */
+    margin-right: 10px; /* Space between title and speaker icon */
+}
+.lo-title {
+    font-weight: 700;
+    color: #3949ab;
+    font-size: 1.15em;
+    margin-bottom: 5px;
+}
+.content-title-container {
+    flex-grow: 1;
+    margin-left: 15px;
+    margin-right: 10px;
+}
+.content-title {
+    color: #546e7a;
+    font-size: 1em;
+}
+.content-title em {
+    color: #78909c;
+    font-size: 0.9em;
+}
+.tts-button {
+    background-color: #42a5f5; /* Light blue, distinct */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    padding: 0;
+    flex-shrink: 0; /* Prevent shrinking if text is long */
+}
+.tts-button:hover {
+    background-color: #1e88e5; /* Darker blue on hover */
+    transform: scale(1.1);
+}
+.tts-button[disabled] {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+}
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    font-size: 0.95em;
+    color: #37474f;
+    max-height: 250px;
+    overflow-y: auto;
+}
+strong { color: #ef5350; }
+em { color: #26a69a; }
+.section-icon {
+    margin-right: 12px;
+    font-size: 1.5em;
+    color: #7e57c2;
+}
+.section-icon img {
+    width: 1.5em; /* Match font size */
+    height: 1.5em;
+    vertical-align: middle;
+}
+.diagnostic-task-result {
+    background-color: #e8f5e9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border-left: 5px solid #4caf50;
+}
+.diagnostic-task-result p { margin: 5px 0; }
+
+.interactive-selection-area label {
+    display: block;
+    margin-bottom: 8px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.interactive-selection-area label:hover {
+    background-color: #f0f4f8;
+    border-color: #00796b;
+}
+.interactive-selection-area input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+.interactive-selection-area input[type="text"],
+.goal-input-area textarea {
+    width: calc(100% - 22px); /* Default width */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: "Poppins", sans-serif;
+    font-size: 1em;
+    margin-top: 5px;
+}
+.input-with-mic {
+    display: flex;
+    align-items: center;
+}
+.input-with-mic input[type="text"],
+.input-with-mic textarea {
+    flex-grow: 1;
+    margin-right: 10px; /* Space between input and mic button */
+}
+.mic-button {
+    background-color: #1e88e5;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+.mic-button:hover {
+    background-color: #1565c0;
+}
+.mic-button.listening {
+    background-color: #d32f2f; /* Red when listening */
+}
+.mic-button[disabled] {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+#voiceStatus {
+    font-size: 0.9em;
+    color: #546e7a;
+    margin-top: 5px;
+    min-height: 1.2em; /* Reserve space for messages */
+}
+
+.selected-items-display {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #e3f2fd;
+    border-radius: 8px;
+    border: 1px dashed #90caf9;
+}
+.selected-items-display p em {
+    color: #546e7a;
+}
+.selected-item-tag {
+    display: inline-block;
+    background-color: #66bb6a;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+}
+.goal-input-area textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+#gameCanvas {
+    border: 3px dashed #764ba2;
+    background-color: #fafafa;
+    border-radius: 12px;
+    cursor: crosshair;
+    margin-top: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.game-info {
+    font-size: 1.2em;
+    color: #004d40;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: 600;
+}
+#gameMessage {
+    text-align: center;
+    font-weight: 600;
+    color: #d32f2f;
+    min-height: 20px;
+    margin-top: 10px;
+}
+.game-section .button {
+     display: block;
+     margin: 20px auto 0 auto;
+}
+.accessibility-controls h3 .section-icon { color: #42a5f5; }
+
+/* Adventure Quest Saga Styles */
+.adventure-quest-section {
+    background-color: #e0f2f1; /* Light teal background */
+    border: 2px dashed #00796b;
+}
+.adventure-map {
+    width: 100%;
+    height: 350px; 
+    background-image: url("./assets/adventure_quest_saga/world_map_background.png");
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden; 
+    margin-bottom: 20px;
+    border: 3px solid #004d40;
+}
+.map-path {
+    position: absolute;
+    height: 8px; 
+    background-color: rgba(255, 220, 100, 0.8); 
+    top: 50%;
+    left: 5%; 
+    right: 5%; 
+    transform: translateY(-50%);
+    z-index: 1;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+.map-node {
+    width: 40px; 
+    height: 40px;
+    background-color: #ff8f00; 
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    border: 3px solid #e65100; 
+    position: absolute; 
+    z-index: 2;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+    cursor: pointer; 
+    transition: transform 0.2s ease;
+}
+.map-node:hover {
+    transform: scale(1.1);
+}
+.map-node.completed {
+    background-color: #4caf50; 
+    border-color: #2e7d32;
+}
+.map-node.current {
+    background-color: #1e88e5; 
+    border-color: #0d47a1;
+    animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+.map-node-tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 3;
+}
+.map-node:hover .map-node-tooltip {
+    opacity: 1;
+}
+
+/* Badge System Styles */
+.badges-section {
+    background-color: #fff8e1; /* Light amber background */
+    border: 2px dashed #ff8f00;
+}
+.badges-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+.badge-item {
+    width: 120px;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+.badge-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+.badge-item.earned {
+    border: 2px solid #4caf50;
+}
+.badge-item.locked {
+    filter: grayscale(1);
+    opacity: 0.7;
+}
+.badge-image {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 10px auto;
+    object-fit: contain;
+}
+.badge-name {
+    font-weight: 600;
+    color: #3949ab;
+    font-size: 0.95em;
+    margin-bottom: 5px;
+}
+.badge-description {
+    font-size: 0.8em;
+    color: #546e7a;
+    line-height: 1.4;
+}
+.badge-earned-date {
+    font-size: 0.75em;
+    color: #4caf50;
+    margin-top: 8px;
+    font-style: italic;
+}
+.badge-locked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.badge-locked-icon {
+    font-size: 2em;
+    color: rgba(0,0,0,0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        width: 95%;
+    }
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.5em; }
+    .section { padding: 15px; }
+    .badges-container { gap: 10px; }
+    .badge-item { width: 100px; padding: 10px; }
+    .badge-image { width: 60px; height: 60px; }
+    .adventure-map { height: 250px; }
+}
+@media (max-width: 480px) {
+    .container { padding: 15px; }
+    h1 { font-size: 1.8em; }
+    .button { padding: 10px 18px; font-size: 0.9em; }
+    .badges-container { gap: 8px; }
+    .badge-item { width: 85px; padding: 8px; }
+    .badge-image { width: 50px; height: 50px; }
+    .adventure-map { height: 200px; }
+}
+

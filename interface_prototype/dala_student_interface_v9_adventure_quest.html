@@ -1,0 +1,651 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DALA Learning Adventure! - Stage 2 Adventure Quest</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fredoka+One&display=swap");
+
+        body {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #4A4A4A;
+            line-height: 1.7;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            max-width: 850px;
+            width: 90%;
+            margin: 20px auto;
+        }
+        h1 {
+            font-family: "Fredoka One", cursive;
+            color: #5e35b1;
+            text-align: center;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            font-family: "Fredoka One", cursive;
+            color: #00796b;
+            border-bottom: 3px dashed #764ba2;
+            padding-bottom: 10px;
+            margin-top: 35px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+        }
+        h3 {
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            color: #1e88e5;
+            margin-top: 25px;
+            font-size: 1.3em;
+        }
+        h4 {
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            color: #3949ab;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background-color: #f7f9fc;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .button {
+            background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-right: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .button:hover {
+            background-image: linear-gradient(to right, #feb47b, #ff7e5f);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+        .button[disabled] {
+            background-image: none;
+            background-color: #cccccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            background-color: #ffffff;
+            margin-bottom: 12px;
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 6px solid #66bb6a;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.07);
+            transition: transform 0.2s ease;
+        }
+        li:hover {
+            transform: translateX(5px);
+        }
+        .lo-title {
+            font-weight: 700;
+            color: #3949ab;
+            font-size: 1.15em;
+            margin-bottom: 5px;
+        }
+        .content-title {
+            margin-left: 15px;
+            color: #546e7a;
+            font-size: 1em;
+        }
+        .content-title em {
+            color: #78909c;
+            font-size: 0.9em;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #f5f5f5;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            font-size: 0.95em;
+            color: #37474f;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        strong { color: #ef5350; }
+        em { color: #26a69a; }
+        .section-icon {
+            margin-right: 12px;
+            font-size: 1.5em;
+            color: #7e57c2;
+        }
+        .section-icon img {
+            width: 1.5em; /* Match font size */
+            height: 1.5em;
+            vertical-align: middle;
+        }
+        .diagnostic-task-result {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 5px solid #4caf50;
+        }
+        .diagnostic-task-result p { margin: 5px 0; }
+
+        .interactive-selection-area label {
+            display: block;
+            margin-bottom: 8px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .interactive-selection-area label:hover {
+            background-color: #f0f4f8;
+            border-color: #00796b;
+        }
+        .interactive-selection-area input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .interactive-selection-area input[type="text"],
+        .goal-input-area textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: "Poppins", sans-serif;
+            font-size: 1em;
+            margin-top: 5px;
+        }
+        .selected-items-display {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+            border: 1px dashed #90caf9;
+        }
+        .selected-items-display p em {
+            color: #546e7a;
+        }
+        .selected-item-tag {
+            display: inline-block;
+            background-color: #66bb6a;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+        .goal-input-area textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        #gameCanvas {
+            border: 3px dashed #764ba2;
+            background-color: #fafafa;
+            border-radius: 12px;
+            cursor: crosshair;
+            margin-top: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .game-info {
+            font-size: 1.2em;
+            color: #004d40;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+        #gameMessage {
+            text-align: center;
+            font-weight: 600;
+            color: #d32f2f;
+            min-height: 20px;
+            margin-top: 10px;
+        }
+        .game-section .button {
+             display: block;
+             margin: 20px auto 0 auto;
+        }
+        .accessibility-controls h3 .section-icon { color: #42a5f5; }
+
+        /* Adventure Quest Saga Styles */
+        .adventure-quest-section {
+            background-color: #e0f2f1; /* Light teal background */
+            border: 2px dashed #00796b;
+        }
+        .adventure-map {
+            width: 100%;
+            height: 350px; /* Increased height for better map display */
+            background-image: url("./assets/adventure_quest_saga/world_map_background.png");
+            background-size: cover; /* Cover the area, might crop */
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden; /* Changed from hidden to visible if map is larger than container */
+            margin-bottom: 20px;
+            border: 3px solid #004d40; /* Darker border for map */
+        }
+        .map-path {
+            position: absolute;
+            height: 8px; /* Thinner path */
+            background-color: rgba(255, 220, 100, 0.8); /* Golden, slightly transparent path */
+            top: 50%;
+            left: 5%; 
+            right: 5%; 
+            transform: translateY(-50%);
+            z-index: 1;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+        .map-node {
+            width: 40px; 
+            height: 40px;
+            background-color: #ff8f00; /* Orange for nodes */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1em;
+            border: 3px solid #e65100; /* Darker orange border */
+            position: absolute; /* Nodes positioned absolutely on the map */
+            z-index: 2;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+            cursor: pointer; /* Indicate nodes are interactive */
+            transition: transform 0.2s ease;
+        }
+        .map-node:hover {
+            transform: scale(1.1);
+        }
+        .map-node.completed {
+            background-color: #4caf50; /* Green for completed */
+            border-color: #2e7d32;
+        }
+        .map-node.current {
+            background-color: #1e88e5; /* Blue for current */
+            border-color: #0d47a1;
+            transform: scale(1.2);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(30, 136, 229, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(30, 136, 229, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(30, 136, 229, 0); }
+        }
+        .map-node span {
+            display: none; /* Hide numbers for now, can add icons later */
+        }
+        .player-avatar {
+            width: 60px; /* Avatar size */
+            height: 60px;
+            position: absolute;
+            z-index: 3;
+            transition: left 0.8s ease-in-out, top 0.8s ease-in-out; /* Smooth transition for left and top */
+            transform: translate(-50%, -50%); /* Center avatar on its coordinates */
+        }
+        .player-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensure avatar scales nicely */
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3)); /* Add a slight shadow */
+        }
+        .cliffhanger-text {
+            text-align: center;
+            font-style: italic;
+            color: #d81b60;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #fce4ec;
+            border-radius: 8px;
+            border: 1px dashed #d81b60;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ DALA Learning Adventure! ✨</h1>
+
+        <!-- Adventure Quest Saga Section -->
+        <div class="section adventure-quest-section">
+            <h2><span class="section-icon"><img src="./assets/adventure_quest_saga/quest_scroll_icon.png" alt="Quest Scroll"></span>Your Epic Quest!</h2>
+            <p>Follow the path on your learning adventure! Each step brings new knowledge and exciting challenges.</p>
+            <div id="adventureMapDisplay" class="adventure-map">
+                <!-- Path will be a simple line for now -->
+                <div class="map-path"></div> 
+                <!-- Nodes and Avatar will be injected by Python -->
+                <div class="player-avatar" style="left: 30%; top: 40%;"><img src="./assets/adventure_quest_saga/student_avatar.png" alt="Your Avatar"></div><div class="map-node completed" style="left: 10%; top: 50%;"><span>1</span></div><div class="map-node current" style="left: 30%; top: 40%;"><span>2</span></div><div class="map-node" style="left: 50%; top: 60%;"><span>3</span></div><div class="map-node" style="left: 70%; top: 50%;"><span>4</span></div>
+            </div>
+            <div id="cliffhangerDisplay" class="cliffhanger-text">
+                Your adventure continues... what mysteries will you uncover next?
+            </div>
+        </div>
+        
+        <div class="section task-section">
+            <h2><span class="section-icon">🚀</span>Let"s Get Started!</h2>
+            <p>Tell us a little about yourself so we can make learning super fun and just right for you!</p>
+            
+            <h3>Your Learning Superpowers (Simulated)</h3>
+            <p>Visual Task Preference: <em>visual</em></p>
+            <p>Textual Task Preference: <em>concise_text</em></p>
+            
+            <h3>Your Awesome Interests (Simulated)</h3>
+            <p>Selected Interests: <strong>Creative Writing, Environmental Science, Mythology, Ancient Civilizations</strong></p>
+            
+            <h3><span class="section-icon">💪</span>My Focus Areas</h3>
+            <p>Everyone has things they find a bit tricky or want to get better at! What are some areas where you"d like a little extra help or practice? Choose a few that feel right for you (up to 3).</p>
+            <div id="struggleAreasSelection" class="interactive-selection-area">
+                
+            <label for="struggle_area_0">
+                <input type="checkbox" id="struggle_area_0" name="struggle_areas" value="Understanding fractions">
+                Understanding fractions
+            </label>
+            <label for="struggle_area_1">
+                <input type="checkbox" id="struggle_area_1" name="struggle_areas" value="Writing long essays">
+                Writing long essays
+            </label>
+            <label for="struggle_area_2">
+                <input type="checkbox" id="struggle_area_2" name="struggle_areas" value="Remembering historical dates">
+                Remembering historical dates
+            </label>
+            <label for="struggle_area_3">
+                <input type="checkbox" id="struggle_area_3" name="struggle_areas" value="Solving word problems in math">
+                Solving word problems in math
+            </label>
+            <label for="struggle_area_4">
+                <input type="checkbox" id="struggle_area_4" name="struggle_areas" value="Staying focused during lectures">
+                Staying focused during lectures
+            </label>
+            <label for="struggle_area_5">
+                <input type="checkbox" id="struggle_area_5" name="struggle_areas" value="Public speaking">
+                Public speaking
+            </label>
+            <label for="struggle_area_6">
+                <input type="checkbox" id="struggle_area_6" name="struggle_areas" value="Learning new vocabulary">
+                Learning new vocabulary
+            </label>
+            <label for="struggle_area_7">
+                <input type="checkbox" id="struggle_area_7" name="struggle_areas" value="Organizing my study time">
+                Organizing my study time
+            </label>
+            </div>
+            <div class="struggle-area-other" style="margin-top:15px;">
+                <label for="otherStruggle">Something else? Tell us:</label>
+                <input type="text" id="otherStruggleInput" name="otherStruggle" placeholder="e.g., Speaking in front of class">
+            </div>
+            <h4>Your Chosen Focus Areas:</h4>
+            <div id="selectedStrugglesDisplay" class="selected-items-display">
+                <p><em>You haven"t selected any focus areas yet. Click on the items above or type one in!</em></p>
+            </div>
+        </div>
+
+        <div class="section goals-section">
+            <h2><span class="section-icon">🎯</span>My Learning Mission!</h2>
+            <p>Setting goals helps us on our learning adventure! What"s one big thing you"re excited to work towards with DALA?</p>
+            <div class="goal-input-area">
+                <textarea id="learningGoalInput" rows="3" placeholder="e.g., Get super good at my times tables, Write an amazing story, Understand how planets work."></textarea>
+                <button class="button" id="setGoalButton" onclick="setLearningGoal()">Set My Mission!</button>
+            </div>
+            <h4>Your Current Mission:</h4>
+            <div id="currentGoalDisplay" class="selected-items-display">
+                <p><em>Your learning mission will appear here once you set it!</em></p>
+            </div>
+        </div>
+
+        <div class="section diagnostic-mini-tasks-section">
+            <h2><span class="section-icon">🧠</span>Brain Boosters! (HLP Mini-Tasks)</h2>
+            <p>Let"s try a few quick activities to understand your unique thinking style even better!</p>
+            
+            <h3>Story Weaver Task (Simulated Results)</h3>
+            <div class="diagnostic-task-result">
+                <p><strong>Task:</strong> You were asked to arrange 3 story parts into the correct order. Let&#x27;s see how you did!</p>
+                <p><em>Your Sequence:</em> 2, 3, 1</p>
+                <p><em>Time taken:</em> 53.5s, <em>Accuracy:</em> 60.0%</p>
+            </div>
+
+            <h3>Mind Mapper Task (Simulated Results)</h3>
+            <div class="diagnostic-task-result">
+                <p><strong>Task:</strong> You explored ideas around the concept: 	Energy	. You came up with 8 related ideas!</p>
+                <p><em>Central Concept:</em> Energy</p>
+                <p><em>Connections Made (simulated):</em> mummies, AI, solar, virtual reality, fun, exploration, pharaohs, source</p>
+                   <p><em>Coherence Score:</em> 0/10</p>
+            </div>
+
+            <h3>Sound Sculptor Task (Simulated Results)</h3>
+            <div class="diagnostic-task-result">
+                <p><strong>Task:</strong> You listened to a sequence of 3 sounds and tried to sculpt them back. Great effort!</p>
+                <!-- <p><em>Target Sound:</em> [Target Sound Placeholder Removed]</p> -->
+                <!-- <p><em>Elements Used:</em> [Elements Used Placeholder Removed]</p> -->
+                <p>Time Taken: 37.2s</p>
+                <!-- <p><em>Match Score:</em> [Match Score Placeholder Removed]/100</p> -->
+            </div>
+            </div>   </div>
+        </div>
+
+        <div class="section pathway-section">
+            <h2><span class="section-icon">🗺️</span>Your Learning Pathway</h2>
+            <p>Here are some activities DALA has picked just for you, based on your profile and goals!</p>
+            <ul id="learningPathwayList">
+                <ul><li><div class="lo-title">1. Recall multiplication and division facts for multiplication tables up to 12 × 12. (LO: Y4MD_LO1)</div><ul class="content-list"><li class="content-title">- Times Tables Practice Game (Up to 12x12) <em>(game Difficulty: medium)</em></li></ul></li></ul>
+            </ul>
+        </div>
+
+        <div class="section game-section">
+            <h2><span class="section-icon">⭐</span>Star Collector Mini-Game!</h2>
+            <p>Well done on exploring your profile! Time for a quick brain break. Click the stars as they appear!</p>
+            <div class="game-info">Score: <span id="score">0</span> | Time Left: <span id="timeLeft">30</span>s</div>
+            <canvas id="gameCanvas" width="600" height="300"></canvas>
+            <div id="gameMessage"></div>
+            <button class="button" id="startGameButton" onclick="startGame()">Start Game!</button>
+        </div>
+
+        <div class="section accessibility-controls">
+            <h3><span class="section-icon">🗣️</span>Accessibility (Future Features)</h3>
+            <p>We are working on making DALA accessible for everyone!</p>
+            <ul>
+                <li>Voice Input for text fields (Coming Soon!)</li>
+                <li>Text-to-Speech for content (Coming Soon!)</li>
+                <li>Screen Reader Compatibility (Under Review)</li>
+            </ul>
+        </div>
+
+        <div class="section feedback-section">
+            <h2><span class="section-icon">💬</span>Feedback</h2>
+            <p>Your thoughts help us make DALA better! (This is a placeholder for a future feedback form)</p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const struggleCheckboxes = document.querySelectorAll('#struggleAreasSelection input[type="checkbox"]');
+            const otherStruggleInput = document.getElementById('otherStruggleInput');
+            const selectedStrugglesDisplay = document.getElementById('selectedStrugglesDisplay');
+            const learningGoalInput = document.getElementById('learningGoalInput');
+            const setGoalButton = document.getElementById('setGoalButton');
+            const currentGoalDisplay = document.getElementById('currentGoalDisplay');
+
+            function updateSelectedStruggles() {
+                let selected = Array.from(struggleCheckboxes)
+                                    .filter(cb => cb.checked)
+                                    .map(cb => cb.value);
+                const otherStruggle = otherStruggleInput.value.trim();
+                if (otherStruggle) {
+                    selected.push(otherStruggle + " (Other)");
+                }
+
+                if (selected.length > 0) {
+                    selectedStrugglesDisplay.innerHTML = selected.map(s => `<span class="selected-item-tag">${html.escape(s)}</span>`).join('');
+                } else {
+                    selectedStrugglesDisplay.innerHTML = '<p><em>You haven"t selected any focus areas yet. Click on the items above or type one in!</em></p>';
+                }
+            }
+
+            struggleCheckboxes.forEach(cb => {
+                cb.addEventListener('change', updateSelectedStruggles);
+            });
+            otherStruggleInput.addEventListener('input', updateSelectedStruggles);
+
+            window.setLearningGoal = function() {
+                const goalText = learningGoalInput.value.trim();
+                if (goalText) {
+                    currentGoalDisplay.innerHTML = `<p><strong>Your Mission:</strong> ${html.escape(goalText)}</p>`;
+                    // Here you would typically send this goal to the backend
+                    console.log("Learning Goal Set:", goalText);
+                    alert("Great! Your learning mission is set.");
+                } else {
+                    alert("Please type in your learning mission first!");
+                }
+            };
+
+            // Star Collector Game Logic
+            const canvas = document.getElementById('gameCanvas');
+            const ctx = canvas.getContext('2d');
+            const scoreDisplay = document.getElementById('score');
+            const timeLeftDisplay = document.getElementById('timeLeft');
+            const gameMessage = document.getElementById('gameMessage');
+            const startGameButton = document.getElementById('startGameButton');
+
+            let score = 0;
+            let timeLeft = 30;
+            let gameInterval;
+            let starInterval;
+            let stars = [];
+            const starRadius = 15;
+            let gameActive = false;
+
+            function drawStar(x, y, color = 'gold') {
+                ctx.beginPath();
+                ctx.arc(x, y, starRadius, 0, Math.PI * 2, false);
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            function spawnStar() {
+                if (!gameActive) return;
+                const x = Math.random() * (canvas.width - starRadius * 2) + starRadius;
+                const y = Math.random() * (canvas.height - starRadius * 2) + starRadius;
+                stars.push({ x, y, color: `hsl(${Math.random() * 360}, 100%, 75%)` });
+                if (stars.length > 10) { // Limit number of stars on screen
+                    stars.shift(); 
+                }
+            }
+
+            function clearCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+
+            function updateGame() {
+                if (!gameActive) return;
+                clearCanvas();
+                stars.forEach(star => drawStar(star.x, star.y, star.color));
+            }
+
+            function handleClick(event) {
+                if (!gameActive) return;
+                const rect = canvas.getBoundingClientRect();
+                const clickX = event.clientX - rect.left;
+                const clickY = event.clientY - rect.top;
+
+                for (let i = stars.length - 1; i >= 0; i--) {
+                    const star = stars[i];
+                    const distance = Math.sqrt((clickX - star.x)**2 + (clickY - star.y)**2);
+                    if (distance < starRadius) {
+                        score++;
+                        scoreDisplay.textContent = score;
+                        stars.splice(i, 1); // Remove clicked star
+                        break; 
+                    }
+                }
+            }
+
+            window.startGame = function() {
+                if (gameActive) return;
+                gameActive = true;
+                score = 0;
+                timeLeft = 30;
+                stars = [];
+                scoreDisplay.textContent = score;
+                timeLeftDisplay.textContent = timeLeft;
+                gameMessage.textContent = '';
+                startGameButton.disabled = true;
+                startGameButton.textContent = 'Game in Progress...';
+
+                gameInterval = setInterval(() => {
+                    timeLeft--;
+                    timeLeftDisplay.textContent = timeLeft;
+                    if (timeLeft <= 0) {
+                        endGame();
+                    }
+                }, 1000);
+
+                starInterval = setInterval(() => {
+                    spawnStar();
+                }, 800); // Spawn star faster
+
+                setInterval(updateGame, 20); // Animation loop
+                canvas.addEventListener('click', handleClick);
+            };
+
+            function endGame() {
+                gameActive = false;
+                clearInterval(gameInterval);
+                clearInterval(starInterval);
+                canvas.removeEventListener('click', handleClick);
+                gameMessage.textContent = `Game Over! Your final score: $${score}. Well done!`;
+                startGameButton.disabled = false;
+                startGameButton.textContent = 'Play Again!';
+                // Optionally, send score to backend or trigger a reward
+                if (score > 10) { // Example: give a small virtual reward
+                    alert("Amazing! You earned a virtual sticker for your high score!");
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+{
+    "subject": "English",
+    "year_group": "Years 3-4",
+    "topic": "Key Stage 2 English Core Skills",
+    "learning_objectives": [
+        {
+            "id": "KS2_ENG_Y34_READ_INFERENCES_PREDICTIONS",
+            "description": "Understand what they read, in books they can read independently, by: drawing inferences such as inferring characters' feelings, thoughts and motives from their actions, and justifying inferences with evidence; predicting what might happen from details stated and implied.",
+            "keywords": ["reading comprehension", "inference", "prediction", "justification"],
+            "prerequisites": []
+        },
+        {
+            "id": "KS2_ENG_Y34_WRITE_PLAN_DISCUSS_RECORD",
+            "description": "Plan their writing by: discussing writing similar to that which they are planning to write in order to understand and learn from its structure, vocabulary and grammar; discussing and recording ideas.",
+            "keywords": ["writing", "planning", "discussion", "idea generation"],
+            "prerequisites": []
+        },
+        {
+            "id": "KS2_ENG_Y34_WRITE_DRAFT_COMPOSE_ORGANISE",
+            "description": "Draft and write by: composing and rehearsing sentences orally (including dialogue), progressively building a varied and rich vocabulary and an increasing range of sentence structures; organising paragraphs around a theme; in narratives, creating settings, characters and plot.",
+            "keywords": ["writing", "drafting", "sentence structure", "paragraphs", "narrative"],
+            "prerequisites": ["KS2_ENG_Y34_WRITE_PLAN_DISCUSS_RECORD"]
+        },
+        {
+            "id": "KS2_ENG_Y34_GRAM_CONJUNCTIONS_TENSES_TIMECAUSE",
+            "description": "Develop their understanding of concepts by: extending the range of sentences with more than one clause by using a wider range of conjunctions, including when, if, because, although; using the present perfect form of verbs in contrast to the past tense; using conjunctions, adverbs and prepositions to express time and cause.",
+            "keywords": ["grammar", "conjunctions", "tenses", "adverbs", "prepositions"],
+            "prerequisites": []
+        },
+        {
+            "id": "KS2_ENG_Y34_PUNC_FRONTEDADV_POSSESSIVES_DIRECTSPEECH",
+            "description": "Indicate grammatical and other features by: using commas after fronted adverbials; indicating possession by using the possessive apostrophe with plural nouns; using and punctuating direct speech.",
+            "keywords": ["punctuation", "fronted adverbials", "possessive apostrophe", "direct speech"],
+            "prerequisites": []
+        },
+        {
+            "id": "KS2_ENG_Y34_READ_ROOTS_PREFIXES_SUFFIXES",
+            "description": "Apply their growing knowledge of root words, prefixes and suffixes (etymology and morphology) as listed in English Appendix 1, both to read aloud and to understand the meaning of new words they meet.",
+            "keywords": ["word reading", "roots", "prefixes", "suffixes", "etymology", "morphology"],
+            "prerequisites": []
+        },
+        {
+            "id": "KS2_ENG_Y34_SPELL_PREFIXES_SUFFIXES_HOMOPHONES_MISSPELLT",
+            "description": "Use further prefixes and suffixes and understand how to add them. Spell further homophones. Spell words that are often misspelt.",
+            "keywords": ["spelling", "prefixes", "suffixes", "homophones", "common misspellings"],
+            "prerequisites": []
+        },
+        {
+            "id": "KS2_ENG_Y34_SPOKEN_LANG_INTEGRATED",
+            "description": "Listen and respond appropriately to adults and their peers. Ask relevant questions to extend their understanding and knowledge. Articulate and justify answers, arguments and opinions. Participate in discussions, presentations, performances, role play, improvisations and debates.",
+            "keywords": ["spoken language", "listening", "discussion", "articulation"],
+            "prerequisites": []
+        }
+    ]
+}
