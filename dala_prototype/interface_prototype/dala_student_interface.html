@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DALA Student Interface Prototype</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; background-color: #f4f4f9; color: #333; }
+        .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #2c3e50; }
+        .task-section, .profile-section, .pathway-section { margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .task-section h3 { margin-top: 0; }
+        .button { background-color: #3498db; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-size: 1em; }
+        .button:hover { background-color: #2980b9; }
+        ul { list-style-type: none; padding-left: 0; }
+        li { background-color: #ecf0f1; margin-bottom: 8px; padding: 10px; border-radius: 4px; }
+        .lo-title { font-weight: bold; }
+        .content-title { margin-left: 20px; }
+        .accessibility-controls { margin-top: 20px; padding: 10px; background-color: #e8f6f3; border: 1px dashed #1abc9c; border-radius: 4px; }
+        .accessibility-controls p { margin: 5px 0; }
+        pre { white-space: pre-wrap; word-wrap: break-word; background-color: #f9f9f9; padding:10px; border-radius:4px; border:1px solid #eee; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the DALA Prototype!</h1>
+        
+        <div class="task-section">
+            <h2>1. Learning Preferences</h2>
+            <p>Let's find out how you like to learn! (Simulated choices)</p>
+            <h3>Visual Preference Task</h3>
+            <p><em>Student chose the &#x27;textual/auditory&#x27; presentation style for the visual task.</em></p>
+            <h3>Textual Preference Task</h3>
+            <p><em>Student chose to engage with &#x27;summary_bullets&#x27; for the textual task.</em></p>
+        </div>
+
+        <div class="task-section">
+            <h2>2. Your Interests</h2>
+            <p>What topics are you curious about? (Simulated selection)</p>
+            <p>Selected Interests: <strong>Environmental Science, Ancient Civilizations</strong></p>
+        </div>
+
+        <div class="profile-section">
+            <h2>3. Your Learner Profile (So Far)</h2>
+            <pre>LearnerProfile(student_id=	student_interface_001	, preferences=	{&#x27;visual_task_1&#x27;: &#x27;non-visual&#x27;, &#x27;textual_task_1&#x27;: &#x27;concise_text&#x27;}	, interests=	[&#x27;Environmental Science&#x27;, &#x27;Ancient Civilizations&#x27;]	)</pre>
+        </div>
+
+        <div class="pathway-section">
+            <h2>4. Your Personalized Learning Pathway</h2>
+            <ul><li><div class="lo-title">Step 1: Recall multiplication and division facts for multiplication tables up to 12 × 12.</div><div class="content-title">Activity: Times Tables Practice Game (Up to 12x12) (Type: game)</div><div class="content-title"><em>Access at: /content/games/timestables_y4.html (Simulated)</em></div></li><li><div class="lo-title">Step 2: Use place value, known and derived facts to multiply and divide mentally, including: multiplying by 0 and 1; dividing by 1; multiplying together three numbers.</div><div class="content-title">Activity: Video: Understanding Multiplication by 0 and 1 (Type: video)</div><div class="content-title"><em>Access at: /content/videos/multiply_zero_one_y4.mp4 (Simulated)</em></div></li><li><div class="lo-title">Step 3: Recognise and use factor pairs and commutativity in mental calculations.</div><div class="content-title">Activity: Worksheet: Factor Pairs Fun (Type: worksheet_pdf)</div><div class="content-title"><em>Access at: /content/worksheets/factor_pairs_y4.pdf (Simulated)</em></div></li></ul>
+        </div>
+
+        <div class="accessibility-controls">
+            <h3>Accessibility Features (Future Integration)</h3>
+            <p><button class="button" disabled>Enable Voice Input (Future)</button></p>
+            <p><button class="button" disabled>Enable Text-to-Speech (Future)</button></p>
+            <p>These features will be integrated to support diverse learning needs.</p>
+        </div>
+
+    </div>
+</body>
+</html>

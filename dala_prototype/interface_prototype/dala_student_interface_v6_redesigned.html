@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DALA Learning Adventure!</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fredoka+One&display=swap");
+
+        body {{
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #4A4A4A;
+            line-height: 1.7;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top for scrolling */
+            min-height: 100vh;
+            padding-top: 30px; /* Space from top */
+            padding-bottom: 30px; /* Space at bottom */
+        }}
+        .container {{
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            max-width: 850px;
+            width: 90%;
+            margin: 20px auto;
+        }}
+        h1 {{
+            font-family: "Fredoka One", cursive;
+            color: #5e35b1; /* Deep Purple */
+            text-align: center;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }}
+        h2 {{
+            font-family: "Fredoka One", cursive;
+            color: #00796b; /* Teal */
+            border-bottom: 3px dashed #764ba2; /* Purple dash */
+            padding-bottom: 10px;
+            margin-top: 35px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+        }}
+        h3 {{
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            color: #1e88e5; /* Bright Blue */
+            margin-top: 25px;
+            font-size: 1.3em;
+        }}
+        .section {{
+            margin-bottom: 35px;
+            padding: 25px;
+            background-color: #f7f9fc;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }}
+        .section:hover {{
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }}
+        .button {{
+            background-image: linear-gradient(to right, #ff7e5f, #feb47b); /* Orange/Yellow Gradient */
+            color: white;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-right: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }}
+        .button:hover {{
+            background-image: linear-gradient(to right, #feb47b, #ff7e5f);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }}
+        .button[disabled] {{
+            background-image: none;
+            background-color: #cccccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }}
+        ul {{
+            list-style-type: none;
+            padding-left: 0;
+        }}
+        li {{
+            background-color: #ffffff;
+            margin-bottom: 12px;
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 6px solid #66bb6a; /* Green accent */
+            box-shadow: 0 3px 8px rgba(0,0,0,0.07);
+            transition: transform 0.2s ease;
+        }}
+        li:hover {{
+            transform: translateX(5px);
+        }}
+        .lo-title {{
+            font-weight: 700;
+            color: #3949ab; /* Indigo */
+            font-size: 1.15em;
+            margin-bottom: 5px;
+        }}
+        .content-title {{
+            margin-left: 15px;
+            color: #546e7a; /* Blue-grey */
+            font-size: 1em;
+        }}
+        .content-title em {{
+            color: #78909c;
+            font-size: 0.9em;
+        }}
+        pre {{
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #f5f5f5;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            font-size: 0.95em;
+            color: #37474f;
+            max-height: 200px; /* Scrollable pre */
+            overflow-y: auto;
+        }}
+        strong {{ color: #ef5350; /* Red for emphasis */ }}
+        em {{ color: #26a69a; /* Teal for other emphasis */ }}
+        .section-icon {{
+            margin-right: 12px;
+            font-size: 1.5em; /* Larger icons */
+            color: #7e57c2; /* Deep Purple for icons */
+        }}
+
+        /* Star Collector Game Styles */
+        #gameCanvas {{
+            border: 3px dashed #764ba2; /* Purple dashed border */
+            background-color: #fafafa;
+            border-radius: 12px;
+            cursor: crosshair;
+            margin-top: 15px;
+            display: block; /* Center canvas */
+            margin-left: auto;
+            margin-right: auto;
+        }}
+        .game-info {{
+            font-size: 1.2em;
+            color: #004d40;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: 600;
+        }}
+        #gameMessage {{
+            text-align: center;
+            font-weight: 600;
+            color: #d32f2f; /* Red for game messages */
+            min-height: 20px; /* Ensure space for message */
+            margin-top: 10px;
+        }}
+        .game-section .button {{
+             display: block; /* Center button */
+             margin: 20px auto 0 auto; /* Center button */
+        }}
+
+        .accessibility-controls h3 .section-icon {{ color: #42a5f5; }} /* Blue for accessibility icon */
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ DALA Learning Adventure! ✨</h1>
+        
+        <div class="section task-section">
+            <h2><span class="section-icon">🚀</span>Let's Get Started!</h2>
+            <p>Tell us a little about yourself so we can make learning super fun and just right for you!</p>
+            <h3>Your Learning Superpowers (Simulated)</h3>
+            <p>Visual Task Preference: <em>Prefers visual style for visual tasks.</em></p>
+            <p>Textual Task Preference: <em>Prefers summary_bullets style for textual tasks.</em></p>
+            
+            <h3>Your Awesome Interests (Simulated)</h3>
+            <p>Selected Interests: <strong>Environmental Science, Ancient Civilizations, Mythology</strong></p>
+            
+            <h3>Areas for a Helping Hand (Simulated)</h3>
+            <p>What topics or skills would you like extra support with?</p>
+            <p>Identified Areas: <strong>Staying focused during lectures, Public speaking</strong></p>
+        </div>
+
+        <div class="section profile-section">
+            <h2><span class="section-icon">🧑‍🎓</span>Your Unique Learner Profile</h2>
+            <pre>LearnerProfile(student_id=	student_visual_006	, preferences=	{&#x27;visual_task_1&#x27;: &#x27;visual&#x27;, &#x27;textual_task_1&#x27;: &#x27;concise_text&#x27;}	, interests=	[&#x27;Environmental Science&#x27;, &#x27;Ancient Civilizations&#x27;, &#x27;Mythology&#x27;]	, struggle_areas=	[&#x27;Staying focused during lectures&#x27;, &#x27;Public speaking&#x27;]	)</pre>
+        </div>
+
+        <div class="section pathway-section">
+            <h2><span class="section-icon">🗺️</span>Your Personalized Learning Pathway</h2>
+            <ul><li><div class="lo-title">📚 Learning Objective 1: Recall multiplication and division facts for multiplication tables up to 12 × 12.</div><div class="content-title">💡 Activity: Times Tables Practice Game (Up to 12x12) (Format: game)</div><div class="content-title"><em>➡️ Go to activity: /content/games/timestables_y4.html (Simulated Link)</em></div></li><li><div class="lo-title">📚 Learning Objective 2: Use place value, known and derived facts to multiply and divide mentally, including: multiplying by 0 and 1; dividing by 1; multiplying together three numbers.</div><div class="content-title">💡 Activity: Video: Understanding Multiplication by 0 and 1 (Format: video)</div><div class="content-title"><em>➡️ Go to activity: /content/videos/multiply_zero_one_y4.mp4 (Simulated Link)</em></div></li><li><div class="lo-title">📚 Learning Objective 3: Recognise and use factor pairs and commutativity in mental calculations.</div><div class="content-title">💡 Activity: Worksheet: Factor Pairs Fun (Format: worksheet_pdf)</div><div class="content-title"><em>➡️ Go to activity: /content/worksheets/factor_pairs_y4.pdf (Simulated Link)</em></div></li><li><div class="lo-title">📚 Learning Objective 4: Solve problems involving multiplying and adding, including using the distributive law to multiply two digit numbers by one digit, integer scaling problems and harder correspondence problems such as n objects are connected to m objects.</div><div class="content-title">💡 Activity: Animated Story: Solving Scaling Problems (Format: video)</div><div class="content-title"><em>➡️ Go to activity: /content/videos/scaling_problems_story_y4.mp4 (Simulated Link)</em></div></li></ul>
+        </div>
+
+        <!-- Star Collector Game Section -->
+        <div class="section game-section">
+            <h2><span class="section-icon">🌟</span>Reward Zone: Star Collector!</h2>
+            <p style="text-align:center;">Awesome work! Time for a quick, fun game to celebrate your progress!</p>
+            <div class="game-info">
+                <span>Score: <span id="score">0</span></span> ✨ 
+                <span>Time Left: <span id="timeLeft">30</span>s</span>
+            </div>
+            <canvas id="gameCanvas" width="600" height="250"></canvas> <!-- Adjusted canvas size -->
+            <p id="gameMessage"></p>
+            <button class="button" id="startGameButton">Play Star Collector!</button>
+        </div>
+
+        <div class="section accessibility-controls">
+            <h3><span class="section-icon">♿</span>Accessibility Tools (Coming Soon!)</h3>
+            <p style="text-align:center;"><button class="button" disabled>🎙️ Voice Input</button> 
+            <button class="button" disabled>🎧 Text-to-Speech</button></p>
+            <p style="text-align:center; font-style:italic;">We're working hard to make learning accessible for everyone!</p>
+        </div>
+
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {{
+        const canvas = document.getElementById("gameCanvas");
+        if (!canvas) {{
+            console.error("Game canvas not found!");
+            return;
+        }}
+        const ctx = canvas.getContext("2d");
+        const scoreDisplay = document.getElementById("score");
+        const timeLeftDisplay = document.getElementById("timeLeft");
+        const gameMessageDisplay = document.getElementById("gameMessage");
+        const startGameButton = document.getElementById("startGameButton");
+
+        if (!ctx || !scoreDisplay || !timeLeftDisplay || !gameMessageDisplay || !startGameButton) {{
+            console.error("One or more game elements are missing from the DOM.");
+            return;
+        }}
+
+        let score = 0;
+        let timeLeft = 30;
+        let gameInterval;
+        let timerIntervalInstance;
+        let stars = [];
+        const starRadius = 12; // Slightly larger stars
+        const numStars = 12; // Fewer stars for less clutter
+        let gameActive = false;
+
+        function drawStar(x, y, spikes, outerRadius, innerRadius) {{
+            let rot = Math.PI / 2 * 3;
+            let step = Math.PI / spikes;
+            ctx.beginPath();
+            ctx.moveTo(x, y - outerRadius);
+            for (let i = 0; i < spikes; i++) {{
+                ctx.lineTo(x + Math.cos(rot) * outerRadius, y + Math.sin(rot) * outerRadius);
+                rot += step;
+                ctx.lineTo(x + Math.cos(rot) * innerRadius, y + Math.sin(rot) * innerRadius);
+                rot += step;
+            }}
+            ctx.lineTo(x, y - outerRadius);
+            ctx.closePath();
+            ctx.fillStyle = `hsl(${Math.random() * 60 + 200}, 100%, 70%)`; // Brighter, varied star colors (blues/purples)
+            ctx.fill();
+            // Add a little sparkle effect
+            ctx.beginPath();
+            ctx.arc(x, y, starRadius * 0.3, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+            ctx.fill();
+        }}
+
+        function createStar() {{
+            return {{
+                x: Math.random() * (canvas.width - starRadius * 2) + starRadius,
+                y: Math.random() * -canvas.height * 0.5, // Start further up
+                speed: Math.random() * 1.5 + 0.8 // Slower, more consistent speed
+            }};
+        }}
+
+        function updateStars() {{
+            for (let i = 0; i < stars.length; i++) {{
+                stars[i].y += stars[i].speed;
+                if (stars[i].y > canvas.height + starRadius) {{
+                    stars.splice(i, 1);
+                    i--;
+                }}
+            }}
+            if (gameActive && stars.length < numStars && Math.random() < 0.08) {{ // Slightly more frequent new stars
+                stars.push(createStar());
+            }}
+        }}
+
+        function drawStars() {{
+            stars.forEach(star => drawStar(star.x, star.y, 5, starRadius, starRadius / 2));
+        }}
+
+        function clearCanvas() {{
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }}
+
+        function gameLoop() {{
+            if (!gameActive) return;
+            clearCanvas();
+            updateStars();
+            drawStars();
+        }}
+
+        function startGame() {{
+            if (gameActive) return;
+            gameActive = true;
+            score = 0;
+            timeLeft = 30;
+            stars = [];
+            for(let i=0; i < numStars / 2; i++) {{ stars.push(createStar()); }}
+            scoreDisplay.textContent = score;
+            timeLeftDisplay.textContent = timeLeft;
+            gameMessageDisplay.textContent = "Catch those stars!";
+            startGameButton.style.display = "none"; // Hide button during game
+
+            if (gameInterval) clearInterval(gameInterval);
+            if (timerIntervalInstance) clearInterval(timerIntervalInstance);
+
+            gameInterval = setInterval(gameLoop, 40); // Smoother animation
+            
+            timerIntervalInstance = setInterval(() => {{
+                if (!gameActive) {{
+                    clearInterval(timerIntervalInstance);
+                    return;
+                }}
+                timeLeft--;
+                timeLeftDisplay.textContent = timeLeft;
+                if (timeLeft <= 0) {{
+                    clearInterval(timerIntervalInstance);
+                    endGame("Time Over! Score: " + score);
+                }}
+            }}, 1000);
+        }}
+
+        function endGame(message) {{
+            gameActive = false;
+            clearInterval(gameInterval);
+            gameMessageDisplay.textContent = message + " Want to play again?";
+            startGameButton.style.display = "block"; // Show button again
+            startGameButton.textContent = "Play Again!";
+        }}
+
+        canvas.addEventListener("click", function(event) {{
+            if (!gameActive) return;
+            const rect = canvas.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const clickY = event.clientY - rect.top;
+
+            for (let i = stars.length - 1; i >= 0; i--) {{
+                const distance = Math.sqrt(Math.pow(clickX - stars[i].x, 2) + Math.pow(clickY - stars[i].y, 2));
+                if (distance < starRadius * 1.8) {{ // Even more generous click area
+                    score++;
+                    scoreDisplay.textContent = score;
+                    stars.splice(i, 1);
+                    // Sound effect placeholder (future enhancement)
+                    // const clickSound = new Audio('path/to/click-sound.mp3');
+                    // clickSound.play();
+                    break; 
+                }}
+            }}
+        }});
+        
+        startGameButton.addEventListener("click", startGame);
+    }});
+    </script>
+</body>
+</html>

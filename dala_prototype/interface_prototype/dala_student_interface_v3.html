@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DALA Student Interface Prototype - Enhanced!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #e0f7fa; /* Light cyan background */
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        h1 {
+            color: #00796b; /* Teal */
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        h2 {
+            color: #004d40; /* Darker Teal */
+            border-bottom: 2px solid #b2dfdb; /* Light teal border */
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #00695c; /* Medium Teal */
+            margin-top: 20px;
+        }
+        .task-section, .profile-section, .pathway-section, .accessibility-controls {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f1f8e9; /* Light green accent */
+            border: 1px solid #c8e6c9; /* Green border */
+            border-radius: 8px;
+        }
+        .button {
+            background-color: #ff7043; /* Coral */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 20px; /* Rounded buttons */
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+        .button:hover {
+            background-color: #f4511e; /* Darker Coral */
+        }
+        .button[disabled] {
+            background-color: #bdbdbd;
+            cursor: not-allowed;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            background-color: #ffffff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 5px solid #4db6ac; /* Teal accent border */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .lo-title {
+            font-weight: bold;
+            color: #004d40;
+            font-size: 1.1em;
+        }
+        .content-title {
+            margin-left: 20px;
+            color: #546e7a; /* Blue-grey */
+        }
+        .content-title em {
+            color: #78909c;
+            font-size: 0.9em;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #eceff1; /* Light blue-grey */
+            padding:15px;
+            border-radius:6px;
+            border:1px solid #cfd8dc;
+            font-size: 0.95em;
+            color: #37474f;
+        }
+        strong { color: #d84315; /* Deep orange for emphasis */ }
+        em { color: #00796b; }
+        .section-icon { /* For potential future icon use */
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Welcome to the DALA Adventure! 🚀</h1>
+        
+        <div class="task-section">
+            <h2><span class="section-icon">🎨</span>1. About You & How You Learn</h2>
+            <p>Let's find out a bit more to help personalize your learning journey!</p>
+            
+            <h3>Your Learning Superpowers (Simulated)</h3>
+            <p>Visual Task Preference: <em>Prefers 	textual/auditory	 style for visual tasks.</em></p>
+            <p>Textual Task Preference: <em>Prefers 	detailed_text	 style for textual tasks.</em></p>
+            
+            <h3>Your Awesome Interests (Simulated)</h3>
+            <p>Selected Interests: <strong>Robotics, Mythology</strong></p>
+            
+            <h3>Areas for a Helping Hand (Simulated)</h3>
+            <p>What topics or skills would you like extra support with?</p>
+            <p>Identified Areas: <strong>Remembering historical dates</strong></p>
+        </div>
+
+        <div class="profile-section">
+            <h2><span class="section-icon">👤</span>2. Your Unique Learner Profile</h2>
+            <pre>LearnerProfile(student_id=	student_visual_003	, preferences=	{&#x27;visual_task_1&#x27;: &#x27;non-visual&#x27;, &#x27;textual_task_1&#x27;: &#x27;detailed_text&#x27;}	, interests=	[&#x27;Robotics&#x27;, &#x27;Mythology&#x27;]	, struggle_areas=	[&#x27;Remembering historical dates&#x27;]	)</pre>
+        </div>
+
+        <div class="pathway-section">
+            <h2><span class="section-icon">🗺️</span>3. Your Personalized Learning Pathway</h2>
+            <ul><li><div class="lo-title">🎯 Step 1: Recall multiplication and division facts for multiplication tables up to 12 × 12.</div><div class="content-title">✨ Activity: Times Tables Practice Game (Up to 12x12) (Type: game)</div><div class="content-title"><em>🔗 Access at: /content/games/timestables_y4.html (Simulated Link)</em></div></li><li><div class="lo-title">🎯 Step 2: Use place value, known and derived facts to multiply and divide mentally, including: multiplying by 0 and 1; dividing by 1; multiplying together three numbers.</div><div class="content-title">✨ Activity: Video: Understanding Multiplication by 0 and 1 (Type: video)</div><div class="content-title"><em>🔗 Access at: /content/videos/multiply_zero_one_y4.mp4 (Simulated Link)</em></div></li><li><div class="lo-title">🎯 Step 3: Recognise and use factor pairs and commutativity in mental calculations.</div><div class="content-title">✨ Activity: Worksheet: Factor Pairs Fun (Type: worksheet_pdf)</div><div class="content-title"><em>🔗 Access at: /content/worksheets/factor_pairs_y4.pdf (Simulated Link)</em></div></li></ul>
+        </div>
+
+        <div class="accessibility-controls">
+            <h3><span class="section-icon">🛠️</span>Accessibility Tools (Coming Soon!)</h3>
+            <p><button class="button" disabled>🎙️ Enable Voice Input</button></p>
+            <p><button class="button" disabled>🎧 Enable Text-to-Speech</button></p>
+            <p>We're working on making learning accessible for everyone!</p>
+        </div>
+
+    </div>
+</body>
+</html>

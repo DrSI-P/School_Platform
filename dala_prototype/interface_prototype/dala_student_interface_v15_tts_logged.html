@@ -1,0 +1,1227 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DALA Learning Adventure! - TTS Prototype</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fredoka+One&display=swap");
+
+        body {{
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #4A4A4A;
+            line-height: 1.7;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }}
+        .container {{
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            max-width: 850px;
+            width: 90%;
+            margin: 20px auto;
+        }}
+        h1 {{
+            font-family: "Fredoka One", cursive;
+            color: #5e35b1;
+            text-align: center;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }}
+        h2 {{
+            font-family: "Fredoka One", cursive;
+            color: #00796b;
+            border-bottom: 3px dashed #764ba2;
+            padding-bottom: 10px;
+            margin-top: 35px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+        }}
+        h3 {{
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            color: #1e88e5;
+            margin-top: 25px;
+            font-size: 1.3em;
+        }}
+        h4 {{
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            color: #3949ab;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }}
+        .section {{
+            margin-bottom: 35px;
+            padding: 25px;
+            background-color: #f7f9fc;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }}
+        .section:hover {{
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }}
+        .button {{
+            background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-right: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }}
+        .button:hover {{
+            background-image: linear-gradient(to right, #feb47b, #ff7e5f);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }}
+        .button[disabled] {{
+            background-image: none;
+            background-color: #cccccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }}
+        ul {{
+            list-style-type: none;
+            padding-left: 0;
+        }}
+        li {{
+            background-color: #ffffff;
+            margin-bottom: 12px;
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 6px solid #66bb6a;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.07);
+            transition: transform 0.2s ease;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }}
+        li:hover {{
+            transform: translateX(5px);
+        }}
+        .lo-title-container {{
+            flex-grow: 1; /* Allow title container to take available space */
+            margin-right: 10px; /* Space between title and speaker icon */
+        }}
+        .lo-title {{
+            font-weight: 700;
+            color: #3949ab;
+            font-size: 1.15em;
+            margin-bottom: 5px;
+        }}
+        .content-title-container {{
+            flex-grow: 1;
+            margin-left: 15px;
+            margin-right: 10px;
+        }}
+        .content-title {{
+            color: #546e7a;
+            font-size: 1em;
+        }}
+        .content-title em {{
+            color: #78909c;
+            font-size: 0.9em;
+        }}
+        .tts-button {{
+            background-color: #42a5f5; /* Light blue, distinct */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            padding: 0;
+            flex-shrink: 0; /* Prevent shrinking if text is long */
+        }}
+        .tts-button:hover {{
+            background-color: #1e88e5; /* Darker blue on hover */
+            transform: scale(1.1);
+        }}
+        .tts-button[disabled] {{
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }}
+        pre {{
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #f5f5f5;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            font-size: 0.95em;
+            color: #37474f;
+            max-height: 250px;
+            overflow-y: auto;
+        }}
+        strong {{ color: #ef5350; }}
+        em {{ color: #26a69a; }}
+        .section-icon {{
+            margin-right: 12px;
+            font-size: 1.5em;
+            color: #7e57c2;
+        }}
+        .section-icon img {{
+            width: 1.5em; /* Match font size */
+            height: 1.5em;
+            vertical-align: middle;
+        }}
+        .diagnostic-task-result {{
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 5px solid #4caf50;
+        }}
+        .diagnostic-task-result p { margin: 5px 0; }
+
+        .interactive-selection-area label {{
+            display: block;
+            margin-bottom: 8px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }}
+        .interactive-selection-area label:hover {{
+            background-color: #f0f4f8;
+            border-color: #00796b;
+        }}
+        .interactive-selection-area input[type="checkbox"] {{
+            margin-right: 10px;
+            transform: scale(1.2);
+        }}
+        .interactive-selection-area input[type="text"],
+        .goal-input-area textarea {{
+            width: calc(100% - 22px); /* Default width */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: "Poppins", sans-serif;
+            font-size: 1em;
+            margin-top: 5px;
+        }}
+        .input-with-mic {{
+            display: flex;
+            align-items: center;
+        }}
+        .input-with-mic input[type="text"],
+        .input-with-mic textarea {{
+            flex-grow: 1;
+            margin-right: 10px; /* Space between input and mic button */
+        }}
+        .mic-button {{
+            background-color: #1e88e5;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }}
+        .mic-button:hover {{
+            background-color: #1565c0;
+        }}
+        .mic-button.listening {{
+            background-color: #d32f2f; /* Red when listening */
+        }}
+        .mic-button[disabled] {{
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }}
+        #voiceStatus {{
+            font-size: 0.9em;
+            color: #546e7a;
+            margin-top: 5px;
+            min-height: 1.2em; /* Reserve space for messages */
+        }}
+
+        .selected-items-display {{
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+            border: 1px dashed #90caf9;
+        }}
+        .selected-items-display p em {{
+            color: #546e7a;
+        }}
+        .selected-item-tag {{
+            display: inline-block;
+            background-color: #66bb6a;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }}
+        .goal-input-area textarea {{
+            resize: vertical;
+            min-height: 60px;
+        }}
+
+        #gameCanvas {{
+            border: 3px dashed #764ba2;
+            background-color: #fafafa;
+            border-radius: 12px;
+            cursor: crosshair;
+            margin-top: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }}
+        .game-info {{
+            font-size: 1.2em;
+            color: #004d40;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: 600;
+        }}
+        #gameMessage {{
+            text-align: center;
+            font-weight: 600;
+            color: #d32f2f;
+            min-height: 20px;
+            margin-top: 10px;
+        }}
+        .game-section .button {{
+             display: block;
+             margin: 20px auto 0 auto;
+        }}
+        .accessibility-controls h3 .section-icon {{ color: #42a5f5; }}
+
+        /* Adventure Quest Saga Styles */
+        .adventure-quest-section {{
+            background-color: #e0f2f1; /* Light teal background */
+            border: 2px dashed #00796b;
+        }}
+        .adventure-map {{
+            width: 100%;
+            height: 350px; 
+            background-image: url("./assets/adventure_quest_saga/world_map_background.png");
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden; 
+            margin-bottom: 20px;
+            border: 3px solid #004d40;
+        }}
+        .map-path {{
+            position: absolute;
+            height: 8px; 
+            background-color: rgba(255, 220, 100, 0.8); 
+            top: 50%;
+            left: 5%; 
+            right: 5%; 
+            transform: translateY(-50%);
+            z-index: 1;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }}
+        .map-node {{
+            width: 40px; 
+            height: 40px;
+            background-color: #ff8f00; 
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1em;
+            border: 3px solid #e65100; 
+            position: absolute; 
+            z-index: 2;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+            cursor: pointer; 
+            transition: transform 0.2s ease;
+        }}
+        .map-node:hover {{
+            transform: scale(1.1);
+        }}
+        .map-node.completed {{
+            background-color: #4caf50; 
+            border-color: #2e7d32;
+        }}
+        .map-node.current {{
+            background-color: #1e88e5; 
+            border-color: #0d47a1;
+            transform: scale(1.2);
+            animation: pulse 1.5s infinite;
+        }}
+        @keyframes pulse {{
+            0% {{ box-shadow: 0 0 0 0 rgba(30, 136, 229, 0.7); }}
+            70% {{ box-shadow: 0 0 0 10px rgba(30, 136, 229, 0); }}
+            100% {{ box-shadow: 0 0 0 0 rgba(30, 136, 229, 0); }}
+        }}
+        .map-node span {{
+            display: none; 
+        }}
+        .player-avatar {{
+            width: 60px; 
+            height: 60px;
+            position: absolute;
+            z-index: 3;
+            transition: left 0.8s ease-in-out, top 0.8s ease-in-out; 
+            transform: translate(-50%, -50%); 
+        }}
+        .player-avatar img {{
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3)); 
+        }}
+        .cliffhanger-text {{
+            text-align: center;
+            font-style: italic;
+            color: #d81b60;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #fce4ec;
+            border-radius: 8px;
+            border: 1px dashed #d81b60;
+        }}
+
+        /* Badge System Styles */
+        .achievements-section {{
+            background-color: #fff3e0; /* Light orange background */
+            border: 2px dashed #ff9800;
+        }}
+        .badges-grid {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Spacing between badges */
+            justify-content: center; /* Center badges if they don't fill the row */
+            margin-top: 15px;
+        }}
+        .badge-item {{
+            width: 100px; /* Width of each badge item */
+            text-align: center;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }}
+        .badge-item:hover {{
+            transform: scale(1.05);
+        }}
+        .badge-icon {{
+            font-size: 3em; /* Larger icon */
+            margin-bottom: 8px;
+            display: block;
+            color: #ffb300; /* Default gold-ish color */
+        }}
+        .badge-icon.earned {{
+            color: #4caf50; /* Green for earned */
+            filter: drop-shadow(0 0 5px #4caf50);
+        }}
+        .badge-icon.not-earned {{
+            color: #bdbdbd; /* Grey for not earned */
+            opacity: 0.7;
+        }}
+        .badge-name {{
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #546e7a;
+            margin-bottom: 3px;
+        }}
+        .badge-description {{
+            font-size: 0.75em;
+            color: #78909c;
+            min-height: 30px; /* Ensure consistent height */
+        }}
+        .badge-earned-date {{
+            font-size: 0.7em;
+            color: #00796b;
+            font-style: italic;
+            margin-top: 5px;
+        }}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Your DALA Learning Adventure!</h1>
+
+        <!-- Holistic Learner Profiling Section -->
+        <div class="section hlp-section">
+            <h2><span class="section-icon">🧠</span>Holistic Learner Profiling</h2>
+            <p>Let's find out a bit more about how you like to learn!</p>
+            
+            <div id="hlpTasksContainer">
+                <!-- HLP Tasks will be dynamically inserted here by JS -->
+            </div>
+            
+            <div id="hlpSummary" class="selected-items-display" style="display:none;">
+                <h3>Your HLP Insights:</h3>
+                <div id="hlpSummaryContent"></div>
+            </div>
+        </div>
+
+        <!-- Interests Section -->
+        <div class="section interests-section">
+            <h2><span class="section-icon">🎨</span>Your Interests</h2>
+            <p>What topics do you enjoy exploring?</p>
+            <div class="interactive-selection-area" id="interestsSelectionArea">
+                <label><input type="checkbox" name="interest" value="Space Exploration"> Space Exploration</label>
+<label><input type="checkbox" name="interest" value="Dinosaurs"> Dinosaurs</label>
+<label><input type="checkbox" name="interest" value="Ancient Civilizations"> Ancient Civilizations</label>
+<label><input type="checkbox" name="interest" value="Robotics"> Robotics</label>
+<label><input type="checkbox" name="interest" value="Marine Biology"> Marine Biology</label>
+<label><input type="checkbox" name="interest" value="Creative Writing"> Creative Writing</label>
+<label><input type="checkbox" name="interest" value="Music Composition"> Music Composition</label>
+<label><input type="checkbox" name="interest" value="Environmental Science"> Environmental Science</label>
+<label><input type="checkbox" name="interest" value="Mythology"> Mythology</label>
+
+            </div>
+            <button class="button" onclick="submitInterests()">Save Interests</button>
+            <div id="selectedInterestsDisplay" class="selected-items-display" style="display:none;">
+                <p><em>Your chosen interests:</em> <span id="selectedInterestsList"></span></p>
+            </div>
+        </div>
+
+        <!-- Struggles Section -->
+        <div class="section struggles-section">
+            <h2><span class="section-icon">🛠️</span>Learning Focus Areas</h2>
+            <p>Are there any areas you'd like some extra support with?</p>
+            <div class="interactive-selection-area" id="strugglesSelectionArea">
+                <label><input type="checkbox" name="struggle" value="Understanding fractions"> Understanding fractions</label>
+<label><input type="checkbox" name="struggle" value="Writing long essays"> Writing long essays</label>
+<label><input type="checkbox" name="struggle" value="Remembering historical dates"> Remembering historical dates</label>
+<label><input type="checkbox" name="struggle" value="Solving word problems in math"> Solving word problems in math</label>
+<label><input type="checkbox" name="struggle" value="Staying focused during lectures"> Staying focused during lectures</label>
+<label><input type="checkbox" name="struggle" value="Public speaking"> Public speaking</label>
+<label><input type="checkbox" name="struggle" value="Learning new vocabulary"> Learning new vocabulary</label>
+<label><input type="checkbox" name="struggle" value="Organizing my study time"> Organizing my study time</label>
+
+            </div>
+            <button class="button" onclick="submitStruggles()">Save Focus Areas</button>
+            <div id="selectedStrugglesDisplay" class="selected-items-display" style="display:none;">
+                <p><em>Your chosen focus areas:</em> <span id="selectedStrugglesList"></span></p>
+            </div>
+        </div>
+
+        <!-- Learning Goals Section -->
+        <div class="section goals-section">
+            <h2><span class="section-icon">🎯</span>Your Learning Goals</h2>
+            <p>What would you like to achieve on your learning journey today?</p>
+            <div class="goal-input-area">
+                <div class="input-with-mic">
+                    <textarea id="learningGoalsInput" placeholder="e.g., Understand fractions better, write a short story..."></textarea>
+                    <button id="micBtnGoals" class="mic-button" title="Record your goals">🎤</button>
+                </div>
+                <div id="voiceStatusGoals" class="voice-status"></div>
+            </div>
+            <button class="button" onclick="submitLearningGoals()">Set Goals</button>
+            <div id="learningGoalsDisplay" class="selected-items-display" style="display:none;">
+                <p><em>Your current learning goals:</em></p>
+                <pre id="learningGoalsText"></pre>
+            </div>
+        </div>
+
+        <!-- Adventure Quest Saga - Visual Progress -->
+        <div class="section adventure-quest-section">
+            <h2><span class="section-icon"><img src="./assets/adventure_quest_saga/icon_map.png" alt="Map Icon"></span>Adventure Quest Saga: Your Journey</h2>
+            <div class="adventure-map" id="adventureMap">
+                <div class="map-path"></div>
+                <div class="map-node current" style="left: 10%; top: 50%;" title="LO 1"><span>1</span></div><div class="map-node" style="left: 25%; top: 40%;" title="LO 2"><span>2</span></div><div class="map-node" style="left: 40%; top: 60%;" title="LO 3"><span>3</span></div><div class="map-node" style="left: 55%; top: 50%;" title="LO 4"><span>4</span></div>
+                <div class="player-avatar" id="playerAvatar" style="left: 10%; top: 50%;"><img src="./assets/adventure_quest_saga/avatar_default.png" alt="Player Avatar"></div>
+            </div>
+            <div id="adventureStatusText" class="cliffhanger-text">
+                Next up: Learning Objective 1! Keep going!
+            </div>
+        </div>
+
+        <!-- Learning Pathway Section -->
+        <div class="section pathway-section">
+            <h2><span class="section-icon">🗺️</span>Your Learning Pathway</h2>
+            <p>Here are some activities tailored for you:</p>
+            <ul id="learningPathwayList">
+                
+        <li>
+            <div class="lo-title-container">
+                <div class="lo-title" id="lo-desc-Y4MD_LO1-0">Recall multiplication and division facts for multiplication tables up to 12 × 12.</div>
+            </div>
+            <button class="tts-button" data-text-source="lo-desc-Y4MD_LO1-0" title="Read Objective Aloud">🔊</button>
+        </li>
+        <ul>
+                <li style='margin-left: 20px; border-left-color: #1e88e5;'>
+                    <div class="content-title-container">
+                        <span class="content-title" id="act-desc-Y4MD_LO1-0-CONT_MD_001-0">Times Tables Practice Game (Up to 12x12) <em>(Type: game, Difficulty: medium)</em></span>
+                        <span style='display:none;'>Times Tables Practice Game (Up to 12x12). Type: game. Difficulty: medium.</span> <!-- Hidden span with full text for TTS if needed, or construct in JS -->
+                    </div>
+                    <button class="tts-button" data-text-source="act-desc-Y4MD_LO1-0-CONT_MD_001-0" title="Read Activity Details Aloud">🔊</button>
+                </li>
+                </ul>
+            </ul>
+            <button class="button" onclick="requestNewPathway()" id="newPathwayBtn">Get New Pathway Activities</button>
+        </div>
+
+        <!-- Achievements and Badges Section -->
+        <div class="section achievements-section">
+            <h2><span class="section-icon">🏆</span>Your Achievements & Badges</h2>
+            <div class="badges-grid" id="badgesDisplayArea">
+                
+        <div class="badge-item" title="Trailblazer: You&#x27;ve taken the first step on your learning adventure! (Completed HLP Introduction)">
+            <span class="badge-icon not-earned">🏆</span>
+            <div class="badge-name">Trailblazer</div>
+            <!-- <div class="badge-description">You&#x27;ve taken the first step on your learning adventure! (Completed HLP Introduction)</div> -->
+            
+        </div>
+        
+        <div class="badge-item" title="Numeria Novice Tackler: Well done! You&#x27;ve successfully navigated the initial challenges of Numeria!">
+            <span class="badge-icon not-earned">🏆</span>
+            <div class="badge-name">Numeria Novice Tackler</div>
+            <!-- <div class="badge-description">Well done! You&#x27;ve successfully navigated the initial challenges of Numeria!</div> -->
+            
+        </div>
+        
+        <div class="badge-item" title="Introductory Quest Completer: You&#x27;ve completed your first full quest! Adventure awaits!">
+            <span class="badge-icon not-earned">🏆</span>
+            <div class="badge-name">Introductory Quest Completer</div>
+            <!-- <div class="badge-description">You&#x27;ve completed your first full quest! Adventure awaits!</div> -->
+            
+        </div>
+        
+        <div class="badge-item" title="Curiosity Spark: Your curiosity is shining bright! You&#x27;ve explored beyond the beaten path!">
+            <span class="badge-icon not-earned">🏆</span>
+            <div class="badge-name">Curiosity Spark</div>
+            <!-- <div class="badge-description">Your curiosity is shining bright! You&#x27;ve explored beyond the beaten path!</div> -->
+            
+        </div>
+        
+        <div class="badge-item" title="Helping Hand: Well done for identifying areas to grow! Understanding your learning is a superpower!">
+            <span class="badge-icon not-earned">🏆</span>
+            <div class="badge-name">Helping Hand</div>
+            <!-- <div class="badge-description">Well done for identifying areas to grow! Understanding your learning is a superpower!</div> -->
+            
+        </div>
+        
+            </div>
+        </div>
+
+        <!-- Star Collector Mini-Game Section -->
+        <div class="section game-section">
+            <h2><span class="section-icon">⭐</span>Star Collector Mini-Game!</h2>
+            <p>Collect stars to earn bonus points! Click on the stars as they appear.</p>
+            <div class="game-info">Score: <span id="score">0</span></div>
+            <canvas id="gameCanvas" width="600" height="300"></canvas>
+            <div id="gameMessage"></div>
+            <button class="button" onclick="startGame()" id="startGameBtn">Start Game</button>
+        </div>
+
+    </div>
+
+    <script>
+        // --- Learner Profile Data (from Python) ---
+        let learnerProfileData = {"student_id": "test_student_001", "learning_preferences": {}, "interests": ["Space Exploration", "Dinosaurs"], "struggles": ["Staying focused during long texts"], "learning_goals": "I want to learn more about multiplication and how to build cool things.", "completed_los": [], "badges_earned": {}, "hlp_results": {"visual_pref_task": "visual_diagram", "textual_pref_task": "bullet_points"}, "game_scores": {}};
+        const allBadgeDefinitions = {"trailblazer": {"id": "trailblazer", "name": "Trailblazer", "description": "You've taken the first step on your learning adventure! (Completed HLP Introduction)", "image_url": "assets/badges/trailblazer_badge.png", "criteria_check_function": "check_trailblazer_badge"}, "topic_tackler_numeria_novice": {"id": "topic_tackler_numeria_novice", "name": "Numeria Novice Tackler", "description": "Well done! You've successfully navigated the initial challenges of Numeria!", "image_url": "assets/badges/topic_tackler_badge.png", "criteria_check_function": "check_topic_tackler_numeria_novice_badge"}, "quest_completer_intro": {"id": "quest_completer_intro", "name": "Introductory Quest Completer", "description": "You've completed your first full quest! Adventure awaits!", "image_url": "assets/badges/quest_completer_badge.png", "criteria_check_function": "check_quest_completer_intro_badge"}, "curiosity_spark": {"id": "curiosity_spark", "name": "Curiosity Spark", "description": "Your curiosity is shining bright! You've explored beyond the beaten path!", "image_url": "assets/badges/curiosity_spark_badge.png", "criteria_check_function": "check_curiosity_spark_badge"}, "helping_hand": {"id": "helping_hand", "name": "Helping Hand", "description": "Well done for identifying areas to grow! Understanding your learning is a superpower!", "image_url": "assets/badges/helping_hand_badge.png", "criteria_check_function": "check_helping_hand_badge"}};
+
+        // --- HLP Tasks Logic ---
+        const hlpTasksContainer = document.getElementById('hlpTasksContainer');
+        const hlpSummaryContainer = document.getElementById('hlpSummary');
+        const hlpSummaryContent = document.getElementById('hlpSummaryContent');
+        let currentHlpTaskIndex = 0;
+        const hlpTasks = [
+            // Task 1: Visual Preference (Simplified)
+            { 
+                id: 'visual_pref_task',
+                title: 'Visual Learning Check-in',
+                description: 'Which of these looks more helpful for learning something new?',
+                type: 'choice',
+                options: [
+                    { text: 'A colorful diagram with clear labels.', value: 'visual_diagram' },
+                    { text: 'A detailed paragraph of text explaining the concept.', value: 'detailed_text' }
+                ],
+                feedbackFunction: (value) => `You chose: ${value === 'visual_diagram' ? 'Colorful Diagram' : 'Detailed Text'}. Thanks for sharing!`
+            },
+            // Task 2: Textual Preference (Simplified)
+            { 
+                id: 'textual_pref_task',
+                title: 'Reading Style Check-in',
+                description: 'When reading instructions, do you prefer:',
+                options: [
+                    { text: 'Short, bullet-pointed steps.', value: 'bullet_points' },
+                    { text: 'A more detailed explanation in paragraph form.', value: 'paragraph_text' }
+                ],
+                feedbackFunction: (value) => `You chose: ${value === 'bullet_points' ? 'Bullet Points' : 'Paragraph Text'}. Good to know!`
+            },
+            // Task 3: Story Weaver (Sophisticated HLP)
+            { 
+                id: 'story_weaver_task',
+                title: 'Adventure Story Weaver',
+                description: 'You find a mysterious map! What kind of adventure do you hope it leads to?',
+                type: 'choice',
+                options: [
+                    { text: 'A quest to find hidden treasure guarded by puzzles.', value: 'treasure_puzzle' },
+                    { text: 'An exploration of an ancient, forgotten city with a rich history.', value: 'ancient_city' },
+                    { text: 'A journey to meet mythical creatures and learn their secrets.', value: 'mythical_creatures' },
+                    { text: 'A mission to build a new, innovative invention to help your village.', value: 'build_invention' }
+                ],
+                feedbackFunction: (value) => `An adventure involving "${value.replace('_', ' ')}"! Sounds exciting!`
+            },
+            // Task 4: Mind Mapper (Sophisticated HLP)
+            { 
+                id: 'mind_mapper_task',
+                title: 'Idea Organizer: Your Dream Project',
+                description: 'If you were to start a big project (like building a treehouse, writing a book, or designing a game), how would you prefer to plan it?',
+                type: 'choice',
+                options: [
+                    { text: 'Drawing a big map or diagram showing all the parts and how they connect.', value: 'diagram_plan' },
+                    { text: 'Making a step-by-step list of tasks in order.', value: 'list_plan' },
+                    { text: 'Talking it through with friends and gathering ideas collaboratively.', value: 'talk_plan' },
+                    { text: 'Building a small model or prototype first to see how it works.', value: 'model_plan' }
+                ],
+                feedbackFunction: (value) => `Planning with a "${value.replace('_', ' ')}" approach. Great strategy!`
+            }
+        ];
+
+        function renderHlpTask(taskIndex) {
+            if (taskIndex >= hlpTasks.length) {
+                displayHlpSummary();
+                return;
+            }
+            const task = hlpTasks[taskIndex];
+            let taskHtml = `
+                <div class="section hlp-task-item" id="hlp-task-${task.id}">
+                    <h3>${task.title}</h3>
+                    <p>${task.description}</p>
+                    <div class="interactive-selection-area">
+            `;
+            task.options.forEach(opt => {
+                taskHtml += `<label><input type="radio" name="${task.id}" value="${opt.value}"> ${opt.text}</label>`;
+            });
+            taskHtml += `
+                    </div>
+                    <button class="button" onclick="submitHlpTask('${task.id}', ${taskIndex})">Next</button>
+                    <div id="feedback-${task.id}" class="diagnostic-task-result" style="display:none;"></div>
+                </div>
+            `;
+            hlpTasksContainer.innerHTML = taskHtml;
+        }
+
+        function submitHlpTask(taskId, taskIndex) {
+            const selectedOption = document.querySelector(`input[name="${taskId}"]:checked`);
+            if (selectedOption) {
+                const value = selectedOption.value;
+                learnerProfileData.hlp_results[taskId] = value; // Store result
+                const task = hlpTasks[taskIndex];
+                if (task.feedbackFunction) {
+                    const feedbackEl = document.getElementById(`feedback-${taskId}`);
+                    feedbackEl.innerHTML = task.feedbackFunction(value);
+                    feedbackEl.style.display = 'block';
+                }
+                // Disable current task inputs and button
+                document.querySelectorAll(`#hlp-task-${taskId} input, #hlp-task-${taskId} button`).forEach(el => el.disabled = true);
+                
+                // Award badges based on HLP completion
+                learnerProfileData = checkAndAwardBadgesHLP(learnerProfileData, taskId);
+                updateBadgesDisplay(learnerProfileData.badges_earned, allBadgeDefinitions);
+
+                currentHlpTaskIndex++;
+                setTimeout(() => renderHlpTask(currentHlpTaskIndex), 1000); // Move to next task after a delay
+            } else {
+                alert("Please select an option.");
+            }
+        }
+
+        function displayHlpSummary() {
+            hlpTasksContainer.innerHTML = '<p><em>HLP assessment complete! Thank you.</em></p>';
+            let summaryHtml = '<ul>';
+            for (const [key, value] of Object.entries(learnerProfileData.hlp_results)) {
+                const taskTitle = hlpTasks.find(t => t.id === key)?.title || key.replace('_', ' ');
+                const selectedOptionText = hlpTasks.find(t => t.id === key)?.options.find(o => o.value === value)?.text || value;
+                summaryHtml += `<li><strong>${taskTitle}:</strong> ${selectedOptionText}</li>`;
+            }
+            summaryHtml += '</ul>';
+            hlpSummaryContent.innerHTML = summaryHtml;
+            hlpSummaryContainer.style.display = 'block';
+            
+            // Final check for overall HLP completion badge
+            learnerProfileData = checkAndAwardBadgesHLP(learnerProfileData, 'hlp_completed_all');
+            updateBadgesDisplay(learnerProfileData.badges_earned, allBadgeDefinitions);
+        }
+
+        // --- Interests Logic ---
+        const selectedInterestsList = document.getElementById('selectedInterestsList');
+        const selectedInterestsDisplay = document.getElementById('selectedInterestsDisplay');
+        function submitInterests() {
+            const checkboxes = document.querySelectorAll('#interestsSelectionArea input[type="checkbox"]:checked');
+            const interests = Array.from(checkboxes).map(cb => cb.value);
+            learnerProfileData.interests = interests;
+            selectedInterestsList.innerHTML = interests.map(i => `<span class="selected-item-tag">${i}</span>`).join(' ');
+            selectedInterestsDisplay.style.display = interests.length > 0 ? 'block' : 'none';
+            // Award badge for selecting interests
+            if (interests.length > 0) {
+                learnerProfileData = checkAndAwardBadgesHLP(learnerProfileData, 'interests_selected');
+                updateBadgesDisplay(learnerProfileData.badges_earned, allBadgeDefinitions);
+            }
+            console.log("Interests submitted:", interests);
+        }
+
+        // --- Struggles Logic ---
+        const selectedStrugglesList = document.getElementById('selectedStrugglesList');
+        const selectedStrugglesDisplay = document.getElementById('selectedStrugglesDisplay');
+        function submitStruggles() {
+            const checkboxes = document.querySelectorAll('#strugglesSelectionArea input[type="checkbox"]:checked');
+            const struggles = Array.from(checkboxes).map(cb => cb.value);
+            learnerProfileData.struggles = struggles;
+            selectedStrugglesList.innerHTML = struggles.map(s => `<span class="selected-item-tag">${s}</span>`).join(' ');
+            selectedStrugglesDisplay.style.display = struggles.length > 0 ? 'block' : 'none';
+            // Award badge for identifying struggles
+            if (struggles.length > 0) {
+                learnerProfileData = checkAndAwardBadgesHLP(learnerProfileData, 'struggles_identified');
+                updateBadgesDisplay(learnerProfileData.badges_earned, allBadgeDefinitions);
+            }
+            console.log("Struggles submitted:", struggles);
+        }
+
+        // --- Learning Goals Logic ---
+        const learningGoalsInput = document.getElementById('learningGoalsInput');
+        const learningGoalsText = document.getElementById('learningGoalsText');
+        const learningGoalsDisplay = document.getElementById('learningGoalsDisplay');
+        function submitLearningGoals() {
+            const goals = learningGoalsInput.value.trim();
+            if (goals) {
+                learnerProfileData.learning_goals = goals;
+                learningGoalsText.textContent = goals;
+                learningGoalsDisplay.style.display = 'block';
+                // Award badge for setting goals
+                learnerProfileData = checkAndAwardBadgesHLP(learnerProfileData, 'goals_set');
+                updateBadgesDisplay(learnerProfileData.badges_earned, allBadgeDefinitions);
+                console.log("Learning goals submitted:", goals);
+            } else {
+                learningGoalsDisplay.style.display = 'none';
+                alert("Please enter your learning goals.");
+            }
+        }
+
+        // --- Learning Pathway Logic ---
+        const learningPathwayList = document.getElementById('learningPathwayList');
+        function requestNewPathway() {
+            // This would ideally be an API call. For now, we'll simulate by re-running Python logic (not possible directly in browser)
+            // For prototype, we can't re-run Python. This button is a placeholder.
+            alert("Generating a new pathway... (This is a placeholder in the prototype. In a full app, new activities would load.)");
+            // Potentially, we could have a few pre-generated alternative pathways in JS to cycle through for demo.
+        }
+
+        // --- Star Collector Mini-Game Logic ---
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreDisplay = document.getElementById('score');
+        const gameMessage = document.getElementById('gameMessage');
+        const startGameBtn = document.getElementById('startGameBtn');
+        let score = 0;
+        let gameInterval;
+        let stars = [];
+        const starImage = new Image();
+        starImage.src = "./assets/star_collector/star.png"; // Path to your star image
+        const gameDuration = 15000; // 15 seconds
+
+        function drawStar(star) {
+            if (starImage.complete) {
+                ctx.drawImage(starImage, star.x, star.y, star.size, star.size);
+            } else {
+                // Fallback if image not loaded (simple circle)
+                ctx.fillStyle = 'gold';
+                ctx.beginPath();
+                ctx.arc(star.x + star.size / 2, star.y + star.size / 2, star.size / 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function spawnStar() {
+            const size = Math.random() * 30 + 20; // Star size between 20 and 50
+            const x = Math.random() * (canvas.width - size);
+            const y = Math.random() * (canvas.height - size);
+            stars.push({ x, y, size, createdAt: Date.now() });
+        }
+
+        function updateGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => drawStar(star));
+            // Remove old stars (e.g., after 3 seconds)
+            stars = stars.filter(star => Date.now() - star.createdAt < 3000);
+        }
+
+        canvas.addEventListener('click', function(event) {
+            if (!gameInterval) return; // Game not running
+            const rect = canvas.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const clickY = event.clientY - rect.top;
+
+            for (let i = stars.length - 1; i >= 0; i--) {
+                const star = stars[i];
+                // Simple bounding box collision detection
+                if (clickX >= star.x && clickX <= star.x + star.size &&
+                    clickY >= star.y && clickY <= star.y + star.size) {
+                    score++;
+                    scoreDisplay.textContent = score;
+                    stars.splice(i, 1); // Remove clicked star
+                    break; 
+                }
+            }
+        });
+
+        function startGame() {
+            score = 0;
+            scoreDisplay.textContent = score;
+            stars = [];
+            gameMessage.textContent = "Game On!";
+            startGameBtn.disabled = true;
+            spawnStar(); // Initial star
+            gameInterval = setInterval(spawnStar, 1000); // Spawn a new star every second
+            const gameLoop = setInterval(updateGame, 50);
+
+            setTimeout(() => {
+                clearInterval(gameInterval);
+                clearInterval(gameLoop);
+                gameMessage.textContent = `Game Over! Final Score: ${score}. Well done!`;
+                startGameBtn.disabled = false;
+                // Award badge for playing the game
+                learnerProfileData = checkAndAwardBadgesHLP(learnerProfileData, 'game_played_star_collector');
+                if (score >= 5) { // Example: Badge for high score
+                    learnerProfileData = checkAndAwardBadgesHLP(learnerProfileData, 'game_high_score_star_collector');
+                }
+                updateBadgesDisplay(learnerProfileData.badges_earned, allBadgeDefinitions);
+            }, gameDuration);
+        }
+        starImage.onload = () => {
+            console.log("Star image loaded for game.");
+            // Could enable game button here if it was initially disabled pending image load
+        };
+        starImage.onerror = () => {
+            console.error("Failed to load star image for game.");
+        };
+
+        // --- Adventure Quest Saga Logic ---
+        const playerAvatar = document.getElementById('playerAvatar');
+        const adventureMap = document.getElementById('adventureMap');
+        const adventureStatusText = document.getElementById('adventureStatusText');
+        const mapNodes = JSON.parse('[{"id": "node_0", "position": {"left": "10%", "top": "50%"}, "status_text": "You are at Learning Objective 1."}, {"id": "node_1", "position": {"left": "25%", "top": "40%"}, "status_text": "You are at Learning Objective 2."}, {"id": "node_2", "position": {"left": "40%", "top": "60%"}, "status_text": "You are at Learning Objective 3."}, {"id": "node_3", "position": {"left": "55%", "top": "50%"}, "status_text": "You are at Learning Objective 4."}]'); // Parsed from Python
+        let currentMapNodeIndex = 0; // From Python
+
+        function updateAdventureDisplay() {
+            // Update node styles (completed, current)
+            document.querySelectorAll('.map-node').forEach((nodeEl, index) => {
+                nodeEl.classList.remove('current', 'completed');
+                if (index < currentMapNodeIndex) {
+                    nodeEl.classList.add('completed');
+                } else if (index === currentMapNodeIndex) {
+                    nodeEl.classList.add('current');
+                }
+            });
+
+            // Move avatar
+            if (mapNodes[currentMapNodeIndex]) {
+                const currentNodePos = mapNodes[currentMapNodeIndex].position;
+                playerAvatar.style.left = currentNodePos.left;
+                playerAvatar.style.top = currentNodePos.top;
+                adventureStatusText.textContent = mapNodes[currentMapNodeIndex].status_text;
+            }
+            
+            // Example: Simulate advancing (in a real app, this would be tied to LO completion)
+            // For demo, let's add a way to advance manually (remove for real app)
+            // setTimeout(() => {
+            //     if (currentMapNodeIndex < mapNodes.length - 1) {
+            //         currentMapNodeIndex++;
+            //         updateAdventureDisplay();
+            //         learnerProfileData = checkAndAwardBadgesHLP(learnerProfileData, 'adventure_progress');
+            //         updateBadgesDisplay(learnerProfileData.badges_earned, allBadgeDefinitions);
+            //     }
+            // }, 5000); 
+        }
+
+        // --- Badge System Logic ---
+        const badgesDisplayArea = document.getElementById('badgesDisplayArea');
+
+        function formatDate(isoString) {
+            if (!isoString) return '';
+            const date = new Date(isoString);
+            return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        function updateBadgesDisplay(earnedBadges, allDefinitions) {
+            let badgesHtml = '';
+            for (const badgeId in allDefinitions) {
+                const def = allDefinitions[badgeId];
+                const earnedInfo = earnedBadges[badgeId];
+                const isEarned = !!earnedInfo;
+                const earnedDate = isEarned ? formatDate(earnedInfo.date_earned) : '';
+
+                badgesHtml += `
+                    <div class="badge-item">
+                        <span class="badge-icon ${isEarned ? 'earned' : 'not-earned'}">${def.icon}</span>
+                        <div class="badge-name">${def.name}</div>
+                        <div class="badge-description">${def.description}</div>
+                        ${isEarned ? `<div class="badge-earned-date">Earned: ${earnedDate}</div>` : ''}
+                    </div>
+                `;
+            }
+            badgesDisplayArea.innerHTML = badgesHtml;
+        }
+        
+        // Function to call from Python-like logic (simulated here)
+        // In a real app, this would be part of the HLP module's JS interaction or server response
+        function checkAndAwardBadgesHLP(currentProfileData, eventOrCondition) {
+            // This is a simplified placeholder. The actual badge awarding logic is in Python.
+            // For the JS prototype, we assume the Python side would update learnerProfileData
+            // and then we'd re-render the badges.
+            // However, for client-side only interactions like HLP tasks, we can simulate some checks.
+            
+            let awardedNewBadge = false;
+            const now = new Date().toISOString();
+
+            // Example: HLP Task Completion Badges
+            if (eventOrCondition === 'visual_pref_task' && !currentProfileData.badges_earned['hlp_visual_task_done']) {
+                currentProfileData.badges_earned['hlp_visual_task_done'] = { name: allBadgeDefinitions['hlp_visual_task_done'].name, date_earned: now };
+                awardedNewBadge = true;
+            }
+            if (eventOrCondition === 'textual_pref_task' && !currentProfileData.badges_earned['hlp_textual_task_done']) {
+                currentProfileData.badges_earned['hlp_textual_task_done'] = { name: allBadgeDefinitions['hlp_textual_task_done'].name, date_earned: now };
+                awardedNewBadge = true;
+            }
+            if (eventOrCondition === 'story_weaver_task' && !currentProfileData.badges_earned['hlp_story_task_done']) {
+                currentProfileData.badges_earned['hlp_story_task_done'] = { name: allBadgeDefinitions['hlp_story_task_done'].name, date_earned: now };
+                awardedNewBadge = true;
+            }
+            if (eventOrCondition === 'mind_mapper_task' && !currentProfileData.badges_earned['hlp_mindmap_task_done']) {
+                currentProfileData.badges_earned['hlp_mindmap_task_done'] = { name: allBadgeDefinitions['hlp_mindmap_task_done'].name, date_earned: now };
+                awardedNewBadge = true;
+            }
+
+            // Check for HLP Explorer (completed any 2 HLP tasks)
+            const hlpTasksDoneCount = ['hlp_visual_task_done', 'hlp_textual_task_done', 'hlp_story_task_done', 'hlp_mindmap_task_done'].filter(b => currentProfileData.badges_earned[b]).length;
+            if (hlpTasksDoneCount >= 2 && !currentProfileData.badges_earned['hlp_explorer']) {
+                currentProfileData.badges_earned['hlp_explorer'] = { name: allBadgeDefinitions['hlp_explorer'].name, date_earned: now };
+                awardedNewBadge = true;
+            }
+            
+            // Check for HLP Champion (completed all 4 HLP tasks)
+            if (hlpTasksDoneCount >= 4 && !currentProfileData.badges_earned['hlp_champion']) {
+                currentProfileData.badges_earned['hlp_champion'] = { name: allBadgeDefinitions['hlp_champion'].name, date_earned: now };
+                awardedNewBadge = true;
+            }
+
+            // Other event-based badges (simplified for JS prototype)
+            if (eventOrCondition === 'interests_selected' && !currentProfileData.badges_earned['profile_interests_set']) {
+                currentProfileData.badges_earned['profile_interests_set'] = { name: allBadgeDefinitions['profile_interests_set'].name, date_earned: now };
+                awardedNewBadge = true;
+            }
+            if (eventOrCondition === 'struggles_identified' && !currentProfileData.badges_earned['profile_focus_set']) {
+                currentProfileData.badges_earned['profile_focus_set'] = { name: allBadgeDefinitions['profile_focus_set'].name, date_earned: now };
+                awardedNewBadge = true;
+            }
+            if (eventOrCondition === 'goals_set' && !currentProfileData.badges_earned['profile_goals_set']) {
+                currentProfileData.badges_earned['profile_goals_set'] = { name: allBadgeDefinitions['profile_goals_set'].name, date_earned: now };
+                awardedNewBadge = true;
+            }
+            if (eventOrCondition === 'game_played_star_collector' && !currentProfileData.badges_earned['game_first_play']) {
+                currentProfileData.badges_earned['game_first_play'] = { name: allBadgeDefinitions['game_first_play'].name, date_earned: now };
+                awardedNewBadge = true;
+            }
+            if (eventOrCondition === 'game_high_score_star_collector' && !currentProfileData.badges_earned['game_high_scorer']) {
+                 // Assuming high score is >= 5 for this badge, checked in startGame's end logic
+                currentProfileData.badges_earned['game_high_scorer'] = { name: allBadgeDefinitions['game_high_scorer'].name, date_earned: now };
+                awardedNewBadge = true;
+            }
+            // 'first_step' (profile setup) - this would typically be awarded after all initial profile sections are done.
+            // For simplicity, let's assume if interests, struggles, AND goals are set, this is awarded.
+            if (currentProfileData.interests && currentProfileData.interests.length > 0 &&
+                currentProfileData.struggles && currentProfileData.struggles.length > 0 &&
+                currentProfileData.learning_goals && currentProfileData.learning_goals.trim() !== '' &&
+                !currentProfileData.badges_earned['first_step']) {
+                currentProfileData.badges_earned['first_step'] = { name: allBadgeDefinitions['first_step'].name, date_earned: now };
+                awardedNewBadge = true;
+            }
+
+            if (awardedNewBadge) {
+                console.log("New badge(s) potentially awarded. Updated profile:", currentProfileData);
+            }
+            return currentProfileData;
+        }
+
+        // --- Voice Input Logic (Web Speech API) ---
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognitionGoals, recognitionPathway;
+
+        if (SpeechRecognition) {
+            // Goals Input Mic
+            const micBtnGoals = document.getElementById('micBtnGoals');
+            const voiceStatusGoals = document.getElementById('voiceStatusGoals');
+            recognitionGoals = new SpeechRecognition();
+            recognitionGoals.continuous = false;
+            recognitionGoals.lang = 'en-GB';
+            recognitionGoals.interimResults = false;
+            recognitionGoals.maxAlternatives = 1;
+
+            micBtnGoals.onclick = () => {
+                if (micBtnGoals.classList.contains('listening')) {
+                    recognitionGoals.stop();
+                } else {
+                    recognitionGoals.start();
+                }
+            };
+            recognitionGoals.onstart = () => {
+                micBtnGoals.classList.add('listening');
+                micBtnGoals.textContent = '🛑';
+                voiceStatusGoals.textContent = 'Listening for your goals...';
+            };
+            recognitionGoals.onspeechend = () => {
+                recognitionGoals.stop();
+            };
+            recognitionGoals.onend = () => {
+                micBtnGoals.classList.remove('listening');
+                micBtnGoals.textContent = '🎤';
+                voiceStatusGoals.textContent = '';
+            };
+            recognitionGoals.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                learningGoalsInput.value = transcript;
+                voiceStatusGoals.textContent = 'Voice input captured!';
+                setTimeout(() => voiceStatusGoals.textContent = '', 2000);
+            };
+            recognitionGoals.onerror = (event) => {
+                voiceStatusGoals.textContent = 'Voice input error: ' + event.error;
+                console.error('Speech recognition error (Goals):', event.error);
+            };
+
+            // Placeholder for Pathway Interaction Mic (if we add one later)
+            // For now, just ensure the API is available.
+            console.log("Web Speech API (Recognition) is available.");
+
+        } else {
+            console.warn("Web Speech API (Recognition) not supported in this browser.");
+            document.getElementById('micBtnGoals').disabled = true;
+            document.getElementById('micBtnGoals').title = "Voice input not supported by your browser";
+            document.getElementById('voiceStatusGoals').textContent = "Voice input not available.";
+        }
+
+        // --- Text-to-Speech (TTS) Logic (Web Speech API) ---
+        const speechSynthesis = window.speechSynthesis;
+        let ttsUtterance;
+
+        function speakText(textToSpeak, buttonElement) {
+            if (!speechSynthesis) {
+                console.warn("Web Speech API (Synthesis) not supported.");
+                alert("Sorry, your browser doesn't support text-to-speech.");
+                if(buttonElement) buttonElement.disabled = true;
+                return;
+            }
+
+            if (speechSynthesis.speaking) {
+                // Optional: If already speaking, stop current and start new, or queue, or ignore.
+                // For this basic version, we'll stop current and start new.
+                speechSynthesis.cancel(); 
+            }
+
+            ttsUtterance = new SpeechSynthesisUtterance(textToSpeak);
+            
+            // Attempt to find a UK English voice
+            const voices = speechSynthesis.getVoices();
+            const ukVoice = voices.find(voice => voice.lang === 'en-GB');
+            if (ukVoice) {
+                ttsUtterance.voice = ukVoice;
+            } else {
+                console.warn("UK English voice not found, using default.");
+            }
+            
+            ttsUtterance.onstart = () => {
+                if(buttonElement) {
+                    buttonElement.textContent = '⏹️'; // Stop icon
+                    buttonElement.title = 'Stop Speech';
+                }
+                console.log("TTS started for: ", textToSpeak.substring(0,30) + "...");
+            };
+            ttsUtterance.onend = () => {
+                if(buttonElement) {
+                    buttonElement.textContent = '🔊'; // Speaker icon
+                    buttonElement.title = 'Read Aloud';
+                }
+                console.log("TTS ended.");
+            };
+            ttsUtterance.onerror = (event) => {
+                console.error('SpeechSynthesis Error:', event.error);
+                if(buttonElement) {
+                    buttonElement.textContent = '🔊';
+                    buttonElement.title = 'Read Aloud (Error Occurred)';
+                }
+                alert("An error occurred during speech synthesis.");
+            };
+            speechSynthesis.speak(ttsUtterance);
+        }
+
+        // Attach event listeners to all TTS buttons dynamically
+        function setupTtsButtons() {
+            document.querySelectorAll('.tts-button').forEach(button => {
+                button.onclick = function() {
+                    const textContainerId = this.dataset.textSource;
+                    const textContainer = document.getElementById(textContainerId);
+                    if (textContainer) {
+                        const textToSpeak = textContainer.innerText || textContainer.textContent;
+                        if (speechSynthesis.speaking && ttsUtterance && ttsUtterance.text === textToSpeak) {
+                            speechSynthesis.cancel(); // If same button clicked while speaking its text, stop it.
+                        } else {
+                            speakText(textToSpeak, this);
+                        }
+                    } else {
+                        console.error("TTS source element not found: ", textContainerId);
+                    }
+                };
+            });
+            // Ensure voices are loaded if needed for voice selection (some browsers require this)
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = () => { console.log("TTS Voices loaded/changed."); };
+            }
+        }
+
+        // --- Initial Setup Call ---
+        window.onload = () => {
+            renderHlpTask(currentHlpTaskIndex);
+            updateAdventureDisplay();
+            updateBadgesDisplay(learnerProfileData.badges_earned, allBadgeDefinitions);
+            setupTtsButtons(); // Setup TTS after DOM is loaded
+            console.log("DALA Interface Initialized with TTS.");
+        };
+
+    </script>
+</body>
+</html>

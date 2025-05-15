@@ -1,0 +1,934 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DALA Learning Adventure! - TTS Prototype</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fredoka+One&display=swap");
+
+        body {{
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #4A4A4A;
+            line-height: 1.7;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }}
+        .container {{
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            max-width: 850px;
+            width: 90%;
+            margin: 20px auto;
+        }}
+        h1 {{
+            font-family: "Fredoka One", cursive;
+            color: #5e35b1;
+            text-align: center;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }}
+        h2 {{
+            font-family: "Fredoka One", cursive;
+            color: #00796b;
+            border-bottom: 3px dashed #764ba2;
+            padding-bottom: 10px;
+            margin-top: 35px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+        }}
+        h3 {{
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            color: #1e88e5;
+            margin-top: 25px;
+            font-size: 1.3em;
+        }}
+        h4 {{
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            color: #3949ab;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }}
+        .section {{
+            margin-bottom: 35px;
+            padding: 25px;
+            background-color: #f7f9fc;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }}
+        .section:hover {{
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }}
+        .button {{
+            background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-right: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }}
+        .button:hover {{
+            background-image: linear-gradient(to right, #feb47b, #ff7e5f);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }}
+        .button[disabled] {{
+            background-image: none;
+            background-color: #cccccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }}
+        ul {{
+            list-style-type: none;
+            padding-left: 0;
+        }}
+        li {{
+            background-color: #ffffff;
+            margin-bottom: 12px;
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 6px solid #66bb6a;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.07);
+            transition: transform 0.2s ease;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }}
+        li:hover {{
+            transform: translateX(5px);
+        }}
+        .lo-title-container {{
+            flex-grow: 1; /* Allow title container to take available space */
+            margin-right: 10px; /* Space between title and speaker icon */
+        }}
+        .lo-title {{
+            font-weight: 700;
+            color: #3949ab;
+            font-size: 1.15em;
+            margin-bottom: 5px;
+        }}
+        .content-title-container {{
+            flex-grow: 1;
+            margin-left: 15px;
+            margin-right: 10px;
+        }}
+        .content-title {{
+            color: #546e7a;
+            font-size: 1em;
+        }}
+        .content-title em {{
+            color: #78909c;
+            font-size: 0.9em;
+        }}
+        .tts-button {{
+            background-color: #42a5f5; /* Light blue, distinct */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            padding: 0;
+            flex-shrink: 0; /* Prevent shrinking if text is long */
+        }}
+        .tts-button:hover {{
+            background-color: #1e88e5; /* Darker blue on hover */
+            transform: scale(1.1);
+        }}
+        .tts-button[disabled] {{
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }}
+        pre {{
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #f5f5f5;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            font-size: 0.95em;
+            color: #37474f;
+            max-height: 250px;
+            overflow-y: auto;
+        }}
+        strong {{ color: #ef5350; }}
+        em {{ color: #26a69a; }}
+        .section-icon {{
+            margin-right: 12px;
+            font-size: 1.5em;
+            color: #7e57c2;
+        }}
+        .section-icon img {{
+            width: 1.5em; /* Match font size */
+            height: 1.5em;
+            vertical-align: middle;
+        }}
+        .diagnostic-task-result {{
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 5px solid #4caf50;
+        }}
+        .diagnostic-task-result p { margin: 5px 0; }
+
+        .interactive-selection-area label {{
+            display: block;
+            margin-bottom: 8px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }}
+        .interactive-selection-area label:hover {{
+            background-color: #f0f4f8;
+            border-color: #00796b;
+        }}
+        .interactive-selection-area input[type="checkbox"] {{
+            margin-right: 10px;
+            transform: scale(1.2);
+        }}
+        .interactive-selection-area input[type="text"],
+        .goal-input-area textarea {{
+            width: calc(100% - 22px); /* Default width */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: "Poppins", sans-serif;
+            font-size: 1em;
+            margin-top: 5px;
+        }}
+        .input-with-mic {{
+            display: flex;
+            align-items: center;
+        }}
+        .input-with-mic input[type="text"],
+        .input-with-mic textarea {{
+            flex-grow: 1;
+            margin-right: 10px; /* Space between input and mic button */
+        }}
+        .mic-button {{
+            background-color: #1e88e5;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }}
+        .mic-button:hover {{
+            background-color: #1565c0;
+        }}
+        .mic-button.listening {{
+            background-color: #d32f2f; /* Red when listening */
+        }}
+        .mic-button[disabled] {{
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }}
+        #voiceStatus {{
+            font-size: 0.9em;
+            color: #546e7a;
+            margin-top: 5px;
+            min-height: 1.2em; /* Reserve space for messages */
+        }}
+
+        .selected-items-display {{
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+            border: 1px dashed #90caf9;
+        }}
+        .selected-items-display p em {{
+            color: #546e7a;
+        }}
+        .selected-item-tag {{
+            display: inline-block;
+            background-color: #66bb6a;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }}
+        .goal-input-area textarea {{
+            resize: vertical;
+            min-height: 60px;
+        }}
+
+        #gameCanvas {{
+            border: 3px dashed #764ba2;
+            background-color: #fafafa;
+            border-radius: 12px;
+            cursor: crosshair;
+            margin-top: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }}
+        .game-info {{
+            font-size: 1.2em;
+            color: #004d40;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: 600;
+        }}
+        #gameMessage {{
+            text-align: center;
+            font-weight: 600;
+            color: #d32f2f;
+            min-height: 20px;
+            margin-top: 10px;
+        }}
+        .game-section .button {{
+             display: block;
+             margin: 20px auto 0 auto;
+        }}
+        .accessibility-controls h3 .section-icon { color: #42a5f5; }
+
+        /* Adventure Quest Saga Styles */
+        .adventure-quest-section {{
+            background-color: #e0f2f1; /* Light teal background */
+            border: 2px dashed #00796b;
+        }}
+        .adventure-map {{
+            width: 100%;
+            height: 350px; 
+            background-image: url("./assets/adventure_quest_saga/world_map_background.png");
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden; 
+            margin-bottom: 20px;
+            border: 3px solid #004d40;
+        }}
+        .map-path {{
+            position: absolute;
+            height: 8px; 
+            background-color: rgba(255, 220, 100, 0.8); 
+            top: 50%;
+            left: 5%; 
+            right: 5%; 
+            transform: translateY(-50%);
+            z-index: 1;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }}
+        .map-node {{
+            width: 40px; 
+            height: 40px;
+            background-color: #ff8f00; 
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1em;
+            border: 3px solid #e65100; 
+            position: absolute; 
+            z-index: 2;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+            cursor: pointer; 
+            transition: transform 0.2s ease;
+        }}
+        .map-node:hover {{
+            transform: scale(1.1);
+        }}
+        .map-node.completed {{
+            background-color: #4caf50; 
+            border-color: #2e7d32;
+        }}
+        .map-node.current {{
+            background-color: #1e88e5; 
+            border-color: #0d47a1;
+            transform: scale(1.2);
+            animation: pulse 1.5s infinite;
+        }}
+        @keyframes pulse {{
+            0% { box-shadow: 0 0 0 0 rgba(30, 136, 229, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(30, 136, 229, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(30, 136, 229, 0); }
+        }}
+        .map-node span {{
+            display: none; 
+        }}
+        .player-avatar {{
+            width: 60px; 
+            height: 60px;
+            position: absolute;
+            z-index: 3;
+            transition: left 0.8s ease-in-out, top 0.8s ease-in-out; 
+            transform: translate(-50%, -50%); 
+        }}
+        .player-avatar img {{
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3)); 
+        }}
+        .cliffhanger-text {{
+            text-align: center;
+            font-style: italic;
+            color: #d81b60;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #fce4ec;
+            border-radius: 8px;
+            border: 1px dashed #d81b60;
+        }}
+
+        /* Badge System Styles */
+        .achievements-section {{
+            background-color: #fff3e0; /* Light orange background */
+            border: 2px dashed #ff9800;
+        }}
+        .badges-grid {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Spacing between badges */
+            justify-content: center; /* Center badges if they don't fill the row */
+            margin-top: 15px;
+        }}
+        .badge-item {{
+            width: 100px; /* Width of each badge item */
+            text-align: center;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+            position: relative; /* For tooltip-like behavior if needed */
+        }}
+        .badge-item:hover {{
+            transform: scale(1.05);
+        }}
+        .badge-item img {{
+            width: 70px; /* Badge image size */
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 8px;
+            border-radius: 50%; /* Circular images */
+            background-color: #f0f0f0; /* Light background for image */
+            padding: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }}
+        .badge-item p.badge-name {{
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #bf360c; /* Dark orange for name */
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }}
+        .badge-item .badge-tooltip {{
+            visibility: hidden;
+            width: 160px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position the tooltip above the badge */
+            left: 50%;
+            margin-left: -80px; /* Use half of the width to center the tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }}
+        .badge-item:hover .badge-tooltip {{
+            visibility: visible;
+            opacity: 1;
+        }}
+
+        /* Voice Input Styles */
+        .voice-input-section {{
+            background-color: #e3f2fd; /* Light blue background */
+            border: 2px dashed #1e88e5;
+        }}
+
+        /* TTS Styles (already defined above, but can be grouped here if preferred) */
+        .tts-button { /* styles defined earlier */ }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to DALA, your Learning Adventure! (TTS Prototype)</h1>
+        
+        
+    <div class="section hlp-diagnostic-section">
+        <h2><span class="section-icon">🧠</span>Let's Discover Your Learning Style!</h2>
+        
+        <h4>Visual Learning Style Task</h4>
+        <p>Engage with this quick visual task to help us understand how you learn best with images and diagrams.</p>
+        <button id="visualPreferenceTaskBtn" class="button" onclick="completeHlpStage("visualPreferenceTask")">Start Visual Task</button>
+        <h4>Textual Learning Style Task</h4>
+        <p>This activity will help us see how you prefer to work with written information.</p>
+        <button id="textualPreferenceTaskBtn" class="button" onclick="completeHlpStage("textualPreferenceTask")">Start Textual Task</button>
+        <h4>Story Weaver Mini-Task</h4>
+        <p>Arrange the story panels in the correct order to weave a tale!</p>
+        <button id="storyWeaverTaskBtn" class="button" onclick="completeHlpStage("storyWeaverTask")">Play Story Weaver</button>
+        <h4>Mind Mapper Mini-Task</h4>
+        <p>Connect the ideas to build a mind map and show your understanding!</p>
+        <button id="mindMapperTaskBtn" class="button" onclick="completeHlpStage("mindMapperTask")">Play Mind Mapper</button>
+    
+    </div>
+    
+
+    <div class="section interest-selection-section">
+        <h3><span class="section-icon">💖</span>What are you interested in?</h3>
+        <p>Knowing your interests helps DALA make learning more fun and relevant for you!</p>
+        <div class="interactive-selection-area">
+            <label><input type="checkbox" name="interests" value="Space Exploration" checked> Space Exploration</label><label><input type="checkbox" name="interests" value="Dinosaurs" checked> Dinosaurs</label><label><input type="checkbox" name="interests" value="Ancient Civilizations" > Ancient Civilizations</label><label><input type="checkbox" name="interests" value="Robotics" > Robotics</label><label><input type="checkbox" name="interests" value="Marine Biology" > Marine Biology</label><label><input type="checkbox" name="interests" value="Creative Writing" > Creative Writing</label><label><input type="checkbox" name="interests" value="Music Composition" > Music Composition</label><label><input type="checkbox" name="interests" value="Environmental Science" > Environmental Science</label><label><input type="checkbox" name="interests" value="Mythology" > Mythology</label>
+        </div>
+        <h4>Tell us another interest:</h4>
+        
+        <div class="input-with-mic">
+            <input type="text" id="interestCustomInput" placeholder="Or type another interest here...">
+            <button class="mic-button" data-target="interestCustomInput" title="Speak your interest" disabled>🎤</button>
+        </div>
+    
+        <div id="selectedInterestsDisplay" class="selected-items-display">
+            <p><em>Your selected interests will appear here.</em></p>
+        </div>
+    </div>
+    
+
+    <div class="section struggle-area-section">
+        <h3><span class="section-icon">🛠️</span>What do you find tricky?</h3>
+        <p>It's okay to find some things harder than others. Let us know what you'd like help with.</p>
+        <div class="interactive-selection-area">
+            <label><input type="checkbox" name="struggles" value="Understanding fractions" checked> Understanding fractions</label><label><input type="checkbox" name="struggles" value="Writing long essays" > Writing long essays</label><label><input type="checkbox" name="struggles" value="Remembering historical dates" > Remembering historical dates</label><label><input type="checkbox" name="struggles" value="Solving word problems in math" > Solving word problems in math</label><label><input type="checkbox" name="struggles" value="Staying focused during lectures" > Staying focused during lectures</label><label><input type="checkbox" name="struggles" value="Public speaking" > Public speaking</label><label><input type="checkbox" name="struggles" value="Learning new vocabulary" > Learning new vocabulary</label><label><input type="checkbox" name="struggles" value="Organizing my study time" > Organizing my study time</label>
+        </div>
+        <h4>Describe another challenge:</h4>
+        
+        <div class="input-with-mic">
+            <input type="text" id="struggleCustomInput" placeholder="Or type something else you find tricky...">
+            <button class="mic-button" data-target="struggleCustomInput" title="Speak your struggle area" disabled>🎤</button>
+        </div>
+    
+        <div id="selectedStrugglesDisplay" class="selected-items-display">
+            <p><em>Your selected struggle areas will appear here.</em></p>
+        </div>
+    </div>
+    
+
+    <div class="section learning-goal-section">
+        <h3><span class="section-icon">🎯</span>What's your learning goal?</h3>
+        <p>What's one thing you'd like to achieve or get better at with DALA's help?</p>
+        <div class="goal-input-area">
+            <textarea id="learningGoalInput" rows="3" placeholder="e.g., 'I want to understand fractions better' or 'I want to improve my story writing'">To learn about space and dinosaurs multiplication!</textarea>
+            <button class="button" onclick="saveLearningGoal()">Save Goal</button>
+        </div>
+        <div id="currentLearningGoalDisplay" class="selected-items-display">
+            <p>Your current goal: <em>To learn about space and dinosaurs multiplication!</em></p>
+        </div>
+    </div>
+    
+
+    <div class="section adventure-quest-section">
+        <h2><span class="section-icon"><img src="./assets/adventure_quest_saga/aqs_icon.png" alt="Adventure Quest Icon"></span>Adventure Quest Saga: The Numeria Chronicles</h2>
+        <div class="adventure-map">
+            <div class="map-path"></div>
+            <div class="map-node current" style="left: 10%; top: 50%;"><span>1</span></div><div class="map-node" style="left: 30%; top: 35%;"><span>2</span></div><div class="map-node" style="left: 50%; top: 60%;"><span>3</span></div><div class="map-node" style="left: 70%; top: 40%;"><span>4</span></div><div class="map-node" style="left: 90%; top: 50%;"><span>5</span></div>
+            <div class="player-avatar" style="left: 10%; top: 50%;">
+                <img src="./assets/adventure_quest_saga/player_avatar.png" alt="Player Avatar">
+            </div>
+        </div>
+        <p class="cliffhanger-text">The adventure continues... what mysteries lie ahead?</p>
+    </div>
+    
+
+    <div class="section achievements-section">
+        <h2><span class="section-icon">🏆</span>My Achievements</h2>
+        <div class="badges-grid"> 
+        <div class="badge-item" title="Trailblazer: You&#x27;ve taken the first step on your learning adventure! (Completed HLP Introduction) Earned: 15 May 2025">
+            <img src="assets/badges/trailblazer_badge.png" alt="Trailblazer">
+            <p class="badge-name">Trailblazer</p>
+        </div> 
+        <div class="badge-item" title="Helping Hand: Well done for identifying areas to grow! Understanding your learning is a superpower! Earned: 15 May 2025">
+            <img src="assets/badges/helping_hand_badge.png" alt="Helping Hand">
+            <p class="badge-name">Helping Hand</p>
+        </div></div>
+    </div>
+    
+
+    <div class="section learning-pathway-section">
+        <h2><span class="section-icon">🗺️</span>My Learning Pathway</h2>
+        <ul><li>
+                                <div class="lo-title-container">
+                                    <span class="lo-title" data-speakable-text="Recall multiplication and division facts for multiplication tables up to 12 × 12.">Recall multiplication and division facts for multiplication tables up to 12 × 12.</span>
+                                </div>
+                                <button class="tts-button" onclick="speakText(this)" title="Read aloud">🔊</button>
+                            </li><ul><li>
+                                        <div class="content-title-container">
+                                            <span class="content-title" data-speakable-text="Times Tables Practice Game (Up to 12x12) (game)">
+                                                Times Tables Practice Game (Up to 12x12) (game) 
+                                                <em>(Est. Time: 10 mins)</em>
+                                            </span>
+                                        </div>
+                                        <button class="tts-button" onclick="speakText(this)" title="Read aloud">🔊</button>
+                                    </li></ul></ul>
+    </div>
+    
+
+    <div class="section game-section">
+        <h2><span class="section-icon">⭐</span>Star Collector Mini-Game!</h2>
+        <p>Ready for a quick challenge? Collect as many stars as you can before time runs out!</p>
+        <div class="game-info">Score: <span id="gameScore">0</span></div>
+        <canvas id="gameCanvas" width="600" height="300"></canvas>
+        <div id="gameMessage">Click "Start Game" to play!</div>
+        <button id="startGameBtn" class="button" onclick="startGame()">Start Game</button>
+    </div>
+    
+
+    </div>
+
+    <script>
+        // Basic Learner Profile Data (Passed from Python)
+        const learnerProfileData = {"name": "test_student_001", "interests": ["Space Exploration", "Dinosaurs"], "struggles": ["Understanding fractions"], "learning_style_preferences": {}, "learning_goal": "To learn about space and dinosaurs multiplication!", "badges_earned": {"trailblazer": {"name": "Trailblazer", "earned_on": "2025-05-15T07:20:41.162041Z"}, "helping_hand": {"name": "Helping Hand", "earned_on": "2025-05-15T07:20:41.162119Z"}}};
+
+        // --- HLP Section Logic (Simplified) ---
+        function completeHlpStage(stageName) {{
+            console.log(stageName + " completed.");
+            // In a real app, this would send data to a backend and update the profile.
+            // For now, just log and disable the button.
+            document.getElementById(stageName + "Btn").disabled = true;
+            // Simulate updating local profile data for display
+            if (stageName === "visualPreferenceTask") learnerProfileData.learning_style_preferences.visual_task_1 = "visual_chosen";
+            if (stageName === "textualPreferenceTask") learnerProfileData.learning_style_preferences.textual_task_1 = "textual_chosen";
+            updateProfileDisplay();
+        }}
+
+        function updateSelectedItems(checkboxName, displayId, customInputId) {{
+            const checkboxes = document.querySelectorAll(`input[name="${checkboxName}"]:checked`);
+            const displayElement = document.getElementById(displayId);
+            let items = [];
+            checkboxes.forEach(cb => items.push(cb.value));
+            
+            const customInput = document.getElementById(customInputId);
+            if (customInput && customInput.value.trim() !== "") {{
+                items.push(customInput.value.trim());
+            }}
+
+            if (items.length > 0) {{
+                displayElement.innerHTML = items.map(item => `<span class="selected-item-tag">${item}</span>`).join("");
+            }} else {{
+                displayElement.innerHTML = `<p><em>Your selected items will appear here.</em></p>`;
+            }}
+            // Update global profile for other interactions (e.g., pathway generation)
+            if (checkboxName === "interests") learnerProfileData.interests = items;
+            if (checkboxName === "struggles") learnerProfileData.struggles = items;
+        }}
+
+        function saveLearningGoal() {{
+            const goalInput = document.getElementById("learningGoalInput");
+            const displayElement = document.getElementById("currentLearningGoalDisplay");
+            if (goalInput.value.trim() !== "") {{
+                learnerProfileData.learning_goal = goalInput.value.trim();
+                displayElement.innerHTML = `<p>Your current goal: <em>${learnerProfileData.learning_goal}</em></p>`;
+                console.log("Learning goal saved: ", learnerProfileData.learning_goal);
+            }} else {{
+                displayElement.innerHTML = `<p><em>Please enter a learning goal.</em></p>`;
+            }}
+        }}
+
+        function updateProfileDisplay() {{
+            // This is a placeholder. In a real app, more comprehensive display updates would happen.
+            console.log("Profile data for display: ", learnerProfileData);
+        }}
+
+        // --- Star Collector Mini-Game Logic ---
+        const gameCanvas = document.getElementById("gameCanvas");
+        const gameScoreDisplay = document.getElementById("gameScore");
+        const gameMessageDisplay = document.getElementById("gameMessage");
+        const startGameBtn = document.getElementById("startGameBtn");
+        let gameCtx, gameScore, gameTimer, gameInterval, stars;
+        const starRadius = 10;
+        const gameDuration = 15; // seconds
+
+        function initGame() {{
+            if (!gameCanvas) return;
+            gameCtx = gameCanvas.getContext("2d");
+            gameScore = 0;
+            stars = [];
+            gameScoreDisplay.textContent = gameScore;
+            gameMessageDisplay.textContent = "Click "Start Game" to play!";
+            if(startGameBtn) startGameBtn.disabled = false;
+            if(gameInterval) clearInterval(gameInterval);
+        }}
+
+        function spawnStar() {{
+            if (!gameCanvas) return;
+            const x = Math.random() * (gameCanvas.width - starRadius * 2) + starRadius;
+            const y = Math.random() * (gameCanvas.height - starRadius * 2) + starRadius;
+            stars.push({x, y, radius: starRadius, color: `hsl(${Math.random() * 360}, 100%, 70%)`});
+        }}
+
+        function drawStars() {{
+            if (!gameCtx || !gameCanvas) return;
+            gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+            stars.forEach(star => {{
+                gameCtx.beginPath();
+                gameCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                gameCtx.fillStyle = star.color;
+                gameCtx.fill();
+                gameCtx.closePath();
+            }});
+        }}
+
+        function gameLoop() {{
+            if (stars.length < 5 && Math.random() < 0.1) {{
+                spawnStar();
+            }}
+            drawStars();
+        }}
+
+        function startGame() {{
+            if (!gameCanvas || !startGameBtn) return;
+            initGame();
+            startGameBtn.disabled = true;
+            gameMessageDisplay.textContent = "Collect the stars!";
+            spawnStar(); // Start with one star
+            gameInterval = setInterval(gameLoop, 100);
+            gameTimer = gameDuration;
+            
+            const timerInterval = setInterval(() => {{
+                gameTimer--;
+                gameMessageDisplay.textContent = `Time left: ${gameTimer}s`;
+                if (gameTimer <= 0) {{
+                    clearInterval(gameInterval);
+                    clearInterval(timerInterval);
+                    gameMessageDisplay.textContent = `Game Over! Final Score: ${gameScore}. Play again?`;
+                    startGameBtn.disabled = false;
+                }}
+            }}, 1000);
+        }}
+
+        if (gameCanvas) {{
+            gameCanvas.addEventListener("click", (event) => {{
+                if (!gameCtx || gameTimer <= 0 || gameTimer === undefined) return;
+                const rect = gameCanvas.getBoundingClientRect();
+                const clickX = event.clientX - rect.left;
+                const clickY = event.clientY - rect.top;
+
+                for (let i = stars.length - 1; i >= 0; i--) {{
+                    const star = stars[i];
+                    const distance = Math.sqrt((clickX - star.x)**2 + (clickY - star.y)**2);
+                    if (distance < star.radius) {{
+                        stars.splice(i, 1);
+                        gameScore++;
+                        gameScoreDisplay.textContent = gameScore;
+                        spawnStar(); // Add a new star
+                        break;
+                    }}
+                }}
+            }});
+        }}
+        
+        // --- Voice Input Logic (Web Speech API) ---
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition;
+
+        if (SpeechRecognition) {{
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.lang = "en-GB"; // UK English
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            document.querySelectorAll(".mic-button").forEach(button => {{
+                button.disabled = false; // Enable mic buttons if API is supported
+                button.addEventListener("click", () => {{
+                    const targetInputId = button.dataset.target;
+                    const targetInput = document.getElementById(targetInputId);
+                    const voiceStatus = document.getElementById("voiceStatus"); 
+
+                    if (targetInput) {{
+                        recognition.start();
+                        button.classList.add("listening");
+                        if(voiceStatus) voiceStatus.textContent = "Listening...";
+                    }}
+                }});
+            }});
+
+            recognition.onresult = (event) => {{
+                const speechResult = event.results[0][0].transcript;
+                // Find the active mic button and its target input
+                const listeningButton = document.querySelector(".mic-button.listening");
+                if (listeningButton) {{
+                    const targetInputId = listeningButton.dataset.target;
+                    const targetInput = document.getElementById(targetInputId);
+                    if (targetInput) {{
+                        targetInput.value = speechResult;
+                        // Trigger change event for display updates if needed
+                        targetInput.dispatchEvent(new Event("input", { bubbles: true })); 
+                        if (targetInputId === "interestCustomInput") {{
+                           updateSelectedItems("interests", "selectedInterestsDisplay", "interestCustomInput");
+                        }} else if (targetInputId === "struggleCustomInput") {{
+                           updateSelectedItems("struggles", "selectedStrugglesDisplay", "struggleCustomInput");
+                        }} else if (targetInputId === "learningGoalInput") {{
+                            saveLearningGoal(); // Call save directly as it reads from the input
+                        }}
+                    }}
+                }}
+            }}
+
+            recognition.onspeechend = () => {{
+                recognition.stop();
+                document.querySelectorAll(".mic-button.listening").forEach(btn => btn.classList.remove("listening"));
+                const voiceStatus = document.getElementById("voiceStatus");
+                if(voiceStatus) voiceStatus.textContent = "Voice input finished.";
+            }}
+
+            recognition.onerror = (event) => {{
+                document.querySelectorAll(".mic-button.listening").forEach(btn => btn.classList.remove("listening"));
+                const voiceStatus = document.getElementById("voiceStatus");
+                if(voiceStatus) voiceStatus.textContent = `Error during speech recognition: ${event.error}`;
+                console.error("Speech recognition error: ", event.error);
+            }}
+        }} else {{
+            console.warn("Speech Recognition API not supported in this browser.");
+            const voiceStatus = document.getElementById("voiceStatus");
+            if(voiceStatus) voiceStatus.textContent = "Voice input is not supported in your browser.";
+        }}
+
+        // --- Text-to-Speech (TTS) Logic (Web Speech API) ---
+        const synth = window.speechSynthesis;
+        let voices = [];
+
+        function populateVoiceList() {{
+            if(typeof speechSynthesis === "undefined") {{
+                console.warn("Speech Synthesis API not supported.");
+                return;
+            }}
+            voices = synth.getVoices();
+            // Log available voices for debugging, especially for en-GB
+            console.log("Available voices:", voices.filter(voice => voice.lang.startsWith("en")));
+        }}
+
+        populateVoiceList();
+        if (typeof speechSynthesis !== "undefined" && speechSynthesis.onvoiceschanged !== undefined) {{
+            speechSynthesis.onvoiceschanged = populateVoiceList;
+        }}
+
+        function speakText(buttonElement) {{
+            if (!synth) {{
+                alert("Sorry, your browser does not support text-to-speech.");
+                return;
+            }}
+            if (synth.speaking) {{
+                // Optional: Implement stop/cancel if already speaking
+                // synth.cancel(); 
+                // For basic prototype, let it finish or overlap if clicked again quickly
+                console.warn("Speech synthesis is already in progress.");
+                // return; 
+            }}
+
+            let textToSpeak = "";
+            // Find the associated text. Expecting the speakable text to be in a sibling span with data-speakable-text
+            // or within the parent if the button is inside the text container.
+            const parentLi = buttonElement.closest("li");
+            if (parentLi) {{
+                const speakableSpan = parentLi.querySelector("[data-speakable-text]");
+                if (speakableSpan) {{
+                    textToSpeak = speakableSpan.dataset.speakableText || speakableSpan.textContent;
+                }}
+            }}
+            
+            if (!textToSpeak && buttonElement.dataset.speakableText) {{
+                 textToSpeak = buttonElement.dataset.speakableText; // Fallback if button itself has the text
+            }}
+
+            if (!textToSpeak.trim()) {{
+                console.error("No text found to speak for this element.");
+                return;
+            }}
+
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            utterance.onerror = (event) => {{
+                console.error("SpeechSynthesisUtterance.onerror", event);
+                alert(`An error occurred during speech synthesis: ${event.error}`);
+            }}
+
+            // Attempt to select a UK English voice
+            const ukVoice = voices.find(voice => voice.lang === "en-GB");
+            if (ukVoice) {{
+                utterance.voice = ukVoice;
+                console.log("Using voice:", ukVoice.name, ukVoice.lang);
+            }} else {{
+                console.warn("en-GB voice not found, using browser default.");
+            }}
+            // Optional: Adjust pitch and rate if desired
+            // utterance.pitch = 1;
+            // utterance.rate = 1;
+
+            synth.speak(utterance);
+        }}
+
+        // --- Initial Setup Calls ---
+        document.addEventListener("DOMContentLoaded", () => {{
+            initGame(); // Initialize Star Collector Game
+            updateProfileDisplay(); // Initial display of profile info (if any)
+            // Attach event listeners for interest and struggle selections
+            document.querySelectorAll("input[name="interests"]").forEach(cb => 
+                cb.addEventListener("change", () => updateSelectedItems("interests", "selectedInterestsDisplay", "interestCustomInput"))
+            );
+            document.querySelectorAll("input[name="struggles"]").forEach(cb => 
+                cb.addEventListener("change", () => updateSelectedItems("struggles", "selectedStrugglesDisplay", "struggleCustomInput"))
+            );
+            // For custom text inputs that also trigger updates
+            const interestCustom = document.getElementById("interestCustomInput");
+            if(interestCustom) interestCustom.addEventListener("input", () => updateSelectedItems("interests", "selectedInterestsDisplay", "interestCustomInput"));
+            
+            const struggleCustom = document.getElementById("struggleCustomInput");
+            if(struggleCustom) struggleCustom.addEventListener("input", () => updateSelectedItems("struggles", "selectedStrugglesDisplay", "struggleCustomInput"));
+        }});
+
+    </script>
+</body>
+</html>
