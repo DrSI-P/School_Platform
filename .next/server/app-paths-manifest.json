@@ -1,7 +1,12 @@
 {
   "/page": "app/page.js",
   "/ai-lab/page": "app/ai-lab/page.js",
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/community/page": "app/community/page.js",
+  "/analytics/page": "app/analytics/page.js",
+  "/assessments/page": "app/assessments/page.js",
+  "/resources/page": "app/resources/page.js",
+  "/projects/page": "app/projects/page.js",
+  "/api/ai-lab/run-code/route": "app/api/ai-lab/run-code/route.js",
   "/api/ai-lab/assistant/route": "app/api/ai-lab/assistant/route.js",
-  "/api/ai-lab/run-code/route": "app/api/ai-lab/run-code/route.js"
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js"
 }

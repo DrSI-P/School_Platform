@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { 
@@ -44,8 +45,16 @@ export function Navigation() {
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="flex items-center">
-                <Lightbulb className="h-8 w-8 text-primary" />
-                <span className="ml-2 text-xl font-bold text-gray-900">EdPsychConnect</span>
+                <div className="relative h-10 w-10 mr-2">
+                  <Image
+                    src="/images/logo.png"
+                    alt="EdPsychConnect Logo"
+                    width={40}
+                    height={40}
+                    className="object-contain"
+                  />
+                </div>
+                <span className="ml-1 text-xl font-bold text-gray-900">EdPsychConnect</span>
               </Link>
             </div>
             

@@ -76,6 +76,14 @@ module.exports = require("next/dist/shared/lib/app-router-context");
 
 /***/ }),
 
+/***/ 1830:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/get-img-props");
+
+/***/ }),
+
 /***/ 20199:
 /***/ ((module) => {
 
@@ -84,11 +92,35 @@ module.exports = require("next/dist/shared/lib/hash");
 
 /***/ }),
 
+/***/ 66864:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/head");
+
+/***/ }),
+
 /***/ 39569:
 /***/ ((module) => {
 
 "use strict";
 module.exports = require("next/dist/shared/lib/hooks-client-context");
+
+/***/ }),
+
+/***/ 52210:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/image-config");
+
+/***/ }),
+
+/***/ 35359:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/image-config-context");
 
 /***/ }),
 
@@ -180,6 +212,14 @@ module.exports = require("next/dist/shared/lib/utils");
 
 /***/ }),
 
+/***/ 98658:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/utils/warn-once");
+
+/***/ }),
+
 /***/ 20991:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -264,15 +304,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11440);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18038);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(51158);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(52451);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18038);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(51158);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
 
 
+
 function Home() {
-    const [showMore, setShowMore] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
+    const [showMore, setShowMore] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "flex flex-col min-h-screen",
         children: [
@@ -313,10 +356,14 @@ function Home() {
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                 className: "hidden md:block",
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                    className: "bg-white/20 rounded-lg h-80 w-full flex items-center justify-center",
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                        className: "text-lg font-medium",
-                                        children: "Interactive Platform Preview"
+                                    className: "rounded-lg h-80 w-full overflow-hidden",
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_2___default()), {
+                                        src: "/images/hero-image.png",
+                                        alt: "EdPsychConnect Platform Preview",
+                                        width: 800,
+                                        height: 600,
+                                        className: "object-cover w-full h-full",
+                                        priority: true
                                     })
                                 })
                             })
@@ -348,11 +395,26 @@ function Home() {
                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                     className: "bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100",
                                     children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                            className: "rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4",
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_3__/* .BrainCircuit */ .N4w, {
-                                                className: "h-6 w-6 text-primary-600"
-                                            })
+                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                            className: "flex items-center mb-4",
+                                            children: [
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                    className: "rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mr-4",
+                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_4__/* .BrainCircuit */ .N4w, {
+                                                        className: "h-6 w-6 text-primary-600"
+                                                    })
+                                                }),
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                    className: "w-12 h-12",
+                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_2___default()), {
+                                                        src: "/images/ai-lab-icon.png",
+                                                        alt: "AI Lab",
+                                                        width: 48,
+                                                        height: 48,
+                                                        className: "object-contain"
+                                                    })
+                                                })
+                                            ]
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h3", {
                                             className: "text-xl font-semibold mb-2",
@@ -387,11 +449,26 @@ function Home() {
                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                     className: "bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100",
                                     children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                            className: "rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4",
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_3__/* .Rocket */ .w8m, {
-                                                className: "h-6 w-6 text-primary-600"
-                                            })
+                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                            className: "flex items-center mb-4",
+                                            children: [
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                    className: "rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mr-4",
+                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_4__/* .Rocket */ .w8m, {
+                                                        className: "h-6 w-6 text-primary-600"
+                                                    })
+                                                }),
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                    className: "w-12 h-12",
+                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_2___default()), {
+                                                        src: "/images/projects-icon.png",
+                                                        alt: "Collaborative Projects",
+                                                        width: 48,
+                                                        height: 48,
+                                                        className: "object-contain"
+                                                    })
+                                                })
+                                            ]
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h3", {
                                             className: "text-xl font-semibold mb-2",
@@ -426,11 +503,26 @@ function Home() {
                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                     className: "bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100",
                                     children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                            className: "rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4",
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_3__/* .Sparkles */ .P$o, {
-                                                className: "h-6 w-6 text-primary-600"
-                                            })
+                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                            className: "flex items-center mb-4",
+                                            children: [
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                    className: "rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mr-4",
+                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_4__/* .Sparkles */ .P$o, {
+                                                        className: "h-6 w-6 text-primary-600"
+                                                    })
+                                                }),
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                    className: "w-12 h-12",
+                                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_2___default()), {
+                                                        src: "/images/resources-icon.png",
+                                                        alt: "AI-Powered Resources",
+                                                        width: 48,
+                                                        height: 48,
+                                                        className: "object-contain"
+                                                    })
+                                                })
+                                            ]
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h3", {
                                             className: "text-xl font-semibold mb-2",
@@ -472,7 +564,7 @@ function Home() {
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                             className: "rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4",
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_3__/* .BarChart2 */ .kM3, {
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_4__/* .BarChart2 */ .kM3, {
                                                 className: "h-6 w-6 text-primary-600"
                                             })
                                         }),
@@ -511,7 +603,7 @@ function Home() {
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                             className: "rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4",
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_3__/* .Shield */ .WL4, {
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_4__/* .Shield */ .WL4, {
                                                 className: "h-6 w-6 text-primary-600"
                                             })
                                         }),
@@ -550,7 +642,7 @@ function Home() {
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                             className: "rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4",
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_3__/* .Users */ .Qaw, {
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_4__/* .Users */ .Qaw, {
                                                 className: "h-6 w-6 text-primary-600"
                                             })
                                         }),
@@ -619,15 +711,25 @@ function Home() {
                             className: "grid grid-cols-1 lg:grid-cols-2 gap-12 items-center",
                             children: [
                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                    className: "bg-white p-6 rounded-lg shadow-md border border-gray-100",
+                                    className: "bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden",
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                            className: "bg-gray-800 rounded-t-md p-3 text-white text-sm font-mono",
+                                            className: "bg-gray-800 p-3 text-white text-sm font-mono",
                                             children: "AI Lab - Code Editor"
                                         }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                            className: "bg-gray-900 p-4 font-mono text-green-400 text-sm whitespace-pre overflow-x-auto",
-                                            children: `// Example AI-powered learning tool
+                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                            className: "relative",
+                                            children: [
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_2___default()), {
+                                                    src: "/images/ai-lab-showcase.png",
+                                                    alt: "AI Lab Code Editor",
+                                                    width: 600,
+                                                    height: 400,
+                                                    className: "object-cover w-full"
+                                                }),
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                    className: "absolute inset-0 bg-gray-900 bg-opacity-70 p-4 font-mono text-green-400 text-sm whitespace-pre overflow-x-auto",
+                                                    children: `// Example AI-powered learning tool
 function analyzeText(text) {
   // Use AI to analyze sentiment and key concepts
   return {
@@ -644,6 +746,8 @@ function analyzeText(text) {
 // Example usage
 const feedback = analyzeText(studentEssay);
 console.log(feedback);`
+                                                })
+                                            ]
                                         })
                                     ]
                                 }),
@@ -979,7 +1083,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [212,985,719], () => (__webpack_exec__(20991)));
+var __webpack_exports__ = __webpack_require__.X(0, [212,113,719], () => (__webpack_exec__(20991)));
 module.exports = __webpack_exports__;
 
 })();

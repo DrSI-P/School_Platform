@@ -29,9 +29,15 @@ export default function Home() {
               </div>
             </div>
             <div className="hidden md:block">
-              {/* Placeholder for hero image */}
-              <div className="bg-white/20 rounded-lg h-80 w-full flex items-center justify-center">
-                <p className="text-lg font-medium">Interactive Platform Preview</p>
+              <div className="rounded-lg h-80 w-full overflow-hidden">
+                <Image
+                  src="/images/hero-image.png"
+                  alt="EdPsychConnect Platform Preview"
+                  width={800}
+                  height={600}
+                  className="object-cover w-full h-full"
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -51,8 +57,19 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Feature 1 - AI Lab */}
             <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100">
-              <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
-                <BrainCircuit className="h-6 w-6 text-primary-600" />
+              <div className="flex items-center mb-4">
+                <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mr-4">
+                  <BrainCircuit className="h-6 w-6 text-primary-600" />
+                </div>
+                <div className="w-12 h-12">
+                  <Image
+                    src="/images/ai-lab-icon.png"
+                    alt="AI Lab"
+                    width={48}
+                    height={48}
+                    className="object-contain"
+                  />
+                </div>
               </div>
               <h3 className="text-xl font-semibold mb-2">AI Lab</h3>
               <p className="text-gray-600 mb-4">
@@ -68,8 +85,19 @@ export default function Home() {
             
             {/* Feature 2 - Collaborative Projects */}
             <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100">
-              <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
-                <Rocket className="h-6 w-6 text-primary-600" />
+              <div className="flex items-center mb-4">
+                <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mr-4">
+                  <Rocket className="h-6 w-6 text-primary-600" />
+                </div>
+                <div className="w-12 h-12">
+                  <Image
+                    src="/images/projects-icon.png"
+                    alt="Collaborative Projects"
+                    width={48}
+                    height={48}
+                    className="object-contain"
+                  />
+                </div>
               </div>
               <h3 className="text-xl font-semibold mb-2">Collaborative Projects</h3>
               <p className="text-gray-600 mb-4">
@@ -85,8 +113,19 @@ export default function Home() {
             
             {/* Feature 3 - AI-Powered Resources */}
             <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100">
-              <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
-                <Sparkles className="h-6 w-6 text-primary-600" />
+              <div className="flex items-center mb-4">
+                <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mr-4">
+                  <Sparkles className="h-6 w-6 text-primary-600" />
+                </div>
+                <div className="w-12 h-12">
+                  <Image
+                    src="/images/resources-icon.png"
+                    alt="AI-Powered Resources"
+                    width={48}
+                    height={48}
+                    className="object-contain"
+                  />
+                </div>
               </div>
               <h3 className="text-xl font-semibold mb-2">AI-Powered Resources</h3>
               <p className="text-gray-600 mb-4">
@@ -178,11 +217,19 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
-              <div className="bg-gray-800 rounded-t-md p-3 text-white text-sm font-mono">
+            <div className="bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden">
+              <div className="bg-gray-800 p-3 text-white text-sm font-mono">
                 AI Lab - Code Editor
               </div>
-              <div className="bg-gray-900 p-4 font-mono text-green-400 text-sm whitespace-pre overflow-x-auto">
+              <div className="relative">
+                <Image
+                  src="/images/ai-lab-showcase.png"
+                  alt="AI Lab Code Editor"
+                  width={600}
+                  height={400}
+                  className="object-cover w-full"
+                />
+                <div className="absolute inset-0 bg-gray-900 bg-opacity-70 p-4 font-mono text-green-400 text-sm whitespace-pre overflow-x-auto">
 {`// Example AI-powered learning tool
 function analyzeText(text) {
   // Use AI to analyze sentiment and key concepts
@@ -200,6 +247,7 @@ function analyzeText(text) {
 // Example usage
 const feedback = analyzeText(studentEssay);
 console.log(feedback);`}
+                </div>
               </div>
             </div>
             

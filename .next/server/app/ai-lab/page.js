@@ -76,6 +76,14 @@ module.exports = require("next/dist/shared/lib/app-router-context");
 
 /***/ }),
 
+/***/ 1830:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/get-img-props");
+
+/***/ }),
+
 /***/ 20199:
 /***/ ((module) => {
 
@@ -84,11 +92,35 @@ module.exports = require("next/dist/shared/lib/hash");
 
 /***/ }),
 
+/***/ 66864:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/head");
+
+/***/ }),
+
 /***/ 39569:
 /***/ ((module) => {
 
 "use strict";
 module.exports = require("next/dist/shared/lib/hooks-client-context");
+
+/***/ }),
+
+/***/ 52210:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/image-config");
+
+/***/ }),
+
+/***/ 35359:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/image-config-context");
 
 /***/ }),
 
@@ -180,6 +212,22 @@ module.exports = require("next/dist/shared/lib/utils");
 
 /***/ }),
 
+/***/ 98658:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/utils/warn-once");
+
+/***/ }),
+
+/***/ 6113:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("crypto");
+
+/***/ }),
+
 /***/ 71238:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -257,11 +305,11 @@ __webpack_require__.r(__webpack_exports__);
 /***/ 55358:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 46232))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 38458))
 
 /***/ }),
 
-/***/ 46232:
+/***/ 38458:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -279,81 +327,13 @@ var jsx_runtime_ = __webpack_require__(56786);
 var react_ = __webpack_require__(18038);
 // EXTERNAL MODULE: ./components/ui/button.tsx
 var ui_button = __webpack_require__(44368);
-// EXTERNAL MODULE: ./node_modules/@radix-ui/react-tabs/dist/index.mjs + 2 modules
-var dist = __webpack_require__(4253);
-// EXTERNAL MODULE: ./lib/utils.ts
-var utils = __webpack_require__(12857);
-;// CONCATENATED MODULE: ./components/ui/tabs.tsx
-/* __next_internal_client_entry_do_not_use__ Tabs,TabsList,TabsTrigger,TabsContent auto */ 
-
-
-
-const Tabs = dist/* Root */.fC;
-const TabsList = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(dist/* List */.aV, {
-        ref: ref,
-        className: (0,utils.cn)("inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground", className),
-        ...props
-    }));
-TabsList.displayName = dist/* List */.aV.displayName;
-const TabsTrigger = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(dist/* Trigger */.xz, {
-        ref: ref,
-        className: (0,utils.cn)("inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm", className),
-        ...props
-    }));
-TabsTrigger.displayName = dist/* Trigger */.xz.displayName;
-const TabsContent = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(dist/* Content */.VY, {
-        ref: ref,
-        className: (0,utils.cn)("mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", className),
-        ...props
-    }));
-TabsContent.displayName = dist/* Content */.VY.displayName;
-
-
-;// CONCATENATED MODULE: ./components/ui/card.tsx
-
-
-
-const Card = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
-        ref: ref,
-        className: (0,utils.cn)("rounded-lg border bg-card text-card-foreground shadow-sm", className),
-        ...props
-    }));
-Card.displayName = "Card";
-const CardHeader = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
-        ref: ref,
-        className: (0,utils.cn)("flex flex-col space-y-1.5 p-6", className),
-        ...props
-    }));
-CardHeader.displayName = "CardHeader";
-const CardTitle = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx("h3", {
-        ref: ref,
-        className: (0,utils.cn)("text-2xl font-semibold leading-none tracking-tight", className),
-        ...props
-    }));
-CardTitle.displayName = "CardTitle";
-const CardDescription = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx("p", {
-        ref: ref,
-        className: (0,utils.cn)("text-sm text-muted-foreground", className),
-        ...props
-    }));
-CardDescription.displayName = "CardDescription";
-const CardContent = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
-        ref: ref,
-        className: (0,utils.cn)("p-6 pt-0", className),
-        ...props
-    }));
-CardContent.displayName = "CardContent";
-const CardFooter = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
-        ref: ref,
-        className: (0,utils.cn)("flex items-center p-6 pt-0", className),
-        ...props
-    }));
-CardFooter.displayName = "CardFooter";
-
-
+// EXTERNAL MODULE: ./components/ui/tabs.tsx
+var tabs = __webpack_require__(75882);
+// EXTERNAL MODULE: ./components/ui/card.tsx
+var card = __webpack_require__(70737);
 // EXTERNAL MODULE: ./node_modules/@monaco-editor/react/dist/index.js
-var react_dist = __webpack_require__(3822);
-var dist_default = /*#__PURE__*/__webpack_require__.n(react_dist);
+var dist = __webpack_require__(3822);
+var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
 ;// CONCATENATED MODULE: ./components/ai-lab/CodeEditor.tsx
 /* __next_internal_client_entry_do_not_use__ CodeEditor auto */ 
 
@@ -410,6 +390,8 @@ function CodeEditor({ value, onChange, language = "javascript", theme = "vs-dark
     });
 }
 
+// EXTERNAL MODULE: ./lib/utils.ts
+var utils = __webpack_require__(12857);
 ;// CONCATENATED MODULE: ./components/ui/textarea.tsx
 /* __next_internal_client_entry_do_not_use__ Textarea auto */ 
 
@@ -1002,127 +984,295 @@ function ModelSelector({ selectedModel, onSelectModel }) {
 
 // EXTERNAL MODULE: ./node_modules/next-auth/react/index.js
 var react = __webpack_require__(74284);
+// EXTERNAL MODULE: ./node_modules/uuid/dist/esm/v4.js + 3 modules
+var v4 = __webpack_require__(29074);
 ;// CONCATENATED MODULE: ./lib/db.ts
-// Mock Prisma client for development
-// This is a temporary solution until we can get Prisma working properly
+// In-memory database for development
+// This is a temporary solution until we can set up a proper database
+
+// In-memory storage
+const db = {
+    users: new Map(),
+    aiUsageLogs: new Map(),
+    aiLabSessions: new Map(),
+    codeSnippets: new Map(),
+    aiModels: new Map()
+};
+// Initialize with some data
+const initializeDb = ()=>{
+    // Add a demo user
+    const userId = (0,v4/* default */.Z)();
+    db.users.set(userId, {
+        id: userId,
+        name: "Demo User",
+        email: "demo@example.com",
+        emailVerified: null,
+        image: null,
+        password: "$2a$10$mockhashedpassword",
+        role: "user",
+        createdAt: new Date(),
+        updatedAt: new Date()
+    });
+    // Add a demo user with email 'mock@example.com' for compatibility
+    const mockUserId = "mock-user-id";
+    db.users.set(mockUserId, {
+        id: mockUserId,
+        name: "Mock User",
+        email: "mock@example.com",
+        emailVerified: null,
+        image: null,
+        password: "$2a$10$mockhashedpassword",
+        role: "user",
+        createdAt: new Date(),
+        updatedAt: new Date()
+    });
+    // Add a default AI model
+    const modelId = (0,v4/* default */.Z)();
+    db.aiModels.set(modelId, {
+        id: modelId,
+        name: "gpt-4o",
+        provider: "OPENAI",
+        type: "TEXT",
+        description: "GPT-4o AI model",
+        createdAt: new Date(),
+        updatedAt: new Date()
+    });
+    // Add a sample AI lab session
+    const sessionId = "mock-session-id-1";
+    db.aiLabSessions.set(sessionId, {
+        id: sessionId,
+        title: "Mock Session 1",
+        description: "Mock session description",
+        duration: 0,
+        userId: mockUserId,
+        createdAt: new Date(),
+        updatedAt: new Date()
+    });
+};
+// Initialize the database
+initializeDb();
+// Prisma-like client interface
 const db_prisma = {
     user: {
         findUnique: async (args)=>{
-            console.log("Mock user findUnique called with:", args);
-            // Return a mock user if email matches
-            if (args?.where?.email === "mock@example.com") {
-                return {
-                    id: "mock-user-id",
-                    name: "Mock User",
-                    email: "mock@example.com",
-                    password: "$2a$10$mockhashedpassword",
-                    role: "user"
-                };
+            const { where } = args;
+            if (where.email) {
+                // Find user by email
+                for (const user of Array.from(db.users.values())){
+                    if (user.email === where.email) {
+                        return {
+                            ...user
+                        };
+                    }
+                }
+            } else if (where.id) {
+                // Find user by id
+                const user = db.users.get(where.id);
+                if (user) {
+                    return {
+                        ...user
+                    };
+                }
             }
-            // Return null if no user found
             return null;
+        },
+        create: async (args)=>{
+            const { data } = args;
+            const id = data.id || (0,v4/* default */.Z)();
+            const user = {
+                id,
+                name: data.name,
+                email: data.email,
+                emailVerified: data.emailVerified || null,
+                image: data.image || null,
+                password: data.password || null,
+                role: data.role || "user",
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+            db.users.set(id, user);
+            return {
+                ...user
+            };
         }
     },
     aiUsageLog: {
         create: async (data)=>{
-            console.log("Mock AI usage log created:", data);
-            return {
-                id: "mock-log-id",
-                ...data.data,
+            const id = (0,v4/* default */.Z)();
+            const log = {
+                id,
+                type: data.data.type,
+                prompt: data.data.prompt,
+                tokensUsed: data.data.tokensUsed,
+                userId: data.data.userId,
                 createdAt: new Date()
+            };
+            db.aiUsageLogs.set(id, log);
+            return {
+                ...log
             };
         }
     },
     aiLabSession: {
         create: async (data)=>{
-            console.log("Mock AI lab session created:", data);
-            return {
-                id: "mock-session-id",
-                ...data.data,
+            const id = data.id || (0,v4/* default */.Z)();
+            const session = {
+                id,
+                title: data.data.title,
+                description: data.data.description || null,
+                duration: data.data.duration || 0,
+                userId: data.data.userId,
                 createdAt: new Date(),
-                updatedAt: new Date(),
-                codeSnippets: [],
+                updatedAt: new Date()
+            };
+            db.aiLabSessions.set(id, session);
+            // Handle code snippets if provided
+            const codeSnippets = [];
+            if (data.data.codeSnippets?.create) {
+                const snippetId = (0,v4/* default */.Z)();
+                const snippet = {
+                    id: snippetId,
+                    title: data.data.codeSnippets.create.title,
+                    language: data.data.codeSnippets.create.language,
+                    code: data.data.codeSnippets.create.code,
+                    isPublic: data.data.codeSnippets.create.isPublic,
+                    sessionId: id,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                };
+                db.codeSnippets.set(snippetId, snippet);
+                codeSnippets.push(snippet);
+            }
+            return {
+                ...session,
+                codeSnippets,
                 aiModels: []
             };
         },
         update: async (data)=>{
-            console.log("Mock AI lab session updated:", data);
+            const { where, data: updateData } = data;
+            const session = db.aiLabSessions.get(where.id);
+            if (!session || session.userId !== where.userId) {
+                return null;
+            }
+            const updatedSession = {
+                ...session,
+                title: updateData.title !== undefined ? updateData.title : session.title,
+                description: updateData.description !== undefined ? updateData.description : session.description,
+                updatedAt: new Date()
+            };
+            db.aiLabSessions.set(where.id, updatedSession);
+            // Get code snippets for this session
+            const codeSnippets = [];
+            for (const snippet of Array.from(db.codeSnippets.values())){
+                if (snippet.sessionId === where.id) {
+                    codeSnippets.push({
+                        ...snippet
+                    });
+                }
+            }
             return {
-                id: data.where.id,
-                ...data.data,
-                userId: data.where.userId,
-                updatedAt: new Date(),
-                codeSnippets: [],
+                ...updatedSession,
+                codeSnippets,
                 aiModels: []
             };
         },
         findMany: async (args)=>{
-            console.log("Mock AI lab session findMany called with:", args);
-            return [
-                {
-                    id: "mock-session-id-1",
-                    title: "Mock Session 1",
-                    description: "Mock session description",
-                    duration: 0,
-                    userId: args.where.userId,
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                    codeSnippets: [],
-                    aiModels: []
+            const { where } = args;
+            const sessions = [];
+            for (const session of Array.from(db.aiLabSessions.values())){
+                if (session.userId === where.userId) {
+                    sessions.push({
+                        ...session
+                    });
                 }
-            ];
-        },
-        findUnique: async (args)=>{
-            console.log("Mock AI lab session findUnique called with:", args);
-            if (args.where.id === "mock-session-id-1") {
+            }
+            // For each session, get its code snippets
+            return sessions.map((session)=>{
+                const codeSnippets = [];
+                for (const snippet of Array.from(db.codeSnippets.values())){
+                    if (snippet.sessionId === session.id) {
+                        codeSnippets.push({
+                            ...snippet
+                        });
+                    }
+                }
                 return {
-                    id: "mock-session-id-1",
-                    title: "Mock Session 1",
-                    description: "Mock session description",
-                    duration: 0,
-                    userId: args.where.userId,
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                    codeSnippets: [],
+                    ...session,
+                    codeSnippets,
                     aiModels: []
                 };
+            });
+        },
+        findUnique: async (args)=>{
+            const { where } = args;
+            const session = db.aiLabSessions.get(where.id);
+            if (!session) {
+                return null;
             }
-            return null;
+            // Get code snippets for this session
+            const codeSnippets = [];
+            for (const snippet of Array.from(db.codeSnippets.values())){
+                if (snippet.sessionId === where.id) {
+                    codeSnippets.push({
+                        ...snippet
+                    });
+                }
+            }
+            return {
+                ...session,
+                codeSnippets,
+                aiModels: []
+            };
         },
         delete: async (args)=>{
-            console.log("Mock AI lab session delete called with:", args);
+            const { where } = args;
+            const session = db.aiLabSessions.get(where.id);
+            if (!session) {
+                return null;
+            }
+            // Delete associated code snippets
+            for (const [id, snippet] of Array.from(db.codeSnippets.entries())){
+                if (snippet.sessionId === where.id) {
+                    db.codeSnippets.delete(id);
+                }
+            }
+            // Delete the session
+            db.aiLabSessions.delete(where.id);
             return {
-                id: args.where.id,
-                title: "Deleted Session",
-                description: "This session has been deleted",
-                duration: 0,
-                userId: args.where.userId,
-                createdAt: new Date(),
+                ...session,
                 updatedAt: new Date()
             };
         }
     },
     aIModel: {
         findFirst: async (args)=>{
-            console.log("Mock AI model findFirst called with:", args);
-            if (args.where.name === "gpt-4") {
-                return {
-                    id: "mock-model-id-gpt4",
-                    name: "gpt-4",
-                    provider: "OPENAI",
-                    type: "TEXT",
-                    description: "GPT-4 AI model"
-                };
+            const { where } = args;
+            if (where.name) {
+                for (const model of Array.from(db.aiModels.values())){
+                    if (model.name === where.name) {
+                        return {
+                            ...model
+                        };
+                    }
+                }
             }
             return null;
         },
         create: async (data)=>{
-            console.log("Mock AI model created:", data);
-            return {
-                id: `mock-model-id-${data.data.name.replace(/[^a-zA-Z0-9]/g, "")}`,
-                ...data.data,
+            const id = (0,v4/* default */.Z)();
+            const model = {
+                id,
+                name: data.data.name,
+                provider: data.data.provider,
+                type: data.data.type,
+                description: data.data.description || null,
                 createdAt: new Date(),
                 updatedAt: new Date()
+            };
+            db.aiModels.set(id, model);
+            return {
+                ...model
             };
         }
     }
@@ -1409,7 +1559,9 @@ console.log(result);
                 code,
                 selectedModel
             }, session.user.id);
-            setSessionId(result.id);
+            if (result && result.id) {
+                setSessionId(result.id);
+            }
             toast({
                 title: "Session saved",
                 description: "Your AI Lab session has been saved successfully"
@@ -1465,48 +1617,48 @@ console.log(result);
                 children: [
                     /*#__PURE__*/ jsx_runtime_.jsx("div", {
                         className: "flex flex-col h-full",
-                        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(Tabs, {
+                        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(tabs/* Tabs */.mQ, {
                             value: activeTab,
                             onValueChange: setActiveTab,
                             className: "flex-1 flex flex-col",
                             children: [
-                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)(TabsList, {
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)(tabs/* TabsList */.dr, {
                                     children: [
-                                        /*#__PURE__*/ jsx_runtime_.jsx(TabsTrigger, {
+                                        /*#__PURE__*/ jsx_runtime_.jsx(tabs/* TabsTrigger */.SP, {
                                             value: "code",
                                             children: "Code Editor"
                                         }),
-                                        /*#__PURE__*/ jsx_runtime_.jsx(TabsTrigger, {
+                                        /*#__PURE__*/ jsx_runtime_.jsx(tabs/* TabsTrigger */.SP, {
                                             value: "assistant",
                                             children: "AI Assistant"
                                         })
                                     ]
                                 }),
-                                /*#__PURE__*/ jsx_runtime_.jsx(TabsContent, {
+                                /*#__PURE__*/ jsx_runtime_.jsx(tabs/* TabsContent */.nU, {
                                     value: "code",
                                     className: "flex-1 p-0",
-                                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(Card, {
+                                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(card/* Card */.Zb, {
                                         className: "h-full flex flex-col",
                                         children: [
-                                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)(CardHeader, {
+                                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)(card/* CardHeader */.Ol, {
                                                 className: "pb-2",
                                                 children: [
-                                                    /*#__PURE__*/ jsx_runtime_.jsx(CardTitle, {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx(card/* CardTitle */.ll, {
                                                         children: "Code Editor"
                                                     }),
-                                                    /*#__PURE__*/ jsx_runtime_.jsx(CardDescription, {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx(card/* CardDescription */.SZ, {
                                                         children: "Write and experiment with AI-powered code"
                                                     })
                                                 ]
                                             }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(CardContent, {
+                                            /*#__PURE__*/ jsx_runtime_.jsx(card/* CardContent */.aY, {
                                                 className: "flex-1 p-0",
                                                 children: /*#__PURE__*/ jsx_runtime_.jsx(CodeEditor, {
                                                     value: code,
                                                     onChange: setCode
                                                 })
                                             }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(CardFooter, {
+                                            /*#__PURE__*/ jsx_runtime_.jsx(card/* CardFooter */.eW, {
                                                 className: "border-t p-2",
                                                 children: /*#__PURE__*/ jsx_runtime_.jsx(ui_button/* Button */.z, {
                                                     onClick: runCode,
@@ -1518,23 +1670,23 @@ console.log(result);
                                         ]
                                     })
                                 }),
-                                /*#__PURE__*/ jsx_runtime_.jsx(TabsContent, {
+                                /*#__PURE__*/ jsx_runtime_.jsx(tabs/* TabsContent */.nU, {
                                     value: "assistant",
                                     className: "flex-1 p-0",
-                                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(Card, {
+                                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(card/* Card */.Zb, {
                                         className: "h-full",
                                         children: [
-                                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)(CardHeader, {
+                                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)(card/* CardHeader */.Ol, {
                                                 children: [
-                                                    /*#__PURE__*/ jsx_runtime_.jsx(CardTitle, {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx(card/* CardTitle */.ll, {
                                                         children: "AI Assistant"
                                                     }),
-                                                    /*#__PURE__*/ jsx_runtime_.jsx(CardDescription, {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx(card/* CardDescription */.SZ, {
                                                         children: "Get help with your code from the AI assistant"
                                                     })
                                                 ]
                                             }),
-                                            /*#__PURE__*/ jsx_runtime_.jsx(CardContent, {
+                                            /*#__PURE__*/ jsx_runtime_.jsx(card/* CardContent */.aY, {
                                                 className: "h-[calc(100%-130px)]",
                                                 children: /*#__PURE__*/ jsx_runtime_.jsx(AIAssistant, {
                                                     code: code,
@@ -1550,20 +1702,20 @@ console.log(result);
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx("div", {
                         className: "h-full",
-                        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(Card, {
+                        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(card/* Card */.Zb, {
                             className: "h-full flex flex-col",
                             children: [
-                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)(CardHeader, {
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)(card/* CardHeader */.Ol, {
                                     children: [
-                                        /*#__PURE__*/ jsx_runtime_.jsx(CardTitle, {
+                                        /*#__PURE__*/ jsx_runtime_.jsx(card/* CardTitle */.ll, {
                                             children: "Output"
                                         }),
-                                        /*#__PURE__*/ jsx_runtime_.jsx(CardDescription, {
+                                        /*#__PURE__*/ jsx_runtime_.jsx(card/* CardDescription */.SZ, {
                                             children: "See the results of your code execution"
                                         })
                                     ]
                                 }),
-                                /*#__PURE__*/ jsx_runtime_.jsx(CardContent, {
+                                /*#__PURE__*/ jsx_runtime_.jsx(card/* CardContent */.aY, {
                                     className: "flex-1 p-0",
                                     children: /*#__PURE__*/ jsx_runtime_.jsx(OutputDisplay, {
                                         output: output
@@ -1635,7 +1787,7 @@ function AILabPage() {
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [212,985,382,719], () => (__webpack_exec__(71238)));
+var __webpack_exports__ = __webpack_require__.X(0, [212,113,253,654,719,737,882], () => (__webpack_exec__(71238)));
 module.exports = __webpack_exports__;
 
 })();

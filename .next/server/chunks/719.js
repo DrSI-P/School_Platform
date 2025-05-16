@@ -66,12 +66,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11440);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(57114);
-/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var next_auth_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(74284);
-/* harmony import */ var next_auth_react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_auth_react__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(51158);
-/* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(44368);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(52451);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(57114);
+/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var next_auth_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(74284);
+/* harmony import */ var next_auth_react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_auth_react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(51158);
+/* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(44368);
 /* __next_internal_client_entry_do_not_use__ Navigation auto */ 
 
 
@@ -79,46 +81,47 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function Navigation() {
-    const { data: session } = (0,next_auth_react__WEBPACK_IMPORTED_MODULE_4__.useSession)();
-    const pathname = (0,next_navigation__WEBPACK_IMPORTED_MODULE_3__.usePathname)();
+    const { data: session } = (0,next_auth_react__WEBPACK_IMPORTED_MODULE_5__.useSession)();
+    const pathname = (0,next_navigation__WEBPACK_IMPORTED_MODULE_4__.usePathname)();
     const [mobileMenuOpen, setMobileMenuOpen] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const isActive = (path)=>pathname === path;
     const navItems = [
         {
             name: "Home",
             href: "/",
-            icon: lucide_react__WEBPACK_IMPORTED_MODULE_6__/* .Home */ .SK8
+            icon: lucide_react__WEBPACK_IMPORTED_MODULE_7__/* .Home */ .SK8
         },
         {
             name: "Resources",
             href: "/resources",
-            icon: lucide_react__WEBPACK_IMPORTED_MODULE_6__/* .BookOpen */ .p1z
+            icon: lucide_react__WEBPACK_IMPORTED_MODULE_7__/* .BookOpen */ .p1z
         },
         {
             name: "Assessments",
             href: "/assessments",
-            icon: lucide_react__WEBPACK_IMPORTED_MODULE_6__/* .FileText */ .acj
+            icon: lucide_react__WEBPACK_IMPORTED_MODULE_7__/* .FileText */ .acj
         },
         {
             name: "AI Lab",
             href: "/ai-lab",
-            icon: lucide_react__WEBPACK_IMPORTED_MODULE_6__/* .BrainCircuit */ .N4w
+            icon: lucide_react__WEBPACK_IMPORTED_MODULE_7__/* .BrainCircuit */ .N4w
         },
         {
             name: "Projects",
             href: "/projects",
-            icon: lucide_react__WEBPACK_IMPORTED_MODULE_6__/* .Rocket */ .w8m
+            icon: lucide_react__WEBPACK_IMPORTED_MODULE_7__/* .Rocket */ .w8m
         },
         {
             name: "Analytics",
             href: "/analytics",
-            icon: lucide_react__WEBPACK_IMPORTED_MODULE_6__/* .BarChart2 */ .kM3
+            icon: lucide_react__WEBPACK_IMPORTED_MODULE_7__/* .BarChart2 */ .kM3
         },
         {
             name: "Community",
             href: "/community",
-            icon: lucide_react__WEBPACK_IMPORTED_MODULE_6__/* .Users */ .Qaw
+            icon: lucide_react__WEBPACK_IMPORTED_MODULE_7__/* .Users */ .Qaw
         }
     ];
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("nav", {
@@ -138,11 +141,18 @@ function Navigation() {
                                         href: "/",
                                         className: "flex items-center",
                                         children: [
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_6__/* .Lightbulb */ .vu$, {
-                                                className: "h-8 w-8 text-primary"
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                className: "relative h-10 w-10 mr-2",
+                                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_3___default()), {
+                                                    src: "/images/logo.png",
+                                                    alt: "EdPsychConnect Logo",
+                                                    width: 40,
+                                                    height: 40,
+                                                    className: "object-contain"
+                                                })
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                                className: "ml-2 text-xl font-bold text-gray-900",
+                                                className: "ml-1 text-xl font-bold text-gray-900",
                                                 children: "EdPsychConnect"
                                             })
                                         ]
@@ -175,18 +185,18 @@ function Navigation() {
                                         className: "text-sm text-gray-700",
                                         children: session.user?.name || session.user?.email
                                     }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ui_button__WEBPACK_IMPORTED_MODULE_5__/* .Button */ .z, {
+                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ui_button__WEBPACK_IMPORTED_MODULE_6__/* .Button */ .z, {
                                         variant: "ghost",
                                         size: "sm",
-                                        onClick: ()=>(0,next_auth_react__WEBPACK_IMPORTED_MODULE_4__.signOut)(),
+                                        onClick: ()=>(0,next_auth_react__WEBPACK_IMPORTED_MODULE_5__.signOut)(),
                                         className: "text-gray-600",
-                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_6__/* .LogOut */ .d6Z, {
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_7__/* .LogOut */ .d6Z, {
                                             className: "h-5 w-5"
                                         })
                                     })
                                 ]
-                            }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ui_button__WEBPACK_IMPORTED_MODULE_5__/* .Button */ .z, {
-                                onClick: ()=>(0,next_auth_react__WEBPACK_IMPORTED_MODULE_4__.signIn)(),
+                            }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ui_button__WEBPACK_IMPORTED_MODULE_6__/* .Button */ .z, {
+                                onClick: ()=>(0,next_auth_react__WEBPACK_IMPORTED_MODULE_5__.signIn)(),
                                 variant: "default",
                                 size: "sm",
                                 children: "Sign In"
@@ -203,10 +213,10 @@ function Navigation() {
                                         className: "sr-only",
                                         children: "Open main menu"
                                     }),
-                                    mobileMenuOpen ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_6__.X, {
+                                    mobileMenuOpen ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_7__.X, {
                                         className: "block h-6 w-6",
                                         "aria-hidden": "true"
-                                    }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_6__/* .Menu */ .v2r, {
+                                    }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_7__/* .Menu */ .v2r, {
                                         className: "block h-6 w-6",
                                         "aria-hidden": "true"
                                     })
@@ -268,20 +278,20 @@ function Navigation() {
                                         })
                                     ]
                                 }),
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ui_button__WEBPACK_IMPORTED_MODULE_5__/* .Button */ .z, {
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ui_button__WEBPACK_IMPORTED_MODULE_6__/* .Button */ .z, {
                                     variant: "ghost",
                                     size: "sm",
-                                    onClick: ()=>(0,next_auth_react__WEBPACK_IMPORTED_MODULE_4__.signOut)(),
+                                    onClick: ()=>(0,next_auth_react__WEBPACK_IMPORTED_MODULE_5__.signOut)(),
                                     className: "ml-auto text-gray-600",
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_6__/* .LogOut */ .d6Z, {
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(lucide_react__WEBPACK_IMPORTED_MODULE_7__/* .LogOut */ .d6Z, {
                                         className: "h-5 w-5"
                                     })
                                 })
                             ]
                         }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                             className: "px-4",
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ui_button__WEBPACK_IMPORTED_MODULE_5__/* .Button */ .z, {
-                                onClick: ()=>(0,next_auth_react__WEBPACK_IMPORTED_MODULE_4__.signIn)(),
+                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ui_button__WEBPACK_IMPORTED_MODULE_6__/* .Button */ .z, {
+                                onClick: ()=>(0,next_auth_react__WEBPACK_IMPORTED_MODULE_5__.signIn)(),
                                 variant: "default",
                                 size: "sm",
                                 children: "Sign In"

@@ -1,7 +1,12 @@
 {
   "/page": "/",
   "/ai-lab/page": "/ai-lab",
-  "/api/auth/[...nextauth]/route": "/api/auth/[...nextauth]",
+  "/community/page": "/community",
+  "/analytics/page": "/analytics",
+  "/assessments/page": "/assessments",
+  "/resources/page": "/resources",
+  "/projects/page": "/projects",
+  "/api/ai-lab/run-code/route": "/api/ai-lab/run-code",
   "/api/ai-lab/assistant/route": "/api/ai-lab/assistant",
-  "/api/ai-lab/run-code/route": "/api/ai-lab/run-code"
+  "/api/auth/[...nextauth]/route": "/api/auth/[...nextauth]"
 }

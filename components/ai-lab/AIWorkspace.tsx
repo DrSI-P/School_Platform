@@ -90,8 +90,10 @@ console.log(result);
         code,
         selectedModel,
       }, session.user.id)
+      if (result && result.id) {
+        setSessionId(result.id)
+      }
       
-      setSessionId(result.id)
       
       toast({
         title: "Session saved",
