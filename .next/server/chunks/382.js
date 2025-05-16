@@ -1,76 +1,6 @@
-exports.id = 635;
-exports.ids = [635];
+exports.id = 382;
+exports.ids = [382];
 exports.modules = {
-
-/***/ 83119:
-/***/ ((module) => {
-
-"use strict";
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/scripts/default-index.ts
-var default_index_exports = {};
-__export(default_index_exports, {
-  Prisma: () => Prisma,
-  PrismaClient: () => PrismaClient,
-  default: () => default_index_default
-});
-module.exports = __toCommonJS(default_index_exports);
-
-// ../../node_modules/.pnpm/@prisma+engines-version@6.8.0-43.2060c79ba17c6bb9f5823312b6f6b7f4a845738e/node_modules/@prisma/engines-version/package.json
-var prisma = {
-  enginesVersion: "2060c79ba17c6bb9f5823312b6f6b7f4a845738e"
-};
-
-// package.json
-var version = "6.8.1";
-
-// src/runtime/utils/clientVersion.ts
-var clientVersion = version;
-
-// src/scripts/default-index.ts
-var PrismaClient = class {
-  constructor() {
-    throw new Error('@prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.');
-  }
-};
-function defineExtension(ext) {
-  if (typeof ext === "function") {
-    return ext;
-  }
-  return (client) => client.$extends(ext);
-}
-function getExtensionContext(that) {
-  return that;
-}
-var Prisma = {
-  defineExtension,
-  getExtensionContext,
-  prismaVersion: { client: clientVersion, engine: prisma.enginesVersion }
-};
-var default_index_default = { Prisma };
-// Annotate the CommonJS export names for ESM import in node:
-0 && (0);
-
-
-/***/ }),
 
 /***/ 11711:
 /***/ ((__unused_webpack_module, exports) => {
@@ -676,16 +606,6 @@ exports.errorMessages = errorMessages;
 "use strict";
 var De=Object.create;var H=Object.defineProperty;var be=Object.getOwnPropertyDescriptor;var ke=Object.getOwnPropertyNames;var Se=Object.getPrototypeOf,Oe=Object.prototype.hasOwnProperty;var Te=(e,t)=>{for(var r in t)H(e,r,{get:t[r],enumerable:!0})},re=(e,t,r,o)=>{if(t&&typeof t=="object"||typeof t=="function")for(let s of ke(t))!Oe.call(e,s)&&s!==r&&H(e,s,{get:()=>t[s],enumerable:!(o=be(t,s))||o.enumerable});return e};var D=(e,t,r)=>(r=e!=null?De(Se(e)):{},re(t||!e||!e.__esModule?H(r,"default",{value:e,enumerable:!0}):r,e)),we=e=>re(H({},"__esModule",{value:!0}),e);var Ae={};Te(Ae,{DiffEditor:()=>me,Editor:()=>$,default:()=>je,loader:()=>Re.default,useMonaco:()=>Ee});module.exports=we(Ae);var Re=D(__webpack_require__(39812));var ae=__webpack_require__(18038);var f=D(__webpack_require__(18038)),pe=D(__webpack_require__(39812));var ue=__webpack_require__(18038);var _=D(__webpack_require__(18038));var Ie={wrapper:{display:"flex",position:"relative",textAlign:"initial"},fullWidth:{width:"100%"},hide:{display:"none"}},W=Ie;var ne=D(__webpack_require__(18038));var Pe={container:{display:"flex",height:"100%",width:"100%",justifyContent:"center",alignItems:"center"}},oe=Pe;function Le({children:e}){return ne.default.createElement("div",{style:oe.container},e)}var ie=Le;var ce=ie;function Ue({width:e,height:t,isEditorReady:r,loading:o,_ref:s,className:E,wrapperProps:x}){return _.default.createElement("section",{style:{...W.wrapper,width:e,height:t},...x},!r&&_.default.createElement(ce,null,o),_.default.createElement("div",{ref:s,style:{...W.fullWidth,...!r&&W.hide},className:E}))}var se=Ue;var N=(0,ue.memo)(se);var fe=__webpack_require__(18038);function ve(e){(0,fe.useEffect)(e,[])}var O=ve;var V=__webpack_require__(18038);function He(e,t,r=!0){let o=(0,V.useRef)(!0);(0,V.useEffect)(o.current||!r?()=>{o.current=!1}:e,t)}var M=He;function k(){}function b(e,t,r,o){return We(e,o)||_e(e,t,r,o)}function We(e,t){return e.editor.getModel(de(e,t))}function _e(e,t,r,o){return e.editor.createModel(t,r,o?de(e,o):void 0)}function de(e,t){return e.Uri.parse(t)}function Ne({original:e,modified:t,language:r,originalLanguage:o,modifiedLanguage:s,originalModelPath:E,modifiedModelPath:x,keepCurrentOriginalModel:R=!1,keepCurrentModifiedModel:j=!1,theme:g="light",loading:L="Loading...",options:C={},height:A="100%",width:q="100%",className:B,wrapperProps:G={},beforeMount:J=k,onMount:K=k}){let[y,T]=(0,f.useState)(!1),[w,d]=(0,f.useState)(!0),p=(0,f.useRef)(null),u=(0,f.useRef)(null),I=(0,f.useRef)(null),a=(0,f.useRef)(K),n=(0,f.useRef)(J),S=(0,f.useRef)(!1);O(()=>{let i=pe.default.init();return i.then(l=>(u.current=l)&&d(!1)).catch(l=>l?.type!=="cancelation"&&console.error("Monaco initialization: error:",l)),()=>p.current?P():i.cancel()}),M(()=>{if(p.current&&u.current){let i=p.current.getOriginalEditor(),l=b(u.current,e||"",o||r||"text",E||"");l!==i.getModel()&&i.setModel(l)}},[E],y),M(()=>{if(p.current&&u.current){let i=p.current.getModifiedEditor(),l=b(u.current,t||"",s||r||"text",x||"");l!==i.getModel()&&i.setModel(l)}},[x],y),M(()=>{let i=p.current.getModifiedEditor();i.getOption(u.current.editor.EditorOption.readOnly)?i.setValue(t||""):t!==i.getValue()&&(i.executeEdits("",[{range:i.getModel().getFullModelRange(),text:t||"",forceMoveMarkers:!0}]),i.pushUndoStop())},[t],y),M(()=>{p.current?.getModel()?.original.setValue(e||"")},[e],y),M(()=>{let{original:i,modified:l}=p.current.getModel();u.current.editor.setModelLanguage(i,o||r||"text"),u.current.editor.setModelLanguage(l,s||r||"text")},[r,o,s],y),M(()=>{u.current?.editor.setTheme(g)},[g],y),M(()=>{p.current?.updateOptions(C)},[C],y);let U=(0,f.useCallback)(()=>{if(!u.current)return;n.current(u.current);let i=b(u.current,e||"",o||r||"text",E||""),l=b(u.current,t||"",s||r||"text",x||"");p.current?.setModel({original:i,modified:l})},[r,t,s,e,o,E,x]),v=(0,f.useCallback)(()=>{!S.current&&I.current&&(p.current=u.current.editor.createDiffEditor(I.current,{automaticLayout:!0,...C}),U(),u.current?.editor.setTheme(g),T(!0),S.current=!0)},[C,g,U]);(0,f.useEffect)(()=>{y&&a.current(p.current,u.current)},[y]),(0,f.useEffect)(()=>{!w&&!y&&v()},[w,y,v]);function P(){let i=p.current?.getModel();R||i?.original?.dispose(),j||i?.modified?.dispose(),p.current?.dispose()}return f.default.createElement(N,{width:q,height:A,isEditorReady:y,loading:L,_ref:I,className:B,wrapperProps:G})}var le=Ne;var me=(0,ae.memo)(le);var Me=__webpack_require__(18038),Z=D(__webpack_require__(39812));function Ve(){let[e,t]=(0,Me.useState)(Z.default.__getMonacoInstance());return O(()=>{let r;return e||(r=Z.default.init(),r.then(o=>{t(o)})),()=>r?.cancel()}),e}var Ee=Ve;var ge=__webpack_require__(18038);var c=D(__webpack_require__(18038)),xe=D(__webpack_require__(39812));var z=__webpack_require__(18038);function ze(e){let t=(0,z.useRef)();return(0,z.useEffect)(()=>{t.current=e},[e]),t.current}var ye=ze;var F=new Map;function Fe({defaultValue:e,defaultLanguage:t,defaultPath:r,value:o,language:s,path:E,theme:x="light",line:R,loading:j="Loading...",options:g={},overrideServices:L={},saveViewState:C=!0,keepCurrentModel:A=!1,width:q="100%",height:B="100%",className:G,wrapperProps:J={},beforeMount:K=k,onMount:y=k,onChange:T,onValidate:w=k}){let[d,p]=(0,c.useState)(!1),[u,I]=(0,c.useState)(!0),a=(0,c.useRef)(null),n=(0,c.useRef)(null),S=(0,c.useRef)(null),U=(0,c.useRef)(y),v=(0,c.useRef)(K),P=(0,c.useRef)(),i=(0,c.useRef)(o),l=ye(E),ee=(0,c.useRef)(!1),Q=(0,c.useRef)(!1);O(()=>{let m=xe.default.init();return m.then(h=>(a.current=h)&&I(!1)).catch(h=>h?.type!=="cancelation"&&console.error("Monaco initialization: error:",h)),()=>n.current?he():m.cancel()}),M(()=>{let m=b(a.current,e||o||"",t||s||"",E||r||"");m!==n.current?.getModel()&&(C&&F.set(l,n.current?.saveViewState()),n.current?.setModel(m),C&&n.current?.restoreViewState(F.get(E)))},[E],d),M(()=>{n.current?.updateOptions(g)},[g],d),M(()=>{!n.current||o===void 0||(n.current.getOption(a.current.editor.EditorOption.readOnly)?n.current.setValue(o):o!==n.current.getValue()&&(Q.current=!0,n.current.executeEdits("",[{range:n.current.getModel().getFullModelRange(),text:o,forceMoveMarkers:!0}]),n.current.pushUndoStop(),Q.current=!1))},[o],d),M(()=>{let m=n.current?.getModel();m&&s&&a.current?.editor.setModelLanguage(m,s)},[s],d),M(()=>{R!==void 0&&n.current?.revealLine(R)},[R],d),M(()=>{a.current?.editor.setTheme(x)},[x],d);let te=(0,c.useCallback)(()=>{if(!(!S.current||!a.current)&&!ee.current){v.current(a.current);let m=E||r,h=b(a.current,o||e||"",t||s||"",m||"");n.current=a.current?.editor.create(S.current,{model:h,automaticLayout:!0,...g},L),C&&n.current.restoreViewState(F.get(m)),a.current.editor.setTheme(x),R!==void 0&&n.current.revealLine(R),p(!0),ee.current=!0}},[e,t,r,o,s,E,g,L,C,x,R]);(0,c.useEffect)(()=>{d&&U.current(n.current,a.current)},[d]),(0,c.useEffect)(()=>{!u&&!d&&te()},[u,d,te]),i.current=o,(0,c.useEffect)(()=>{d&&T&&(P.current?.dispose(),P.current=n.current?.onDidChangeModelContent(m=>{Q.current||T(n.current.getValue(),m)}))},[d,T]),(0,c.useEffect)(()=>{if(d){let m=a.current.editor.onDidChangeMarkers(h=>{let X=n.current.getModel()?.uri;if(X&&h.find(Y=>Y.path===X.path)){let Y=a.current.editor.getModelMarkers({resource:X});w?.(Y)}});return()=>{m?.dispose()}}return()=>{}},[d,w]);function he(){P.current?.dispose(),A?C&&F.set(E,n.current.saveViewState()):n.current.getModel()?.dispose(),n.current.dispose()}return c.default.createElement(N,{width:q,height:B,isEditorReady:d,loading:j,_ref:S,className:G,wrapperProps:J})}var Ce=Fe;var $=(0,ge.memo)(Ce);var je=$;0&&(0);
 //# sourceMappingURL=index.js.map
-
-/***/ }),
-
-/***/ 78553:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = {
-  ...__webpack_require__(83119),
-}
-
 
 /***/ }),
 

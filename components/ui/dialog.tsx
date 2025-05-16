@@ -10,8 +10,8 @@ const Dialog = DialogPrimitive.Root
 
 const DialogTrigger = DialogPrimitive.Trigger
 
+// Remove the className prop since it's not part of DialogPortalProps
 const DialogPortal = ({
-  className,
   ...props
 }: DialogPrimitive.DialogPortalProps) => (
   <DialogPrimitive.Portal {...props} />

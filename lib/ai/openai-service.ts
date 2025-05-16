@@ -1,9 +1,10 @@
-import OpenAI from 'openai';
+import { Configuration, OpenAIApi } from 'openai';
 
 // Initialize OpenAI client
-const openai = new OpenAI({
+const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
+const openai = new OpenAIApi(configuration);
 
 // Define message type to match OpenAI API
 type ChatMessage = {
@@ -14,12 +15,13 @@ type ChatMessage = {
 
 // OpenAI Service class for more structured usage
 export class OpenAIService {
-  private client: OpenAI;
+  private client: OpenAIApi;
 
   constructor(apiKey?: string) {
-    this.client = new OpenAI({
+    const config = new Configuration({
       apiKey: apiKey || process.env.OPENAI_API_KEY,
     });
+    this.client = new OpenAIApi(config);
   }
 
   async getChatCompletion(
@@ -34,8 +36,8 @@ export class OpenAIService {
     } = {}
   ) {
     try {
-      const response = await this.client.chat.completions.create({
-        model: options.model || process.env.OPENAI_API_MODEL || 'gpt-4o',
+      const response = await this.client.createChatCompletion({
+        model: options.model || process.env.OPENAI_API_MODEL || 'gpt-4',
         messages: messages as any, // Type assertion to bypass strict typing
         temperature: options.temperature || 0.7,
         max_tokens: options.max_tokens || 1500,
@@ -45,8 +47,8 @@ export class OpenAIService {
       });
 
       return {
-        content: response.choices[0].message.content,
-        usage: response.usage,
+        content: response.data.choices[0].message?.content,
+        usage: response.data.usage,
       };
     } catch (error) {
       console.error('OpenAI API error:', error);
@@ -56,14 +58,14 @@ export class OpenAIService {
 
   async generateEmbedding(text: string) {
     try {
-      const response = await this.client.embeddings.create({
-        model: 'text-embedding-3-small',
+      const response = await this.client.createEmbedding({
+        model: 'text-embedding-ada-002',
         input: text,
       });
 
       return {
-        embedding: response.data[0].embedding,
-        usage: response.usage,
+        embedding: response.data.data[0].embedding,
+        usage: response.data.usage,
       };
     } catch (error) {
       console.error('OpenAI API error:', error);
@@ -73,14 +75,14 @@ export class OpenAIService {
 
   async moderateContent(text: string) {
     try {
-      const response = await this.client.moderations.create({
+      const response = await this.client.createModeration({
         input: text,
       });
 
       return {
-        flagged: response.results[0].flagged,
-        categories: response.results[0].categories,
-        scores: response.results[0].category_scores,
+        flagged: response.data.results[0].flagged,
+        categories: response.data.results[0].categories,
+        scores: response.data.results[0].category_scores,
       };
     } catch (error) {
       console.error('OpenAI API error:', error);
@@ -92,8 +94,8 @@ export class OpenAIService {
 // Standalone functions for simpler usage
 export async function generateContent(prompt: string, options: any = {}) {
   try {
-    const response = await openai.chat.completions.create({
-      model: process.env.OPENAI_API_MODEL || 'gpt-4o',
+    const response = await openai.createChatCompletion({
+      model: process.env.OPENAI_API_MODEL || 'gpt-4',
       messages: [
         {
           role: 'system',
@@ -109,8 +111,8 @@ export async function generateContent(prompt: string, options: any = {}) {
     });
 
     return {
-      content: response.choices[0].message.content,
-      usage: response.usage,
+      content: response.data.choices[0].message?.content,
+      usage: response.data.usage,
     };
   } catch (error) {
     console.error('OpenAI API error:', error);
@@ -137,8 +139,8 @@ export async function analyzeStudentResponse(question: string, studentResponse: 
     5. Suggested follow-up activities
     `;
     
-    const response = await openai.chat.completions.create({
-      model: process.env.OPENAI_API_MODEL || 'gpt-4o',
+    const response = await openai.createChatCompletion({
+      model: process.env.OPENAI_API_MODEL || 'gpt-4',
       messages: [
         {
           role: 'system',
@@ -153,8 +155,8 @@ export async function analyzeStudentResponse(question: string, studentResponse: 
     });
 
     return {
-      analysis: response.choices[0].message.content,
-      usage: response.usage,
+      analysis: response.data.choices[0].message?.content,
+      usage: response.data.usage,
     };
   } catch (error) {
     console.error('OpenAI API error:', error);
@@ -179,8 +181,8 @@ export async function generateLessonPlan(subject: string, topic: string, gradeLe
     - Extensions and homework options
     `;
     
-    const response = await openai.chat.completions.create({
-      model: process.env.OPENAI_API_MODEL || 'gpt-4o',
+    const response = await openai.createChatCompletion({
+      model: process.env.OPENAI_API_MODEL || 'gpt-4',
       messages: [
         {
           role: 'system',
@@ -195,8 +197,8 @@ export async function generateLessonPlan(subject: string, topic: string, gradeLe
     });
 
     return {
-      lessonPlan: response.choices[0].message.content,
-      usage: response.usage,
+      lessonPlan: response.data.choices[0].message?.content,
+      usage: response.data.usage,
     };
   } catch (error) {
     console.error('OpenAI API error:', error);
@@ -220,8 +222,8 @@ export async function personalizeContent(content: string, learnerProfile: any) {
     Adapt this content to better engage this learner while maintaining educational integrity. Consider their learning style, build on their strengths, provide support for challenges, and connect to their interests where appropriate.
     `;
     
-    const response = await openai.chat.completions.create({
-      model: process.env.OPENAI_API_MODEL || 'gpt-4o',
+    const response = await openai.createChatCompletion({
+      model: process.env.OPENAI_API_MODEL || 'gpt-4',
       messages: [
         {
           role: 'system',
@@ -236,8 +238,8 @@ export async function personalizeContent(content: string, learnerProfile: any) {
     });
 
     return {
-      personalizedContent: response.choices[0].message.content,
-      usage: response.usage,
+      personalizedContent: response.data.choices[0].message?.content,
+      usage: response.data.usage,
     };
   } catch (error) {
     console.error('OpenAI API error:', error);

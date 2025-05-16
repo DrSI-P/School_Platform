@@ -257,11 +257,11 @@ __webpack_require__.r(__webpack_exports__);
 /***/ 55358:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 34991))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 46232))
 
 /***/ }),
 
-/***/ 34991:
+/***/ 46232:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -508,9 +508,12 @@ function AIAssistant({ code, model, onSuggestion }) {
     const applySuggestion = (content)=>{
         // Extract code blocks from markdown
         const codeBlockRegex = /```(?:javascript|js|typescript|ts)?\n([\s\S]*?)```/g;
-        const matches = [
-            ...content.matchAll(codeBlockRegex)
-        ];
+        // Use a different approach instead of spread operator with matchAll
+        const matches = [];
+        let match;
+        while((match = codeBlockRegex.exec(content)) !== null){
+            matches.push(match);
+        }
         if (matches.length > 0) {
             // Use the first code block found
             onSuggestion(matches[0][1]);
@@ -729,7 +732,8 @@ var react_dialog_dist = __webpack_require__(7589);
 
 const dialog_Dialog = react_dialog_dist/* Root */.fC;
 const DialogTrigger = react_dialog_dist/* Trigger */.xz;
-const DialogPortal = ({ className, ...props })=>/*#__PURE__*/ jsx_runtime_.jsx(react_dialog_dist/* Portal */.h_, {
+// Remove the className prop since it's not part of DialogPortalProps
+const DialogPortal = ({ ...props })=>/*#__PURE__*/ jsx_runtime_.jsx(react_dialog_dist/* Portal */.h_, {
         ...props
     });
 DialogPortal.displayName = react_dialog_dist/* Portal */.h_.displayName;
@@ -998,21 +1002,131 @@ function ModelSelector({ selectedModel, onSelectModel }) {
 
 // EXTERNAL MODULE: ./node_modules/next-auth/react/index.js
 var react = __webpack_require__(74284);
-// EXTERNAL MODULE: ./node_modules/@prisma/client/default.js
-var client_default = __webpack_require__(78553);
-;// CONCATENATED MODULE: ./lib/db/index.ts
-
-// PrismaClient is attached to the `global` object in development to prevent
-// exhausting your database connection limit.
-// Learn more: https://pris.ly/d/help/next-js-best-practices
-const globalForPrisma = global;
-const db_prisma = globalForPrisma.prisma || new client_default.PrismaClient({
-    log:  false ? 0 : [
-        "error"
-    ]
-});
-if (false) {}
-/* harmony default export */ const db = ((/* unused pure expression or super */ null && (db_prisma)));
+;// CONCATENATED MODULE: ./lib/db.ts
+// Mock Prisma client for development
+// This is a temporary solution until we can get Prisma working properly
+const db_prisma = {
+    user: {
+        findUnique: async (args)=>{
+            console.log("Mock user findUnique called with:", args);
+            // Return a mock user if email matches
+            if (args?.where?.email === "mock@example.com") {
+                return {
+                    id: "mock-user-id",
+                    name: "Mock User",
+                    email: "mock@example.com",
+                    password: "$2a$10$mockhashedpassword",
+                    role: "user"
+                };
+            }
+            // Return null if no user found
+            return null;
+        }
+    },
+    aiUsageLog: {
+        create: async (data)=>{
+            console.log("Mock AI usage log created:", data);
+            return {
+                id: "mock-log-id",
+                ...data.data,
+                createdAt: new Date()
+            };
+        }
+    },
+    aiLabSession: {
+        create: async (data)=>{
+            console.log("Mock AI lab session created:", data);
+            return {
+                id: "mock-session-id",
+                ...data.data,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                codeSnippets: [],
+                aiModels: []
+            };
+        },
+        update: async (data)=>{
+            console.log("Mock AI lab session updated:", data);
+            return {
+                id: data.where.id,
+                ...data.data,
+                userId: data.where.userId,
+                updatedAt: new Date(),
+                codeSnippets: [],
+                aiModels: []
+            };
+        },
+        findMany: async (args)=>{
+            console.log("Mock AI lab session findMany called with:", args);
+            return [
+                {
+                    id: "mock-session-id-1",
+                    title: "Mock Session 1",
+                    description: "Mock session description",
+                    duration: 0,
+                    userId: args.where.userId,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                    codeSnippets: [],
+                    aiModels: []
+                }
+            ];
+        },
+        findUnique: async (args)=>{
+            console.log("Mock AI lab session findUnique called with:", args);
+            if (args.where.id === "mock-session-id-1") {
+                return {
+                    id: "mock-session-id-1",
+                    title: "Mock Session 1",
+                    description: "Mock session description",
+                    duration: 0,
+                    userId: args.where.userId,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                    codeSnippets: [],
+                    aiModels: []
+                };
+            }
+            return null;
+        },
+        delete: async (args)=>{
+            console.log("Mock AI lab session delete called with:", args);
+            return {
+                id: args.where.id,
+                title: "Deleted Session",
+                description: "This session has been deleted",
+                duration: 0,
+                userId: args.where.userId,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+        }
+    },
+    aIModel: {
+        findFirst: async (args)=>{
+            console.log("Mock AI model findFirst called with:", args);
+            if (args.where.name === "gpt-4") {
+                return {
+                    id: "mock-model-id-gpt4",
+                    name: "gpt-4",
+                    provider: "OPENAI",
+                    type: "TEXT",
+                    description: "GPT-4 AI model"
+                };
+            }
+            return null;
+        },
+        create: async (data)=>{
+            console.log("Mock AI model created:", data);
+            return {
+                id: `mock-model-id-${data.data.name.replace(/[^a-zA-Z0-9]/g, "")}`,
+                ...data.data,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+        }
+    }
+};
 
 ;// CONCATENATED MODULE: ./lib/api/lab-sessions.ts
 
@@ -1521,7 +1635,7 @@ function AILabPage() {
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [212,985,635,719], () => (__webpack_exec__(71238)));
+var __webpack_exports__ = __webpack_require__.X(0, [212,985,382,719], () => (__webpack_exec__(71238)));
 module.exports = __webpack_exports__;
 
 })();

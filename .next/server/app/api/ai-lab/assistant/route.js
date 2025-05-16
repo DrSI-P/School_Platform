@@ -5,13 +5,6 @@ exports.id = 289;
 exports.ids = [289];
 exports.modules = {
 
-/***/ 53524:
-/***/ ((module) => {
-
-module.exports = require("@prisma/client");
-
-/***/ }),
-
 /***/ 4530:
 /***/ ((module) => {
 
@@ -168,24 +161,25 @@ var next = __webpack_require__(17185);
 var route = __webpack_require__(35904);
 // EXTERNAL MODULE: ./node_modules/openai/dist/index.js
 var dist = __webpack_require__(31980);
-var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
 ;// CONCATENATED MODULE: ./lib/ai/openai-service.ts
 
 // Initialize OpenAI client
-const openai = new (dist_default())({
+const configuration = new dist.Configuration({
     apiKey: process.env.OPENAI_API_KEY
 });
+const openai = new dist.OpenAIApi(configuration);
 // OpenAI Service class for more structured usage
 class OpenAIService {
     constructor(apiKey){
-        this.client = new (dist_default())({
+        const config = new dist.Configuration({
             apiKey: apiKey || process.env.OPENAI_API_KEY
         });
+        this.client = new dist.OpenAIApi(config);
     }
     async getChatCompletion(messages, options = {}) {
         try {
-            const response = await this.client.chat.completions.create({
-                model: options.model || process.env.OPENAI_API_MODEL || "gpt-4o",
+            const response = await this.client.createChatCompletion({
+                model: options.model || process.env.OPENAI_API_MODEL || "gpt-4",
                 messages: messages,
                 temperature: options.temperature || 0.7,
                 max_tokens: options.max_tokens || 1500,
@@ -194,8 +188,8 @@ class OpenAIService {
                 presence_penalty: options.presence_penalty || 0
             });
             return {
-                content: response.choices[0].message.content,
-                usage: response.usage
+                content: response.data.choices[0].message?.content,
+                usage: response.data.usage
             };
         } catch (error) {
             console.error("OpenAI API error:", error);
@@ -204,13 +198,13 @@ class OpenAIService {
     }
     async generateEmbedding(text) {
         try {
-            const response = await this.client.embeddings.create({
-                model: "text-embedding-3-small",
+            const response = await this.client.createEmbedding({
+                model: "text-embedding-ada-002",
                 input: text
             });
             return {
-                embedding: response.data[0].embedding,
-                usage: response.usage
+                embedding: response.data.data[0].embedding,
+                usage: response.data.usage
             };
         } catch (error) {
             console.error("OpenAI API error:", error);
@@ -219,13 +213,13 @@ class OpenAIService {
     }
     async moderateContent(text) {
         try {
-            const response = await this.client.moderations.create({
+            const response = await this.client.createModeration({
                 input: text
             });
             return {
-                flagged: response.results[0].flagged,
-                categories: response.results[0].categories,
-                scores: response.results[0].category_scores
+                flagged: response.data.results[0].flagged,
+                categories: response.data.results[0].categories,
+                scores: response.data.results[0].category_scores
             };
         } catch (error) {
             console.error("OpenAI API error:", error);
@@ -236,8 +230,8 @@ class OpenAIService {
 // Standalone functions for simpler usage
 async function generateContent(prompt, options = {}) {
     try {
-        const response = await openai.chat.completions.create({
-            model: process.env.OPENAI_API_MODEL || "gpt-4o",
+        const response = await openai.createChatCompletion({
+            model: process.env.OPENAI_API_MODEL || "gpt-4",
             messages: [
                 {
                     role: "system",
@@ -252,8 +246,8 @@ async function generateContent(prompt, options = {}) {
             max_tokens: options.maxTokens || 1500
         });
         return {
-            content: response.choices[0].message.content,
-            usage: response.usage
+            content: response.data.choices[0].message?.content,
+            usage: response.data.usage
         };
     } catch (error) {
         console.error("OpenAI API error:", error);
@@ -278,8 +272,8 @@ async function analyzeStudentResponse(question, studentResponse, gradeLevel, sub
     4. Areas for improvement
     5. Suggested follow-up activities
     `;
-        const response = await openai.chat.completions.create({
-            model: process.env.OPENAI_API_MODEL || "gpt-4o",
+        const response = await openai.createChatCompletion({
+            model: process.env.OPENAI_API_MODEL || "gpt-4",
             messages: [
                 {
                     role: "system",
@@ -293,8 +287,8 @@ async function analyzeStudentResponse(question, studentResponse, gradeLevel, sub
             temperature: 0.5
         });
         return {
-            analysis: response.choices[0].message.content,
-            usage: response.usage
+            analysis: response.data.choices[0].message?.content,
+            usage: response.data.usage
         };
     } catch (error) {
         console.error("OpenAI API error:", error);
@@ -317,8 +311,8 @@ async function generateLessonPlan(subject, topic, gradeLevel, learningObjectives
     ${differentiation ? "- Differentiation strategies for various learning needs" : ""}
     - Extensions and homework options
     `;
-        const response = await openai.chat.completions.create({
-            model: process.env.OPENAI_API_MODEL || "gpt-4o",
+        const response = await openai.createChatCompletion({
+            model: process.env.OPENAI_API_MODEL || "gpt-4",
             messages: [
                 {
                     role: "system",
@@ -332,8 +326,8 @@ async function generateLessonPlan(subject, topic, gradeLevel, learningObjectives
             temperature: 0.7
         });
         return {
-            lessonPlan: response.choices[0].message.content,
-            usage: response.usage
+            lessonPlan: response.data.choices[0].message?.content,
+            usage: response.data.usage
         };
     } catch (error) {
         console.error("OpenAI API error:", error);
@@ -355,8 +349,8 @@ async function personalizeContent(content, learnerProfile) {
     
     Adapt this content to better engage this learner while maintaining educational integrity. Consider their learning style, build on their strengths, provide support for challenges, and connect to their interests where appropriate.
     `;
-        const response = await openai.chat.completions.create({
-            model: process.env.OPENAI_API_MODEL || "gpt-4o",
+        const response = await openai.createChatCompletion({
+            model: process.env.OPENAI_API_MODEL || "gpt-4",
             messages: [
                 {
                     role: "system",
@@ -370,8 +364,8 @@ async function personalizeContent(content, learnerProfile) {
             temperature: 0.7
         });
         return {
-            personalizedContent: response.choices[0].message.content,
-            usage: response.usage
+            personalizedContent: response.data.choices[0].message?.content,
+            usage: response.data.usage
         };
     } catch (error) {
         console.error("OpenAI API error:", error);
@@ -379,8 +373,8 @@ async function personalizeContent(content, learnerProfile) {
     }
 }
 
-// EXTERNAL MODULE: ./lib/db/index.ts
-var db = __webpack_require__(25007);
+// EXTERNAL MODULE: ./lib/db.ts
+var db = __webpack_require__(93302);
 ;// CONCATENATED MODULE: ./app/api/ai-lab/assistant/route.ts
 
 

@@ -1,0 +1,7 @@
+{
+  "/page": "/",
+  "/ai-lab/page": "/ai-lab",
+  "/api/auth/[...nextauth]/route": "/api/auth/[...nextauth]",
+  "/api/ai-lab/assistant/route": "/api/ai-lab/assistant",
+  "/api/ai-lab/run-code/route": "/api/ai-lab/run-code"
+}

@@ -5,13 +5,6 @@ exports.id = 912;
 exports.ids = [912];
 exports.modules = {
 
-/***/ 53524:
-/***/ ((module) => {
-
-module.exports = require("@prisma/client");
-
-/***/ }),
-
 /***/ 4530:
 /***/ ((module) => {
 

@@ -19,7 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_auth_providers_google__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(51989);
 /* harmony import */ var bcrypt__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(67096);
 /* harmony import */ var bcrypt__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(bcrypt__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _lib_db__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(25007);
+/* harmony import */ var _lib_db__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(93302);
 
 
 
@@ -104,26 +104,136 @@ const handler = next_auth__WEBPACK_IMPORTED_MODULE_0___default()(authOptions);
 
 /***/ }),
 
-/***/ 25007:
+/***/ 93302:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   _: () => (/* binding */ prisma)
 /* harmony export */ });
-/* harmony import */ var _prisma_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(53524);
-/* harmony import */ var _prisma_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_prisma_client__WEBPACK_IMPORTED_MODULE_0__);
-
-// PrismaClient is attached to the `global` object in development to prevent
-// exhausting your database connection limit.
-// Learn more: https://pris.ly/d/help/next-js-best-practices
-const globalForPrisma = global;
-const prisma = globalForPrisma.prisma || new _prisma_client__WEBPACK_IMPORTED_MODULE_0__.PrismaClient({
-    log:  false ? 0 : [
-        "error"
-    ]
-});
-if (false) {}
-/* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = ((/* unused pure expression or super */ null && (prisma)));
+// Mock Prisma client for development
+// This is a temporary solution until we can get Prisma working properly
+const prisma = {
+    user: {
+        findUnique: async (args)=>{
+            console.log("Mock user findUnique called with:", args);
+            // Return a mock user if email matches
+            if (args?.where?.email === "mock@example.com") {
+                return {
+                    id: "mock-user-id",
+                    name: "Mock User",
+                    email: "mock@example.com",
+                    password: "$2a$10$mockhashedpassword",
+                    role: "user"
+                };
+            }
+            // Return null if no user found
+            return null;
+        }
+    },
+    aiUsageLog: {
+        create: async (data)=>{
+            console.log("Mock AI usage log created:", data);
+            return {
+                id: "mock-log-id",
+                ...data.data,
+                createdAt: new Date()
+            };
+        }
+    },
+    aiLabSession: {
+        create: async (data)=>{
+            console.log("Mock AI lab session created:", data);
+            return {
+                id: "mock-session-id",
+                ...data.data,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                codeSnippets: [],
+                aiModels: []
+            };
+        },
+        update: async (data)=>{
+            console.log("Mock AI lab session updated:", data);
+            return {
+                id: data.where.id,
+                ...data.data,
+                userId: data.where.userId,
+                updatedAt: new Date(),
+                codeSnippets: [],
+                aiModels: []
+            };
+        },
+        findMany: async (args)=>{
+            console.log("Mock AI lab session findMany called with:", args);
+            return [
+                {
+                    id: "mock-session-id-1",
+                    title: "Mock Session 1",
+                    description: "Mock session description",
+                    duration: 0,
+                    userId: args.where.userId,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                    codeSnippets: [],
+                    aiModels: []
+                }
+            ];
+        },
+        findUnique: async (args)=>{
+            console.log("Mock AI lab session findUnique called with:", args);
+            if (args.where.id === "mock-session-id-1") {
+                return {
+                    id: "mock-session-id-1",
+                    title: "Mock Session 1",
+                    description: "Mock session description",
+                    duration: 0,
+                    userId: args.where.userId,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                    codeSnippets: [],
+                    aiModels: []
+                };
+            }
+            return null;
+        },
+        delete: async (args)=>{
+            console.log("Mock AI lab session delete called with:", args);
+            return {
+                id: args.where.id,
+                title: "Deleted Session",
+                description: "This session has been deleted",
+                duration: 0,
+                userId: args.where.userId,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+        }
+    },
+    aIModel: {
+        findFirst: async (args)=>{
+            console.log("Mock AI model findFirst called with:", args);
+            if (args.where.name === "gpt-4") {
+                return {
+                    id: "mock-model-id-gpt4",
+                    name: "gpt-4",
+                    provider: "OPENAI",
+                    type: "TEXT",
+                    description: "GPT-4 AI model"
+                };
+            }
+            return null;
+        },
+        create: async (data)=>{
+            console.log("Mock AI model created:", data);
+            return {
+                id: `mock-model-id-${data.data.name.replace(/[^a-zA-Z0-9]/g, "")}`,
+                ...data.data,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+        }
+    }
+};
 
 
 /***/ })

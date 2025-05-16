@@ -1,7 +1,7 @@
 {
   "/page": "app/page.js",
   "/ai-lab/page": "app/ai-lab/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
   "/api/ai-lab/assistant/route": "app/api/ai-lab/assistant/route.js",
-  "/api/ai-lab/run-code/route": "app/api/ai-lab/run-code/route.js",
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js"
+  "/api/ai-lab/run-code/route": "app/api/ai-lab/run-code/route.js"
 }
