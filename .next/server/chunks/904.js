@@ -26,6 +26,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// @ts-ignore - Ignore the type incompatibility between @auth/prisma-adapter and next-auth
 const authOptions = {
     adapter: (0,_auth_prisma_adapter__WEBPACK_IMPORTED_MODULE_1__/* .PrismaAdapter */ .N)(_lib_db__WEBPACK_IMPORTED_MODULE_5__/* .prisma */ ._),
     providers: [

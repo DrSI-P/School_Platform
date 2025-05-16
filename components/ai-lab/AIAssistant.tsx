@@ -80,7 +80,13 @@ export function AIAssistant({ code, model, onSuggestion }: AIAssistantProps) {
   const applySuggestion = (content: string) => {
     // Extract code blocks from markdown
     const codeBlockRegex = /```(?:javascript|js|typescript|ts)?\n([\s\S]*?)```/g
-    const matches = [...content.matchAll(codeBlockRegex)]
+    
+    // Use a different approach instead of spread operator with matchAll
+    const matches = []
+    let match
+    while ((match = codeBlockRegex.exec(content)) !== null) {
+      matches.push(match)
+    }
     
     if (matches.length > 0) {
       // Use the first code block found

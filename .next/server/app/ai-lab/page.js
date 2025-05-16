@@ -279,33 +279,34 @@ var jsx_runtime_ = __webpack_require__(56786);
 var react_ = __webpack_require__(18038);
 // EXTERNAL MODULE: ./components/ui/button.tsx
 var ui_button = __webpack_require__(44368);
+// EXTERNAL MODULE: ./node_modules/@radix-ui/react-tabs/dist/index.mjs + 2 modules
+var dist = __webpack_require__(4253);
 // EXTERNAL MODULE: ./lib/utils.ts
 var utils = __webpack_require__(12857);
 ;// CONCATENATED MODULE: ./components/ui/tabs.tsx
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-tabs'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* __next_internal_client_entry_do_not_use__ Tabs,TabsList,TabsTrigger,TabsContent auto */ 
 
 
 
-const Tabs = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-tabs'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-const TabsList = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-tabs'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+const Tabs = dist/* Root */.fC;
+const TabsList = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(dist/* List */.aV, {
         ref: ref,
         className: (0,utils.cn)("inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground", className),
         ...props
     }));
-TabsList.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-tabs'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).displayName;
-const TabsTrigger = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-tabs'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+TabsList.displayName = dist/* List */.aV.displayName;
+const TabsTrigger = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(dist/* Trigger */.xz, {
         ref: ref,
         className: (0,utils.cn)("inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm", className),
         ...props
     }));
-TabsTrigger.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-tabs'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).displayName;
-const TabsContent = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-tabs'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+TabsTrigger.displayName = dist/* Trigger */.xz.displayName;
+const TabsContent = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(dist/* Content */.VY, {
         ref: ref,
         className: (0,utils.cn)("mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", className),
         ...props
     }));
-TabsContent.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-tabs'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).displayName;
+TabsContent.displayName = dist/* Content */.VY.displayName;
 
 
 ;// CONCATENATED MODULE: ./components/ui/card.tsx
@@ -351,8 +352,8 @@ CardFooter.displayName = "CardFooter";
 
 
 // EXTERNAL MODULE: ./node_modules/@monaco-editor/react/dist/index.js
-var dist = __webpack_require__(3822);
-var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
+var react_dist = __webpack_require__(3822);
+var dist_default = /*#__PURE__*/__webpack_require__.n(react_dist);
 ;// CONCATENATED MODULE: ./components/ai-lab/CodeEditor.tsx
 /* __next_internal_client_entry_do_not_use__ CodeEditor auto */ 
 
@@ -716,35 +717,38 @@ function OutputDisplay({ output }) {
     });
 }
 
+// EXTERNAL MODULE: ./node_modules/cmdk/dist/index.js
+var cmdk_dist = __webpack_require__(27754);
+// EXTERNAL MODULE: ./node_modules/@radix-ui/react-dialog/dist/index.mjs
+var react_dialog_dist = __webpack_require__(7589);
 ;// CONCATENATED MODULE: ./components/ui/dialog.tsx
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* __next_internal_client_entry_do_not_use__ Dialog,DialogTrigger,DialogContent,DialogHeader,DialogFooter,DialogTitle,DialogDescription auto */ 
 
 
 
 
-const dialog_Dialog = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-const DialogTrigger = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-const DialogPortal = ({ className, ...props })=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+const dialog_Dialog = react_dialog_dist/* Root */.fC;
+const DialogTrigger = react_dialog_dist/* Trigger */.xz;
+const DialogPortal = ({ className, ...props })=>/*#__PURE__*/ jsx_runtime_.jsx(react_dialog_dist/* Portal */.h_, {
         ...props
     });
-DialogPortal.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).displayName;
-const DialogOverlay = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+DialogPortal.displayName = react_dialog_dist/* Portal */.h_.displayName;
+const DialogOverlay = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(react_dialog_dist/* Overlay */.aV, {
         ref: ref,
         className: (0,utils.cn)("fixed inset-0 z-50 bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0", className),
         ...props
     }));
-DialogOverlay.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).displayName;
+DialogOverlay.displayName = react_dialog_dist/* Overlay */.aV.displayName;
 const dialog_DialogContent = /*#__PURE__*/ react_.forwardRef(({ className, children, ...props }, ref)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)(DialogPortal, {
         children: [
             /*#__PURE__*/ jsx_runtime_.jsx(DialogOverlay, {}),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)(react_dialog_dist/* Content */.VY, {
                 ref: ref,
                 className: (0,utils.cn)("fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg md:w-full", className),
                 ...props,
                 children: [
                     children,
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)(react_dialog_dist/* Close */.x8, {
                         className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground",
                         children: [
                             /*#__PURE__*/ jsx_runtime_.jsx(lucide_react.X, {
@@ -760,7 +764,7 @@ const dialog_DialogContent = /*#__PURE__*/ react_.forwardRef(({ className, child
             })
         ]
     }));
-dialog_DialogContent.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).displayName;
+dialog_DialogContent.displayName = react_dialog_dist/* Content */.VY.displayName;
 const DialogHeader = ({ className, ...props })=>/*#__PURE__*/ jsx_runtime_.jsx("div", {
         className: (0,utils.cn)("flex flex-col space-y-1.5 text-center sm:text-left", className),
         ...props
@@ -771,34 +775,33 @@ const DialogFooter = ({ className, ...props })=>/*#__PURE__*/ jsx_runtime_.jsx("
         ...props
     });
 DialogFooter.displayName = "DialogFooter";
-const DialogTitle = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+const DialogTitle = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(react_dialog_dist/* Title */.Dx, {
         ref: ref,
         className: (0,utils.cn)("text-lg font-semibold leading-none tracking-tight", className),
         ...props
     }));
-DialogTitle.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).displayName;
-const DialogDescription = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+DialogTitle.displayName = react_dialog_dist/* Title */.Dx.displayName;
+const DialogDescription = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(react_dialog_dist/* Description */.dk, {
         ref: ref,
         className: (0,utils.cn)("text-sm text-muted-foreground", className),
         ...props
     }));
-DialogDescription.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-dialog'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).displayName;
+DialogDescription.displayName = react_dialog_dist/* Description */.dk.displayName;
 
 
 ;// CONCATENATED MODULE: ./components/ui/command.tsx
-Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* __next_internal_client_entry_do_not_use__ Command,CommandDialog,CommandInput,CommandList,CommandEmpty,CommandGroup,CommandItem,CommandShortcut,CommandSeparator auto */ 
 
 
 
 
 
-const Command = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+const Command = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(cmdk_dist.Command, {
         ref: ref,
         className: (0,utils.cn)("flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground", className),
         ...props
     }));
-Command.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).displayName;
+Command.displayName = cmdk_dist.Command.displayName;
 const CommandDialog = ({ children, ...props })=>{
     return /*#__PURE__*/ _jsx(Dialog, {
         ...props,
@@ -818,44 +821,44 @@ const CommandInput = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, r
             /*#__PURE__*/ jsx_runtime_.jsx(lucide_react/* Search */.olm, {
                 className: "mr-2 h-4 w-4 shrink-0 opacity-50"
             }),
-            /*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Input, {
+            /*#__PURE__*/ jsx_runtime_.jsx(cmdk_dist.Command.Input, {
                 ref: ref,
                 className: (0,utils.cn)("flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50", className),
                 ...props
             })
         ]
     }));
-CommandInput.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Input.displayName;
-const CommandList = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).List, {
+CommandInput.displayName = cmdk_dist.Command.Input.displayName;
+const CommandList = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(cmdk_dist.Command.List, {
         ref: ref,
         className: (0,utils.cn)("max-h-[300px] overflow-y-auto overflow-x-hidden", className),
         ...props
     }));
-CommandList.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).List.displayName;
-const CommandEmpty = /*#__PURE__*/ react_.forwardRef((props, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Empty, {
+CommandList.displayName = cmdk_dist.Command.List.displayName;
+const CommandEmpty = /*#__PURE__*/ react_.forwardRef((props, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(cmdk_dist.Command.Empty, {
         ref: ref,
         className: "py-6 text-center text-sm",
         ...props
     }));
-CommandEmpty.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Empty.displayName;
-const CommandGroup = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Group, {
+CommandEmpty.displayName = cmdk_dist.Command.Empty.displayName;
+const CommandGroup = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(cmdk_dist.Command.Group, {
         ref: ref,
         className: (0,utils.cn)("overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground", className),
         ...props
     }));
-CommandGroup.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Group.displayName;
-const CommandSeparator = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Separator, {
+CommandGroup.displayName = cmdk_dist.Command.Group.displayName;
+const CommandSeparator = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(cmdk_dist.Command.Separator, {
         ref: ref,
         className: (0,utils.cn)("-mx-1 h-px bg-border", className),
         ...props
     }));
-CommandSeparator.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Separator.displayName;
-const CommandItem = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Item, {
+CommandSeparator.displayName = cmdk_dist.Command.Separator.displayName;
+const CommandItem = /*#__PURE__*/ react_.forwardRef(({ className, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(cmdk_dist.Command.Item, {
         ref: ref,
         className: (0,utils.cn)("relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50", className),
         ...props
     }));
-CommandItem.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'cmdk'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Item.displayName;
+CommandItem.displayName = cmdk_dist.Command.Item.displayName;
 const CommandShortcut = ({ className, ...props })=>{
     return /*#__PURE__*/ jsx_runtime_.jsx("span", {
         className: (0,utils.cn)("ml-auto text-xs tracking-widest text-muted-foreground", className),
@@ -865,16 +868,17 @@ const CommandShortcut = ({ className, ...props })=>{
 CommandShortcut.displayName = "CommandShortcut";
 
 
+// EXTERNAL MODULE: ./node_modules/@radix-ui/react-popover/dist/index.mjs + 8 modules
+var react_popover_dist = __webpack_require__(45248);
 ;// CONCATENATED MODULE: ./components/ui/popover.tsx
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-popover'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* __next_internal_client_entry_do_not_use__ Popover,PopoverTrigger,PopoverContent auto */ 
 
 
 
-const Popover = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-popover'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-const PopoverTrigger = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-popover'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-const PopoverContent = /*#__PURE__*/ react_.forwardRef(({ className, align = "center", sideOffset = 4, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-popover'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
-        children: /*#__PURE__*/ jsx_runtime_.jsx(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-popover'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+const Popover = react_popover_dist/* Root */.fC;
+const PopoverTrigger = react_popover_dist/* Trigger */.xz;
+const PopoverContent = /*#__PURE__*/ react_.forwardRef(({ className, align = "center", sideOffset = 4, ...props }, ref)=>/*#__PURE__*/ jsx_runtime_.jsx(react_popover_dist/* Portal */.h_, {
+        children: /*#__PURE__*/ jsx_runtime_.jsx(react_popover_dist/* Content */.VY, {
             ref: ref,
             align: align,
             sideOffset: sideOffset,
@@ -882,7 +886,7 @@ const PopoverContent = /*#__PURE__*/ react_.forwardRef(({ className, align = "ce
             ...props
         })
     }));
-PopoverContent.displayName = Object(function webpackMissingModule() { var e = new Error("Cannot find module '@radix-ui/react-popover'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).displayName;
+PopoverContent.displayName = react_popover_dist/* Content */.VY.displayName;
 
 
 ;// CONCATENATED MODULE: ./components/ai-lab/ModelSelector.tsx
@@ -1517,7 +1521,7 @@ function AILabPage() {
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [212,497,173,84], () => (__webpack_exec__(71238)));
+var __webpack_exports__ = __webpack_require__.X(0, [212,985,635,719], () => (__webpack_exec__(71238)));
 module.exports = __webpack_exports__;
 
 })();

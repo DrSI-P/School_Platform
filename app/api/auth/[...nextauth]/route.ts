@@ -5,8 +5,9 @@ import GoogleProvider from 'next-auth/providers/google'
 import { compare } from 'bcrypt'
 import { prisma } from '@/lib/db'
 
+// @ts-ignore - Ignore the type incompatibility between @auth/prisma-adapter and next-auth
 export const authOptions: AuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma) as any,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',

@@ -28,6 +28,8 @@
     "@radix-ui/react-dialog": "1.0.5",
     "@radix-ui/react-popover": "1.0.7",
     "@radix-ui/react-slot": "1.0.2",
+    "@radix-ui/react-tabs": "1.0.4",
+    "@radix-ui/react-toast": "1.1.5",
     "@types/node": "18.0.0",
     "@types/react": "18.0.0",
     "autoprefixer": "10.4.14",
@@ -42,13 +44,16 @@
     "postcss": "8.4.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "tailwind-merge": "1.14.0",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "vm2": "3.9.19"
   },
   "devDependencies": {
     "@tailwindcss/forms": "0.5.4",
     "@tailwindcss/postcss": "4.1.7",
     "@tailwindcss/typography": "0.5.9",
+    "@types/bcrypt": "^5.0.2",
     "coffee-script": "1.12.7",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
