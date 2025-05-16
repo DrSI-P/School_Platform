@@ -1,0 +1,202 @@
+/**
+ * EdPsych Connect - Color System
+ * 
+ * This file implements a comprehensive color system with:
+ * - Psychology-informed color palette
+ * - Accessible color combinations
+ * - Age-appropriate color themes
+ * - High contrast mode support
+ */
+
+:root {
+  /* Primary Colors - Blues (learning, trust, calm) */
+  --color-primary-50: #E3F2FD;
+  --color-primary-100: #BBDEFB;
+  --color-primary-200: #90CAF9;
+  --color-primary-300: #64B5F6;
+  --color-primary-400: #42A5F5;
+  --color-primary-500: #2196F3; /* Primary brand color */
+  --color-primary-600: #1E88E5;
+  --color-primary-700: #1976D2;
+  --color-primary-800: #1565C0;
+  --color-primary-900: #0D47A1;
+
+  /* Secondary Colors - Greens (growth, progress, success) */
+  --color-secondary-50: #E8F5E9;
+  --color-secondary-100: #C8E6C9;
+  --color-secondary-200: #A5D6A7;
+  --color-secondary-300: #81C784;
+  --color-secondary-400: #66BB6A;
+  --color-secondary-500: #4CAF50; /* Secondary brand color */
+  --color-secondary-600: #43A047;
+  --color-secondary-700: #388E3C;
+  --color-secondary-800: #2E7D32;
+  --color-secondary-900: #1B5E20;
+
+  /* Accent Colors - Purples (creativity, imagination) */
+  --color-accent-50: #F3E5F5;
+  --color-accent-100: #E1BEE7;
+  --color-accent-200: #CE93D8;
+  --color-accent-300: #BA68C8;
+  --color-accent-400: #AB47BC;
+  --color-accent-500: #9C27B0; /* Accent brand color */
+  --color-accent-600: #8E24AA;
+  --color-accent-700: #7B1FA2;
+  --color-accent-800: #6A1B9A;
+  --color-accent-900: #4A148C;
+
+  /* Energetic Colors - Oranges (energy, enthusiasm) */
+  --color-energetic-50: #FFF3E0;
+  --color-energetic-100: #FFE0B2;
+  --color-energetic-200: #FFCC80;
+  --color-energetic-300: #FFB74D;
+  --color-energetic-400: #FFA726;
+  --color-energetic-500: #FF9800; /* Energetic brand color */
+  --color-energetic-600: #FB8C00;
+  --color-energetic-700: #F57C00;
+  --color-energetic-800: #EF6C00;
+  --color-energetic-900: #E65100;
+
+  /* Neutral Colors */
+  --color-neutral-50: #FAFAFA;
+  --color-neutral-100: #F5F5F5;
+  --color-neutral-200: #EEEEEE;
+  --color-neutral-300: #E0E0E0;
+  --color-neutral-400: #BDBDBD;
+  --color-neutral-500: #9E9E9E;
+  --color-neutral-600: #757575;
+  --color-neutral-700: #616161;
+  --color-neutral-800: #424242;
+  --color-neutral-900: #212121;
+
+  /* Semantic Colors */
+  --color-success-light: #81C784;
+  --color-success-main: #4CAF50;
+  --color-success-dark: #388E3C;
+
+  --color-warning-light: #FFB74D;
+  --color-warning-main: #FF9800;
+  --color-warning-dark: #F57C00;
+
+  --color-error-light: #E57373;
+  --color-error-main: #F44336;
+  --color-error-dark: #D32F2F;
+
+  --color-info-light: #64B5F6;
+  --color-info-main: #2196F3;
+  --color-info-dark: #1976D2;
+
+  /* Background and Text Colors */
+  --color-background-primary: var(--color-neutral-50);
+  --color-background-secondary: var(--color-neutral-100);
+  --color-background-tertiary: var(--color-neutral-200);
+  
+  --color-text-primary: var(--color-neutral-900);
+  --color-text-secondary: var(--color-neutral-700);
+  --color-text-tertiary: var(--color-neutral-500);
+  --color-text-disabled: var(--color-neutral-400);
+  
+  --color-text-on-primary: white;
+  --color-text-on-secondary: white;
+  --color-text-on-accent: white;
+  --color-text-on-energetic: black;
+}
+
+/* High Contrast Mode */
+.high-contrast {
+  --color-primary-500: #0056B3;
+  --color-secondary-500: #008000;
+  --color-accent-500: #9400D3;
+  --color-energetic-500: #FF6600;
+  
+  --color-background-primary: white;
+  --color-background-secondary: #F0F0F0;
+  --color-background-tertiary: #E0E0E0;
+  
+  --color-text-primary: black;
+  --color-text-secondary: #333333;
+  --color-text-tertiary: #555555;
+  
+  --color-success-main: #006400;
+  --color-warning-main: #B35C00;
+  --color-error-main: #CC0000;
+  --color-info-main: #0056B3;
+}
+
+/* Early Years Theme (3-7) */
+.theme-early-years {
+  --color-primary-500: #FF9E1B; /* Warm orange - friendly and engaging */
+  --color-secondary-500: #4DB6AC; /* Teal - calming and supportive */
+  --color-accent-500: #FFEB3B; /* Yellow - stimulating and positive */
+  --color-energetic-500: #FF5252; /* Bright red - exciting and energetic */
+  
+  --color-text-on-primary: black;
+  --color-text-on-accent: black;
+  --color-text-on-energetic: white;
+}
+
+/* Primary Theme (8-11) */
+.theme-primary {
+  --color-primary-500: #2196F3; /* Blue - trustworthy and calm */
+  --color-secondary-500: #4CAF50; /* Green - growth and progress */
+  --color-accent-500: #9C27B0; /* Purple - creative and imaginative */
+  --color-energetic-500: #FF9800; /* Orange - energetic but controlled */
+}
+
+/* Secondary Theme (12-16) */
+.theme-secondary {
+  --color-primary-500: #1976D2; /* Darker blue - more sophisticated */
+  --color-secondary-500: #388E3C; /* Darker green - more mature */
+  --color-accent-500: #7B1FA2; /* Darker purple - more nuanced */
+  --color-energetic-500: #F57C00; /* Darker orange - more mature */
+}
+
+/* Post-16 Theme (16+) */
+.theme-post-16 {
+  --color-primary-500: #0D47A1; /* Very dark blue - professional */
+  --color-secondary-500: #1B5E20; /* Very dark green - serious */
+  --color-accent-500: #4A148C; /* Very dark purple - sophisticated */
+  --color-energetic-500: #E65100; /* Very dark orange - mature energy */
+}
+
+/* Color Utility Classes */
+
+/* Text Colors */
+.text-primary { color: var(--color-primary-500); }
+.text-secondary { color: var(--color-secondary-500); }
+.text-accent { color: var(--color-accent-500); }
+.text-energetic { color: var(--color-energetic-500); }
+.text-success { color: var(--color-success-main); }
+.text-warning { color: var(--color-warning-main); }
+.text-error { color: var(--color-error-main); }
+.text-info { color: var(--color-info-main); }
+
+/* Background Colors */
+.bg-primary { background-color: var(--color-primary-500); color: var(--color-text-on-primary); }
+.bg-secondary { background-color: var(--color-secondary-500); color: var(--color-text-on-secondary); }
+.bg-accent { background-color: var(--color-accent-500); color: var(--color-text-on-accent); }
+.bg-energetic { background-color: var(--color-energetic-500); color: var(--color-text-on-energetic); }
+.bg-success { background-color: var(--color-success-main); color: white; }
+.bg-warning { background-color: var(--color-warning-main); color: black; }
+.bg-error { background-color: var(--color-error-main); color: white; }
+.bg-info { background-color: var(--color-info-main); color: white; }
+
+/* Background Shades */
+.bg-primary-light { background-color: var(--color-primary-100); }
+.bg-primary-dark { background-color: var(--color-primary-700); color: white; }
+.bg-secondary-light { background-color: var(--color-secondary-100); }
+.bg-secondary-dark { background-color: var(--color-secondary-700); color: white; }
+.bg-accent-light { background-color: var(--color-accent-100); }
+.bg-accent-dark { background-color: var(--color-accent-700); color: white; }
+
+/* Neutral Backgrounds */
+.bg-neutral-light { background-color: var(--color-neutral-100); }
+.bg-neutral { background-color: var(--color-neutral-300); }
+.bg-neutral-dark { background-color: var(--color-neutral-700); color: white; }
+
+/* Border Colors */
+.border-primary { border-color: var(--color-primary-500); }
+.border-secondary { border-color: var(--color-secondary-500); }
+.border-accent { border-color: var(--color-accent-500); }
+.border-energetic { border-color: var(--color-energetic-500); }
+.border-neutral { border-color: var(--color-neutral-300); }
