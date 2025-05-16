@@ -1,22 +1,13 @@
 {
   "version": 2,
-  "public": false,
-  "github": {
-    "enabled": true,
-    "silent": true
-  },
-  "buildCommand": "prisma generate && next build",
-  "installCommand": "npm install",
-  "framework": "nextjs",
-  "regions": ["iad1"],
-  "crons": [
+  "builds": [
     {
-      "path": "/api/cron/usage-analytics",
-      "schedule": "0 0 * * *"
-    },
-    {
-      "path": "/api/cron/subscription-reminders",
-      "schedule": "0 12 * * *"
+      "src": "package.json",
+      "use": "@vercel/next",
+      "config": {
+        "installCommand": "npm install --legacy-peer-deps",
+        "buildCommand": "prisma generate && next build"
+      }
     }
   ]
 }
