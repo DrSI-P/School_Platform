@@ -5,13 +5,18 @@
       "src": "package.json",
       "use": "@vercel/next",
       "config": {
-        "installCommand": "npm install --legacy-peer-deps --force",
+        "installCommand": "npm install --legacy-peer-deps --force --no-package-lock",
         "buildCommand": "npm run prisma:generate && next build",
-        "nodeVersion": "18.x"
+        "nodeVersion": "18.x",
+        "skipInstall": false
       }
     }
   ],
   "env": {
-    "NPM_FLAGS": "--legacy-peer-deps --force"
+    "NPM_FLAGS": "--legacy-peer-deps --force --no-package-lock",
+    "NODE_OPTIONS": "--max-old-space-size=4096",
+    "NEXT_TELEMETRY_DISABLED": "1",
+    "SKIP_INSTALL_DEPS": "0",
+    "NEXT_FORCE_REACT_18": "true"
   }
 }
