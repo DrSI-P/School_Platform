@@ -1,17 +1,11 @@
 'use client'
 
 import React from 'react'
-import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { BookOpen, FileText, Download, Star } from 'lucide-react'
-
-export const metadata: Metadata = {
-  title: 'Resources | EdPsychConnect',
-  description: 'Access AI-powered educational resources and materials',
-}
 
 export default function ResourcesPage() {
   // Sample resource categories

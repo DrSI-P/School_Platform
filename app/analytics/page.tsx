@@ -1,18 +1,12 @@
 'use client'
 
 import React from 'react'
-import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { BarChart2, PieChart, LineChart, TrendingUp, Users, Clock, Download, Filter } from 'lucide-react'
-
-export const metadata: Metadata = {
-  title: 'Analytics | EdPsychConnect',
-  description: 'Track and analyze educational data with AI-powered insights',
-}
 
 export default function AnalyticsPage() {
   // Sample analytics categories

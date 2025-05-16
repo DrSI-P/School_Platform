@@ -1,18 +1,12 @@
 'use client'
 
 import React from 'react'
-import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Rocket, Users, Calendar, Clock, PlusCircle, Star, GitBranch } from 'lucide-react'
-
-export const metadata: Metadata = {
-  title: 'Projects | EdPsychConnect',
-  description: 'Collaborate on AI-powered educational projects',
-}
 
 export default function ProjectsPage() {
   // Sample project categories

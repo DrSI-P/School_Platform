@@ -1,18 +1,12 @@
 'use client'
 
 import React from 'react'
-import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Users, MessageSquare, Search, BookOpen, Award, UserPlus, Heart, Share2 } from 'lucide-react'
-
-export const metadata: Metadata = {
-  title: 'Community | EdPsychConnect',
-  description: 'Connect with educators, specialists, and students in our educational community',
-}
 
 export default function CommunityPage() {
   // Sample community categories
